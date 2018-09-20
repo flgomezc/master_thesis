@@ -1,0 +1,109 @@
+\documentclass[manuscript]{aastex62}
+% \documentclass[manuscript]{aastex62}
+%%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+%% Tells LaTeX to search for image files in the 
+%% current directory as well as in the figures/ folder.
+\graphicspath{{./}{figures/}}
+%% Reintroduced the \received and \accepted commands from AASTeX v5.2
+%%\received{January 1, 2018}
+%%\revised{January 7, 2018}
+%%\accepted{\today}
+\shorttitle{A LSS Void Identifier based on $\beta$-Skeleton}
+\shortauthors{F. L. G\'omez-Cort\'es}
+
+
+\begin{document}
+
+\title{A Large Scale Structure Void Identifier for Galaxy Surveys
+  Based on the $\beta$-Skeleton Graph Method}
+
+\correspondingauthor{Felipe Leonardo G\'omez-Cort\'es}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo G\'omez-Cort\'es}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{(Master Student)}
+
+\nocollaboration
+
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{(Advisor)}
+
+
+\begin{abstract}
+
+  We are living the golden age of cosmology. Since the three past decades
+  we are able do precise measurements of cosmological parameters by
+  observational methods. Besides, computational astrophysics has
+  won its own place as the tool to probe theoretical models and compare
+  them with observations.
+
+  The standard cosmological model ($\Lambda$CDM) explains the observed
+  Large Scale Structure (LSS) of galaxies by introducing dark matter and
+  dark energy as the Universe components along with baryonic matter.
+  The LSS has been reproduced in Gravitational N-bodies simulations
+  such as Millenium and Bolshoi.
+
+  One of the LSS elements are the voids; irregular huge volumes at $h^{-1}$Mpc
+  scales, where the matter density is below the $20\%$ of the Universe
+  average density and sparse non-massive galaxies. Voids are key
+  elements to study Dark Energy and give important hints about other
+  cosmological parameters. Statistics about voids population such as
+  mass, shape and orientation encloses that information.
+
+  The $\beta$-Skeleton method has been widely used on image processing,
+  recognition and machine learnig applications, has been introduced
+  recently in LSS analysis. It is a fast tool identifiying LSS filaments,
+  and promises to be a robust tool to make statistical analysis
+  as the two point correlation function and the Alcock-Pazcynski test,
+  booth methods are currently used in cosmology.
+
+  The objetive of this work is to develope a LSS void identifier based
+  on the $\beta$-Skeleton method in order to improve the statistical
+  analysis of voids in galaxy surveys and the constriction of
+  cosmological parameters.
+
+
+  
+\end{abstract}
+
+\keywords{ Large Scale Structure, cosmology, voids, computational astrophysics}
+
+
+\section*{}
+\nocite{*}
+%% of citation expression problems, but it is necessary to clearly
+%% delimit the year from the author name used in the citation.
+%% See the natbib documentation for more details and options.
+
+
+
+
+\begin{thebibliography}{}                                                       
+
+\bibitem[van de Weygaert(2014)]{2016IAUS..308..493V} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493   
+\bibitem[Fang(2018)]{arXiv:1809.00438} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
+\bibitem[Alcock-Paczynski(1979)]{1979Natur.281..358A} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358
+\bibitem[Leclercq(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
+                                                                                
+\end{thebibliography}                                                           
+                       
+
+
+%% This command is needed to show the entire author+affilation list when
+%% the collaboration and author truncation commands are used.  It has to
+%% go at the end of the manuscript.
+%\allauthors
+
+%% Include this line if you are using the \added, \replaced, \deleted
+%% commands to see a summary list of all changes at the end of the article.
+%\listofchanges
+
+\end{document}
+
+% End of file `sample62.tex'.
