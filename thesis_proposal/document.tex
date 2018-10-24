@@ -1,6 +1,9 @@
-\documentclass[manuscript]{aastex62}
+\documentclass[preprint]{aastex62}
 % \documentclass[manuscript]{aastex62}
 %%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
+\usepackage[utf8]{inputenc}
+%\usepackage[spanish]{babel}
+%
 \newcommand{\vdag}{(v)^\dagger}
 \newcommand\aastex{AAS\TeX}
 \newcommand\latex{La\TeX}
@@ -13,8 +16,7 @@
 %%\accepted{\today}
 \shorttitle{A LSS Void Identifier based on $\beta$-Skeleton}
 \shortauthors{F. L. G\'omez-Cort\'es}
-
-
+  
 \begin{document}
 
 \title{A Large Scale Structure Void Identifier for Galaxy Surveys
@@ -113,7 +115,82 @@
   Palabras clave: estructura de gran escala, cosmolog\'ia, vac\'ios,
   astrof\'isica computacional.
 
-\nocite{*}
+
+  \section{Introducción}
+
+  Hola Mundo
+  \section{Objetivo Principal}
+
+  Desarrollar un nuevo buscador de vacíos de la red cósmica (LSS) en catálogos de galaxias
+  basado en el método $\beta$-Skeleton.
+  
+  \section{Specific Objetives}
+
+  Identificar y catalogar vacíos de la red cósmica en catálogos de halos de materia oscura de
+  simulaciones y en catálogos de galaxias desde observaciones.
+
+  Calcular el parámetro cosmológico asociado a la energía oscura a partir del catálogo de
+  vacíos de la red cósmica
+
+  Estimar los posibles resultados observacionales que pueda medir el experimento DESI.
+
+  \section{Metodología}
+
+  La primera parte de este trabajo consiste en desarrollar el código del buscador de vacíos
+  en la red cósmica.
+
+  Actualmente se dispone tanto de catálogos de halos de materia oscura de simulaciones como de catálogos de galaxias de observaciones.
+
+  Se dispone de la librería ``NGL''\citep{ngl} (Neighborhood Graph Library)
+  para calcular la estructura $\beta$-Skeleton. Esta librería es de uso libre, está escrita en C++.
+  Inicialmente fue desarrollada para estudiar topología de conjuntos de datos con un número de muestra
+  pequeño. Puede encontrar vecinos en los conjuntos de puntos usando distintos métodos como los
+  Grafos de Gabriel y el $\beta$-Skeleton, estos métodos resultan computacionalmente más económicos
+  y rápidos que otros métodos más robustos como la trianguación de Delaunay.
+
+  El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{arXiv:1809.00438} para
+  encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
+  Ha probado ser una herramienta útil para detectar estructuras subyacentes diferentes en
+  simulaciones cosmológicas generadas por métodos distintos.
+
+
+  Se parte de un catálogo de puntos distribuidos espacialmente siguiendo la red cósmica.
+
+  
+  El espacio se divide en celdas
+
+  
+  Se aplica Beta-Skeleton para conectar los puntos y trazar los filamentos de la red cósmica
+
+  
+  Se transforman estos puntos y líneas en un campo de densidad de materia
+
+  
+  se suaviza el campo de materia
+
+  
+  Una vez suavizado se utiliza el método \textit{watershed} para identificar las regiones de baja densidad \citep{2015A&C.....9....1S}.
+  Otro método a probar es la construcción de esferas dentro de las regiones vacías (Voids in the Large-Scale Structure
+Hagai El-Ad and Tsvi Piran 1997)
+  
+
+  Se calculan propiedades de las regiones como tamaño, forma, orientación. (Tensor de momento de inercia)
+
+  
+
+
+
+  
+  
+
+%  \section{Ethical Considerations}
+
+%  \section{Chronogram}
+
+%  \section{Specialists}
+
+  
+  \nocite{*}
 
 
 \begin{thebibliography}{}                                                       
@@ -122,7 +199,10 @@
 \bibitem[Fang(2018)]{arXiv:1809.00438} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
 \bibitem[Alcock-Paczynski(1979)]{1979Natur.281..358A} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358
 \bibitem[Leclercq(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
-                                                                                
+\bibitem[Correa \& Lindstrom (2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011 ``Towards Robust Topology of Sparsely Sampled Data''\ IEEE Transactions on Visualization and computer Graphics\ 17,12 (Dec 2011), 1852-1861
+\bibitem[Sutter et al.(2014)]{2015A&C.....9....1S} Sutter, P. M. \& Lavaux G. \& Hamaus, N \& et al. \ 2015, A\&C, 9, 1-9
+
+  
 \end{thebibliography}                                                           
                        
 
