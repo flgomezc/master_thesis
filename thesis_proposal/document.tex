@@ -15,17 +15,17 @@
 %%\revised{January 7, 2018}
 %%\accepted{\today}
 \shorttitle{A LSS Void Identifier based on $\beta$-Skeleton}
-\shortauthors{F. L. G\'omez-Cort\'es}
+\shortauthors{F. L. Gómez-Cortés}
   
 \begin{document}
 
 \title{A Large Scale Structure Void Identifier for Galaxy Surveys
   Based on the $\beta$-Skeleton Graph Method}
 
-\correspondingauthor{Felipe Leonardo G\'omez-Cort\'es}
+\correspondingauthor{Felipe Leonardo Gómez-Cortés}
 \email{fl.gomez10@uniandes.edu.co}
 
-\author{Felipe Leonardo G\'omez-Cort\'es}
+\author{Felipe Leonardo Gómez-Cortés}
 \affiliation{Physics Department, Universidad de Los Andes}
 \collaboration{Master Student}
 \collaboration{Code 201324084}
@@ -112,32 +112,15 @@
 
   \medskip
 
-  Palabras clave: estructura de gran escala, cosmolog\'ia, vac\'ios,
-  astrof\'isica computacional.
+  Palabras clave: estructura de gran escala, cosmología, vacíos,
+  astrofísica computacional.
 
 
   \section{Introducción}
 
   Hola Mundo
-  \section{Objetivo Principal}
 
-  Desarrollar un nuevo buscador de vacíos de la red cósmica (LSS) en catálogos de galaxias
-  basado en el método $\beta$-Skeleton.
-  
-  \section{Specific Objetives}
-
-  Identificar y catalogar vacíos de la red cósmica en catálogos de halos de materia oscura de
-  simulaciones y en catálogos de galaxias desde observaciones.
-
-  Calcular el parámetro cosmológico asociado a la energía oscura a partir del catálogo de
-  vacíos de la red cósmica
-
-  Estimar los posibles resultados observacionales que pueda medir el experimento DESI.
-
-  \section{Metodología}
-
-  La primera parte de este trabajo consiste en desarrollar el código del buscador de vacíos
-  en la red cósmica.
+  \section{Marco Teórico}
 
   Actualmente se dispone tanto de catálogos de halos de materia oscura de simulaciones como de catálogos de galaxias de observaciones.
 
@@ -148,46 +131,93 @@
   Grafos de Gabriel y el $\beta$-Skeleton, estos métodos resultan computacionalmente más económicos
   y rápidos que otros métodos más robustos como la trianguación de Delaunay.
 
-  El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{arXiv:1809.00438} para
+  El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{Fang2018} para
   encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
   Ha probado ser una herramienta útil para detectar estructuras subyacentes diferentes en
   simulaciones cosmológicas generadas por métodos distintos.
-
-
-  Se parte de un catálogo de puntos distribuidos espacialmente siguiendo la red cósmica.
-
-  
-  El espacio se divide en celdas
-
-  
-  Se aplica Beta-Skeleton para conectar los puntos y trazar los filamentos de la red cósmica
-
-  
-  Se transforman estos puntos y líneas en un campo de densidad de materia
-
-  
-  se suaviza el campo de materia
-
-  
-  Una vez suavizado se utiliza el método \textit{watershed} para identificar las regiones de baja densidad \citep{2015A&C.....9....1S}.
-  Otro método a probar es la construcción de esferas dentro de las regiones vacías (Voids in the Large-Scale Structure
-Hagai El-Ad and Tsvi Piran 1997)
   
 
-  Se calculan propiedades de las regiones como tamaño, forma, orientación. (Tensor de momento de inercia)
+  \section{Objetivos}
 
+  \subsection{Objetivo Principal}
+  Desarrollar un nuevo buscador de vacíos de la red cósmica (LSS) en catálogos de galaxias
+  basado en el método $\beta$-Skeleton.
+  
+  \subsection{Objetivos Específicos}
+
+  \begin{itemize}
+
+      \item Identificar y catalogar vacíos de la red cósmica en catálogos de halos de materia oscura de
+  simulaciones y en catálogos de galaxias desde observaciones.
+
+      \item Calcular el parámetro cosmológico asociado a la energía oscura a partir del catálogo de
+  vacíos de la red cósmica
+
+    \item  Estimar los posibles resultados observacionales que pueda medir el experimento DESI.
+  \end{itemize}
+  
+  \section{Metodología}
+
+  La primera parte de este trabajo consiste en desarrollar el código del buscador de vacíos
+  en la red cósmica. Aquí se incluye una etapa de calibración de parámetros libres del buscador.
+  En la segunda parte se utilizará el código para obtener catálogos
+  de vacíos de la red a partir de catálogos de halos de materia oscura de simulaciones o
+  catálogos de galaxias de observaciones, mediante análisis estadístico de los catálogos de
+  vacíos se compararán simulaciones y observaciones.
+  En la tercera parte se hará un análisis estadístico para determinar parámetros cosmológicos.
+  Finalmente se podrá dar un estimado de las observaciones que podrá llegar a medir el
+  experimento DESI.
+
+  \subsection{Desarrollo del código}
+
+  El código será escrito en Python3 o C++, podrá ejecutarse en el Colaboratorio o en el HPC de la
+  facultad de ciencas de la Universidad de los Andes.
+  
+  Para desarrollar el código se parte de la lectura de archivos estándar de catálogos de halos
+  de materia oscura o distribución de galaxias. Estos puntos se ubican en un espacio tridimensional.
+
+  Por definición los vacíos cósmicos son regiones con baja densidad de materia, así que se
+  estudiarán regiones de un campo escalar. Para esto es conveniente dividir el espacio en
+  celdas discretas. El tamaño de las celdas será el primer parámetro a calibrar en el código.
+  
+  Se aplica el método $\beta$-Skeleton para conectar los puntos en el espacio y trazar los
+  filamentos de la red cósmica. En esta punto se utilizará la librería NGL \citep{ngl}.
+  El parámetro $\beta$ de este método es otro parámetro a calibrar en el código. Se puede
+  utilizar como guía el resultado obtenido por \citet{Fang2018}.
+  Se transforman estos puntos y filamentos en un campo de densidad de materia. Este primer
+  campo escalar de materia es bastante discreto y discontínuo. Será suavizado mediante un
+  kernel Gaussiano, el número de veces que sea suavizado el campo de densidad y el tamaño de
+  las celdas del kernel serán parámetros a calibrar en el código.
+
+  Una vez suavizado el campo de densidad de materia se utiliza identificarán los centroides
+  de los vacíos de la red. Esto se puede realizar revisando, por ejemplo, puntos intermedios
+  en conexiones largas  que pueden aparecer en un $\beta$-skeleton con parámetro $\beta$ bajo,
+  pero no aparecen en la red obtenida con el valor de $\beta$ apropiado.
+
+  Ya identificados los centroides de los vacíos, se utiliza el método \textit{watershed}
+  para identificar las regiones de baja densidad \citep{Sutter2015}. Con este método
+  se planta una semilla en los centroides, todas las semillas crecen a la misma velocidad; una
+  celda vecina a la vez. Se establecen ciertas reglas, por ejemplo las regiones no crecerán en
+  las regiones donde el campo escalar de densidad tenga un valor alto, o se detendrán cuando
+  se encuentren con otra región en crecimiento.
+  Otro método a probar para identificar regiones es la construcción de esferas dentro de los
+  vacíos de la red 
+
+  \subsection{Análisis Estadístico de Catálogos de Vacíos de la Red Cósmica}
+
+  Se calculan propiedades de las regiones como tamaño, forma, orientación. (Tensor de momento de inercia) \citep{El-Ad1997}
+
+  \subsection{Análisis de Parámetros Cosmológicos}
+
+  \subsection{Posibles Resultados del Experimento DESI}
   
 
 
-
-  
   
 
-%  \section{Ethical Considerations}
+  \section{Cronograma}
 
-%  \section{Chronogram}
-
-%  \section{Specialists}
+  \section{Resultados Esperados}
 
   
   \nocite{*}
@@ -196,12 +226,12 @@ Hagai El-Ad and Tsvi Piran 1997)
 \begin{thebibliography}{}                                                       
 
 \bibitem[van de Weygaert(2014)]{2016IAUS..308..493V} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493   
-\bibitem[Fang(2018)]{arXiv:1809.00438} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
+\bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
 \bibitem[Alcock-Paczynski(1979)]{1979Natur.281..358A} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358
 \bibitem[Leclercq(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
-\bibitem[Correa \& Lindstrom (2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011 ``Towards Robust Topology of Sparsely Sampled Data''\ IEEE Transactions on Visualization and computer Graphics\ 17,12 (Dec 2011), 1852-1861
-\bibitem[Sutter et al.(2014)]{2015A&C.....9....1S} Sutter, P. M. \& Lavaux G. \& Hamaus, N \& et al. \ 2015, A\&C, 9, 1-9
-
+\bibitem[Correa \& Lindstrom(2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011,  IEEE TVCG\ 17,12 (Dec 2011), 1852-1861
+\bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M. \& Lavaux G. \& Hamaus, N \& et al. \ 2015, A\&C, 9, 1-9
+\bibitem[El-Ad \& Piran(1997)]{El-Ad1997} El-Ad, H. \& Piran, T. \ 1997, \apj, 491, 2, 421
   
 \end{thebibliography}                                                           
                        
