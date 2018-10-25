@@ -2,6 +2,7 @@
 % \documentclass[manuscript]{aastex62}
 %%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
 \usepackage[utf8]{inputenc}
+%\usepackage{siunitx}
 %\usepackage[spanish]{babel}
 %
 \newcommand{\vdag}{(v)^\dagger}
@@ -70,8 +71,6 @@
   with that experiment.
   
 
-  
-
   \medskip
 
   Keywords: Large Scale Structure, cosmology, voids, computational astrophysics
@@ -118,7 +117,70 @@
 
   \section{Introducción}
 
-  Hola Mundo
+  Hace poco más de un siglo se concebía el Universo estacionario tan grande como nuestra
+  Vía Láctea, la cosmología había sido construída sobre especulaciones y apenas empezaban
+  las primeras observaciones con métodos y técnicas lo suficientemente sistemáticas y
+  rigurosas para apoyar modelos cosmológicos.
+  Las contribuciones teóricas de Albert Einstein y las observacionales de Edwin 
+  Hubble cambiaron por completo el paradigma del Universo en 1929. El Universo era ahora un ente
+  dinámico en constante cambio, que tuvo un origen en algún momento. Lemaître propuso
+  en 1931  un modelo del Universo basado en los modelos de Friedman, donde el universo tendría
+  su origen en un ``átomo primigenio'', una singularidad donde toda la energía y materia
+  del Universo estaría concentrada, a una temperatura y una densidad muy altas. Afuera
+  de esta densidad no existía el espacio ni el tiempo. Esta singularidad se expande,
+  a medida que esto sucede la densidad de energía y materia se reducen.
+  En intentos de desprestigiar este modelo, Hoyle lo llamó  ``Big Bang'',
+  neologismo que ganó popularidad y ha perdurado hasta la fecha sin el lastre peyorativo.
+
+  En 1933, Zwicky medía la velocidad de dispersión de galaxias en el clúster Coma
+  para calcular la masa total por el teorema del virial. Luego comparó este resultado
+  con la masa estimada a partir de la relación Masa-Luminosidad, pero el resultado de
+  los dos cálculos discrepaba. En el clúster había mucha más materia que la que daba cuenta
+  de la materia luminosa ordinaria  asociada a las galaxias. Esta fue la primera evidencia de la
+  existencia de la materia oscura.
+
+  En 1946, George Gamow desarrolló un modelo para la nucleosíntesis basado en el modelo
+  del Universo de Lemaître, con la mecánica cuántica desarrollada hasta la fecha se
+  podía predecir temperaturas y densidades altas donde un gas de partículas elementales
+  (protones, neutrones y electrones) podría dar origen a los núcleos de los elementos
+  más abundantes del Universo: hidrógeno y helio. Chandrasekar y Henrick habían sentado las
+  basess para el desarrollo de la nucleosíntesis unos años atrás.  En 1948, Alpher y Herman
+  encontraron que en cierto punto la interacción entre la materia y la radiación dejarían
+  un remanente. 
+  
+  En 1965 se detectó por primera vez ese remanente, la radiación cósmica de fondo (CMB).
+
+
+  En 1960, von Hoerner realizó las primeras simulaciones en computador resolviendo problemas
+  de N-cuerpos (con 16 cuerpos inicialmente) ligados gravitacionalmente. Poco tiempo después
+  se empezaron a resolver problemas de clusters de galaxias y cúmulos globulares de estrellas
+  con los trabajos individuales de Aarseth, Wilem, Lecar y Almada entre otros pioneros. A
+  mediados de los 80's se realizaban simulaciones con $N = 5.000$ cuerpos.
+  \citep{Aarseth2003}.
+
+  
+  
+  En los 80's se lanzó la misión COBE para estudiar con mayor detalle esta radiación,
+  y a la par empezaron a realizarse grandes proyectos para mapear el cielo como el
+  \textit{Center for Astrophysics (CfA) Survey} aprovechando la reciente tecnología de
+  cámaras CCD. Se encontraron grandes estructuras de galaxias ligadas gravitacionalmente,
+  del orden de $\sim 100 h^{-1}\rm Mpc$.
+  Posteriormente, en los 90's, en el mapeo de \textit{Las Campanas Redshift Survey (LCRS)} empezó a
+  definirse la noción de Estructura del Universo a Gran Escala (\textit{Large-Scale
+    Structure LSS}); las galaxias no están puestas aleatoriamente en el espacio, obedecen
+  a una estructura de red cósmica con filamentos y paredes donde se observa una gran
+  densidad de galaxias y vacíos en la red donde hay pocas galaxias. \citep{Schneider2014}
+
+
+    
+
+
+  WMAP, Plank
+  Millenium, Bolshoi-Plank
+  
+  
+
+  \section{Estado del Arte}
 
   \section{Marco Teórico}
 
@@ -181,7 +243,7 @@
   celdas discretas. El tamaño de las celdas será el primer parámetro a calibrar en el código.
   
   Se aplica el método $\beta$-Skeleton para conectar los puntos en el espacio y trazar los
-  filamentos de la red cósmica. En esta punto se utilizará la librería NGL \citep{ngl}.
+  filamentos de la red cósmica. En este punto se utilizará la librería NGL \citep{ngl}.
   El parámetro $\beta$ de este método es otro parámetro a calibrar en el código. Se puede
   utilizar como guía el resultado obtenido por \citet{Fang2018}.
   Se transforman estos puntos y filamentos en un campo de densidad de materia. Este primer
@@ -189,9 +251,9 @@
   kernel Gaussiano, el número de veces que sea suavizado el campo de densidad y el tamaño de
   las celdas del kernel serán parámetros a calibrar en el código.
 
-  Una vez suavizado el campo de densidad de materia se utiliza identificarán los centroides
+  Una vez suavizado el campo de densidad de materia se identifican los centroides
   de los vacíos de la red. Esto se puede realizar revisando, por ejemplo, puntos intermedios
-  en conexiones largas  que pueden aparecer en un $\beta$-skeleton con parámetro $\beta$ bajo,
+  en conexiones largas que pueden aparecer en un $\beta$-skeleton con parámetro $\beta$ bajo,
   pero no aparecen en la red obtenida con el valor de $\beta$ apropiado.
 
   Ya identificados los centroides de los vacíos, se utiliza el método \textit{watershed}
@@ -206,6 +268,7 @@
 
   Se calculan propiedades de las regiones como tamaño, forma, orientación. (Tensor de momento de inercia) \citep{El-Ad1997}
 
+  Se estudian propiedades de distorsión de esferas hacia elipses por el efecto \citet{AlcockPaczynski1979}.
   \subsection{Análisis de Parámetros Cosmológicos}
 
   \subsection{Posibles Resultados del Experimento DESI}
@@ -258,20 +321,23 @@
   \section{Resultados Esperados}
 
   
+  
   \nocite{*}
 
 
-\begin{thebibliography}{}                                                       
+  \begin{thebibliography}{}
 
-\bibitem[van de Weygaert(2014)]{2016IAUS..308..493V} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493   
-\bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
-\bibitem[Alcock-Paczynski(1979)]{1979Natur.281..358A} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358
-\bibitem[Leclercq(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
-\bibitem[Correa \& Lindstrom(2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011,  IEEE TVCG\ 17,12 (Dec 2011), 1852-1861
-\bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M. \& Lavaux G. \& Hamaus, N \& et al. \ 2015, A\&C, 9, 1-9
-\bibitem[El-Ad \& Piran(1997)]{El-Ad1997} El-Ad, H. \& Piran, T. \ 1997, \apj, 491, 2, 421
+    \bibitem[Aarseth(2003)]{Aarseth2003} Aarseth, S. J. \ 2003, ``Gravitational N-Body Simulations'', Cambridge University Press.
+    \bibitem[Alcock-Paczynski(1979)]{AlcockPaczynski1979} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358    
+    \bibitem[Correa \& Lindstrom(2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011,  IEEE TVCG\ 17,12 (Dec 2011), 1852-1861
+    \bibitem[El-Ad \& Piran(1997)]{El-Ad1997} El-Ad, H. \& Piran, T. \ 1997, \apj, 491, 2, 421
+    \bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
+    \bibitem[Leclercq(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
+    \bibitem[Schneider(2014)]{Schneider2014} Schneider, P. \ 2014, ``Extragalactic Astronomy and Cosmology'', Springer.
+    \bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M. \& Lavaux G. \& Hamaus, N \& et al. \ 2015, A\&C, 9, 1-9
+    \bibitem[van de Weygaert(2014)]{2016IAUS..308..493V} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493   
   
-\end{thebibliography}                                                           
+  \end{thebibliography}                                                           
                        
 
 %\listofchanges
