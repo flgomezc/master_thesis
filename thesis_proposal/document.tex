@@ -155,7 +155,7 @@
   de N-cuerpos (con 16 cuerpos inicialmente) ligados gravitacionalmente. El valor medido de
   la constante de Hubble según distintos experimentos ahora oscilaba en el rango
   $50-100 \rm~km~s^{-1}~Mpc^{-1}$.  
-  A mediados de los 70's la capacidad de los computadores permitía realizar simuaciones
+  A mediados de los 70's la capacidad de los computadores permitía realizar simulaciones
   cosmológicas con 300 - 1000 partículas. Las condiciones iniciales venían determinadas por
   la CMB y desarrollo analítico liderado por Zel'dovich, Sunyaev y Doroshkevich
   que describían las anisotropías iniciales descritas estadísticamente por espectros de
@@ -174,18 +174,31 @@
     Structure LSS}); las galaxias no están puestas aleatoriamente en el espacio, obedecen
   a una estructura de red cósmica con filamentos y paredes donde se observa una gran
   densidad de galaxias y vacíos en la red donde hay pocas galaxias. 
-    
-  En los 80's se lanzó la misión COBE para estudiar con mayor detalle la CMB,
+
+  A principios de 1980, Guth propuso un modelo de universo inflacionario para resolver
+  problemas de cómo perturbaciones cuánticas podrían interactuar con regiones más allá
+  del horizonte de eventos, problema señalado dos años antes por Zel'dovich trabajando
+  en el problema de los monopolos magnéticos. Según el modelo inflacionario, el Universo
+  tuvo una expansión tipo exponencial en los primeros $10 ^{-32} \rm~s$, después de esto
+  se expande según el modelo de Friedmann. 
+  Este modelo de inflación permite conectar causalmente regiones del Universo  que hoy
+  en día se encuentran a distancias mayores a lo que la luz podría viajar en la edad del
+  Universo, de este modo se puede explicar la homogeneidad del Universo a gran escala.
+  
+  En esta misma década se lanzó la misión COBE para estudiar con mayor detalle la CMB,
   y a la par se realizaban grandes proyectos para generar catálogos tridimensionales de
   galaxias, estos mapeos del cielo como el \textit{Center for Astrophysics (CfA) Survey}
   (1978-1982) aprovecharon la reciente tecnología de cámaras CCD. Se encontraron grandes
   estructuras de galaxias ligadas gravitacionalmente, del orden de $\sim 100 h^{-1}\rm Mpc$.
   Posteriormente, en los 90's, vienen grandes catálogos como  \textit{Las Campanas Redshift
     Survey (LCRS)}, se tiene en órbita en plenas condiciones de observación el Telescopio
-  Espacial Hubble, empiezan a medirse grandes distancias cosmológicas usando Supernovas Ia,
-  se detectan lentes gravitacionales. Las simulaciones cosmológicas manejan cerca de
-  $256^3$ partículas ($\sim 17$ millones). El valor de la Constante de Hubble se restringe
-  al rango  $60-85 \rm~km~s^{-1}~Mpc^{-1}$.     \citep{Schneider2014}
+  Espacial Hubble, se detectan lentes gravitacionales, empiezan a medirse grandes distancias
+  cosmológicas usando Supernovas Ia y con esto se descubre que el universo tiene una
+  expansión acelerada, definida por la misma constante cosmológica $\Lambda$ que
+  Einstein había propuesto en su modelo del universo. Mientras tanto, el desarrollo de
+  microprocesadores ya permite que las simulaciones cosmológicas manejan cerca de
+  $256^3$ partículas ($\sim 17$ millones). El valor de la Constante de Hubble medido por
+  distintos experimentos se restringe al rango  $60-85 \rm~km~s^{-1}~Mpc^{-1}$. \citep{Schneider2014}
   
 
   \section{Estado del Arte}
@@ -212,36 +225,64 @@
   $3\%$, restricción del valor de curvatura del espacio $\Omega_k = -0.0027^{0.0039}_{-0.0038}$, la suma
   de la masa de los neutrinos a $\sum m_\nu < 0.44 \rm~eV$ con un intervalo de confianza del $95\%$,
   y polarización de la CMB. Es de resaltar el trabajo conjunto con el SDSS utilizando los resultados
-  de BOSS, WiggleZ (Australia - UK) y 6dFGS (Australia - UK) para analizar BAOs.
-  Esto ha convertido a la cosmología en una ciencia de precisión.
+  de BOSS, WiggleZ (Australia - UK) y 6dFGS (Australia - UK) para mejorar la precisión en los cálculos
+  de los parámetros cosmológicos. Esto ha convertido a la cosmología en una ciencia de precisión.
   La última entrega de datos del WMAP fue tras 9 años de operación, dando espacio para una misión con
   mejor resolución. \citep{WMAP2013}
 
-
   
-  Plank(2009-2013) papers liberados en 2013 y 2015
+  En la parte computacional, se construye la simulación cosmológica más grande hasta la fecha,
+  \citep{Springel2005}. La simulación Millenium corrió en el clúster de cómputo del Max Plank Institute.
+  Cuenta con $N = 2,160^3\sim 10^{10}$ partículas, inicia en redshift $z=127$ y
+  evoluciona hasta el presente, emulando una región de $500 h^{-1} \rm~Mpc^{-1}$. Tiene suficiente
+  resolución como para reproducir galaxias más brillantes que la Pequeña Nube de Magallanes. Las
+  condiciones iniciales vienen dadas por los primeros resultados de la CMB obtenidos por la WMAP.
+  Esta simulación tiene diez veces más resolución que otras de su clase. Tres años después se lanza
+  una versión similar de la simulación en un volumen reducido para mejorar su resolución. Es un gran
+  logro, reproduce la estructura observada a gran escala.
+
+  \begin{figure}
+    \plotone{pie_millennium_walls}
+    \caption{Estructura a gran escala (LSS) observada en mapeos como el SDSS y el 2dFGS (en azul)
+      comparadas con resultados de la simulación Millenium (rojo).
+      Max Planck Institute for Astrophysics.
+      \label{fig:pie_millenium_walls}}
+  \end{figure}
+  
 
   La misión Planck entró en operación en 2009 y tomó datos hasta 2012 cuando agotó su reserva de helio
-  líquido.
+  líquido. Este satélite contaba con equipos para la medición de microondas con mejor resolución y
+  mejor resolución espacial. Se encuentra pronto a salir el último artículo de la colaboración Planck.
 
 \begin{table}[htb]
     \begin{tabular}{|cc|cc| }
       \hline
-      Parámetro & Símbolo & WMAP2 & PLANCK  \\
+      Parámetro & Símbolo & WMAP2 (2013)& PLANCK(2015)  \\
       \hline
-      Densidad de materia Bariónica & $\Omega_b h^2$ & $0.0224 \pm 0.0009$ & $0.02230\pm 0.00014$ \\
-      
-
+      Edad del Universo (Ga) & $t_0$ & $13.74\pm0.11$ & $13.799\pm0.021$ \\
+      Densidad de materia Bariónica & $\Omega_b h^2$ & $0.022 \pm 0.0009$ & $0.02230\pm 0.00014$ \\
+      Contenido de materia Oscura & $\Omega_c h^2$ & $0.1138\pm0.0045$ & $0.1186\pm0.0020$\\
+      Constante de Hubble ($\rm~km~s^{-1}~Mpc^{-1}$) & $H_0 $ & $ 69.32 \pm 0.80 $  & $ 67.74 \pm 0.46 $\\
+      Fluctuaciones de Densidad $@ 8 h^{-1} \rm~Mpc$ & $\sigma_8$ & $0.820^{+0.013}_{-0.014}$ & $0.8159 \pm 0.086$ \\  
+      Profundidad óptica de reionización & $\tau$ & $ 0.081\pm0.012$  & $0.066 \pm 0.016$ \\
+      Índice Espetral & $n_s$ & $ 0.9608 \pm 0.0080 $  & $ 0.968 \pm 0.006 $ \\
       \hline
     \end{tabular}
   \end{table}
   
   
-  Millenium, Bolshoi-Plank
+\medskip
+
+Bolshoi-Plank-MD (PENDIENTE)
+
+\medskip
+
+DESI (PENDIENTE)
 
   \section{Marco Teórico}
 
-  Actualmente se dispone tanto de catálogos de halos de materia oscura de simulaciones como de catálogos de galaxias de observaciones.
+  Actualmente se dispone tanto de catálogos de halos de materia oscura de simulaciones como de catálogos de
+  galaxias de observaciones.
 
   Se dispone de la librería ``NGL''\citep{ngl} (Neighborhood Graph Library)
   para calcular la estructura $\beta$-Skeleton. Esta librería es de uso libre, está escrita en C++.
@@ -254,8 +295,13 @@
   encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
   Ha probado ser una herramienta útil para detectar estructuras subyacentes diferentes en
   simulaciones cosmológicas generadas por métodos distintos.
-  
 
+  Análisis estadístico por medio de funciones de correlación de dos puntos
+
+  \medskip
+  PENDIENTE
+  \medskip
+  
   \section{Objetivos}
 
   \subsection{Objetivo Principal}
@@ -326,10 +372,26 @@
   Se calculan propiedades de las regiones como tamaño, forma, orientación. (Tensor de momento de inercia) \citep{El-Ad1997}
 
   Se estudian propiedades de distorsión de esferas hacia elipses por el efecto \citet{AlcockPaczynski1979}.
+
+  \medskip
+  PENDIENTE
+  \medskip  TBD
+  
   \subsection{Análisis de Parámetros Cosmológicos}
 
+  \url{http://cosmo17.in2p3.fr/talks/parallel/Achitouv_COSMO17.pdf}
+
+    \medskip
+  PENDIENTE
+  \medskip
+  TBD
+  
   \subsection{Posibles Resultados del Experimento DESI}
-    
+
+  TBD
+    \medskip
+  PENDIENTE
+  \medskip
 
   \section{Cronograma}
 
@@ -374,6 +436,7 @@
   
   \section{Resultados Esperados}
 
+  
     
   \nocite{*}
 
@@ -388,9 +451,11 @@
     \bibitem[Longair(2004)]{Longair2004} Longair, M. S. \ 2004, ``A Brief History of Cosmology'', ``Measuring and Modeling the Universe'', Carnegie Observatories Astrophysics Series, Vol 2.
     \bibitem[Press \& Schechter(1974)]{Press&Schechter1974} Press, W. H. \& Schechter, P. \ 1974, \apj, 187, 425-438.
     \bibitem[Schneider(2014)]{Schneider2014} Schneider, P. \ 2014, ``Extragalactic Astronomy and Cosmology'', Springer.
+    \bibitem[Springel et al.(2005)]{Springel2005} Springel, V. et al. \ 2005, \nat, 435, 639
     \bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M. \& Lavaux G. \& Hamaus, N \& et al. \ 2015, A\&C, 9, 1-9
     \bibitem[van de Weygaert(2014)]{2016IAUS..308..493V} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493   
 
+      
     \bibitem[SDSS Collaboration(2017)]{SDSS-DR14-2017} SDSS Collaboration \ 2017, arxiv, 1707.09322 astro-ph
     \bibitem[Hinshaw et al.(2013)]{WMAP2013} Hinshaw, G. et al. \ 2013, \apjs, 208, 20.
   \end{thebibliography}                                                           
