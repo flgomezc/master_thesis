@@ -253,8 +253,8 @@
   La misión Planck entró en operación en 2009 y tomó datos hasta 2012 cuando agotó su reserva de helio
   líquido. Este satélite contaba con equipos para la medición de microondas con mejor resolución y
   mejor resolución espacial. Se encuentra pronto a salir el último artículo de la colaboración Planck.
-
-\begin{table}[htb]
+  
+  \begin{table}[htb]
     \begin{tabular}{|cc|cc| }
       \hline
       Parámetro & Símbolo & WMAP2 (2013)& PLANCK(2015)  \\
@@ -271,65 +271,104 @@
   \end{table}
   
   
-\medskip
+  Bolshoi-Plank-MD es una simulación de mayor volúmen y mejor resolución que Millenium. Fue
+  desarrollada por el mismo consorsio VIRGO. La última corrida tiene condiciones iniciales calibradas
+  con los parámetros de cosmología Planck 2015.
 
-Bolshoi-Plank-MD (PENDIENTE)
+  \medskip
 
-\medskip
-
-DESI (PENDIENTE)
+  DESI es un experimento que actualmente se encuentra en etapa de construcción. Usa un telescopio de 4m con
+  dispositivos de ubicación automática de fibras para realizar espectroscopía. Puede ser considerado una versión
+  potenciada del SDSS.
 
   \section{Marco Teórico}
 
   Actualmente se dispone tanto de catálogos de halos de materia oscura de simulaciones como de catálogos de
   galaxias de observaciones.
 
-  Se dispone de la librería ``NGL''\citep{ngl} (Neighborhood Graph Library)
-  para calcular la estructura $\beta$-Skeleton. Esta librería es de uso libre, está escrita en C++.
-  Inicialmente fue desarrollada para estudiar topología de conjuntos de datos con un número de muestra
-  pequeño. Puede encontrar vecinos en los conjuntos de puntos usando distintos métodos como los
-  Grafos de Gabriel y el $\beta$-Skeleton, estos métodos resultan computacionalmente más económicos
-  y rápidos que otros métodos más robustos como la trianguación de Delaunay.
 
   El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{Fang2018} para
   encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
   Ha probado ser una herramienta útil para detectar estructuras subyacentes diferentes en
   simulaciones cosmológicas generadas por métodos distintos.
 
-  Análisis estadístico por medio de funciones de correlación de dos puntos
 
-  \url{Testing cosmic geometry without dynamic distortions using voids}
-  \url{Hamaus, N., Sutter, P. M., Lavaux, G., & Wandelt, B. D. "Testing cosmic geometry without dynamic distortions using voids". JCAP 12, 013, December (2014). https://arxiv.org/pdf/1409.3580.pdf}
-
+ % \url{Testing cosmic geometry without dynamic distortions using voids}
+ % \url{Hamaus, N., Sutter, P. M., Lavaux, G., & Wandelt, B. D. "Testing cosmic geometry without dynamic distortions using voids". JCAP 12, 013, December (2014). https://arxiv.org/pdf/1409.3580.pdf}
 
 
-  Similarly, incorrect assumptions about the expansion history and the geometry of the
-Universe can result in a skewed distribution of tracers. The conversion between redshifts and
-angles on the sky into Cartesian coordinates requires knowledge of the spacetime metric that
-describes the Universe, which in turn depends on the latter’s matter and energy content. Any
-deviation from the true underlying cosmological parameters results in a distortion of tracer
-coordinates, which is known as the Alcock-Paczy\'nski
-Luckily, a tracer’s angular position on the sky is not affected by redshift-space distortions.
-Therefore, by statistically comparing its line-of-sight and angular clustering patterns,
-one can disentangle the impact of peculiar motions and geometric distortions on the coordinate
-distribution of a tracer. This method is particularly powerful for cosmic voids, as
-on average they exhibit spherical symmetry in real space, which allows to assign any type
-of anisotropy to a skewed coordinate system in redshift space [14–18]. Vice versa, these
-anisotropies can be used to infer the peculiar velocities of tracers around voids [19–22],
-opening up the possibility to determine the strength of gravity on void scales. The main
-underlying assumption to this method is the cosmological principle, i.e. statistical homogeneity
-and isotropy of the Universe. Observational evidence for the anisotropic nature of
-the void-galaxy cross-correlation function has been provided by Paz et al. [21] using SDSS
-data, and Micheletti et al. [23] in the VIPERS survey
-\url{https://arxiv.org/pdf/1507.04363.pdf}
-Probing cosmology and gravity with
-redshift-space distortions around voids
+  Al estudiar la LSS se encuentra que la mayor parte del volúmen del Universo está dominado
+  por los vacíos de la red cósmica. Pero por el desarrollo histórico de la astrofísica, se ha
+  prestado más atención a las galaxias como marcadores de la estructura compuesta por materia
+  bariónica y materia oscura. No en todos los halos de materia oscura se forman galaxias, así
+  que hay un cierto sesgo (\textit{bias}) al tomar las galaxias como marcadores de los
+  halos de materia oscura. Se han desarrollado numerosas pruebas estadísticas para estudiar
+  estos marcadores, entre ellas las funciones de correlación galaxia-galaxia.
 
+  Al construir los mapas tridimensionales del universo se convierten los observables (posición
+  angular y corrimiento al rojo) en coordenadas cartesianas en el marco de referencia comovil.
+  Para hacer esta conversión es necesario conocer la métrica de nuestro Universo; cómo se
+  expande el espacio en función del tiempo. El modelo cosmológico estándar $\Lambda$CDM
+  describe esta rata de expansión en función de algunos parámetros como la densidad de materia
+  y la densidad de energía oscura en el Universo. Estos datos se pueden obtener con precisión
+  de sondas como Planck y otro tipo de experimentos (BAO por ejemplo).
+
+  Si se construye un mapa del universo con los parámetros cosmológicos erroneos, se observarán
+  distorsiones en la distribución de los objetos. Este es el principio del test de
+  \citet{AlcockPaczynski1979}.
+
+  Al estudiar los vacíos de la red cósmica en simulaciones se encuentra estadísticamente una
+  forma esferoidal. Se quieren obtener resultados similares al convertir observaciones de
+  vacíos (a partir de las observaciones de galaxias como marcadores de sus límites) a coordenadas
+  comóviles. Una descripción detallada de esta metodología se brinda en \citet{Hamaus2015}:
+
+  Sea $x$ el vector que denota las coordenadas de un objeto en el espacio. La distancia comovil en la
+  dirección de la línea de visión se calcula como:
+
+  \begin{equation}
+    x_{\parallel} = \int _0 ^z \frac{c}{H(z')}dz'
+  \end{equation}
+
+  Donde $c$ es la velocidad de la luz y $H(z)$ describe la expansión de Hubble como función del
+  corrimento al rojo $z$. Si el objeto tiene velocidad radial, esta induce un corrimiento adicional
+  hacia el rojo o hacia el azul. Al tener esto en cuenta queda:
+
+  \begin{equation}
+    \tilde{x}_{\parallel} = \int _0 ^{z + \frac{v_\parallel}{c}}(1+z) \frac{c}{H(z')}dz'
+    \simeq x_\parallel + \frac{v_\parallel}{H(z)}(1+z)
+  \end{equation}
+
+  En tanto el ángulo $\theta$  entre un par de objetos objetos se relaciona con la distancia comovil según
+
+  \begin{equation}
+    x_{\perp} = D_A(z)\theta
+  \end{equation}
   
+  En una métrica de  Friedmann-Lema\^itre-Robertson-Walker de curvatura $k$, la distancia
+  comovil angular viene dada por:
   
-  \medskip
-  PENDIENTE
-  \medskip
+  \begin{equation}
+    D_A(z) = \frac{c}{H_0\sqrt{-\Omega_k}} \sin \left( H_o\sqrt{-\Omega_k}
+    \int_0^z \frac{1}{H(z'} dz' \right).
+  \end{equation}
+  
+  Este término es bastante sensible al parámetro de curvatura
+  $\Omega_k = 1 - \Omega_m - \Omega_\Lambda$, en tanto la rata de expansión de Hubble
+  depende en sí misma del contenido de energía y materia en el Universo como:
+
+  \begin{equation}
+    H(z) = H_0 \sqrt{ \Omega_m(1+z)^3 + \Omega_k(1+z)^2+\Omega_\Lambda}
+  \end{equation}
+
+  De este modo se puede ver cómo es necesario asumir los valores actuales correctos de los
+  parámetros cosmológicos para generar mapas tridimensionales de los objetos en el cielo. Si
+  estos valores no coinciden con los parámetros
+  cosmológicos reales, las distancias calculadas  en la lína de visión y perpendicular a ella serán
+  incorrectas. Una de las herramientas fundamentales para realizar tests AP son las funciones
+  de correlación. Estas pueden ser aplicadas entre pares de galaxias-vacíos o funciones de
+  autocorrelación vacío-vacío.
+  
+
   
   \section{Objetivos}
 
@@ -358,7 +397,15 @@ redshift-space distortions around voids
   de vacíos de la red a partir de catálogos de halos de materia oscura de simulaciones o
   catálogos de galaxias de observaciones, mediante análisis estadístico de los catálogos de
   vacíos se compararán simulaciones y observaciones.
+  Se calculan propiedades de las regiones como tamaño, forma, orientación. \citep{El-Ad1997}.
+  Estas pueden ser comparadas con propiedades similares de catálogos generados por otros códigos
+  como VIDE \citep{Sutter2015}.
+
   En la tercera parte se hará un análisis estadístico para determinar parámetros cosmológicos.
+  Se espera encontrar estadísticamente que no hayan direcciones privilegiadas para la orientación
+  de los ejes (asumiendo formas elipsoidales), funciones de correlación en distancias transversales
+  y longitudinales a la línea de observación para hacer pruebas de \citet{AlcockPaczynski1979}.
+  
   Finalmente se podrá dar un estimado de las observaciones que podrá llegar a medir el
   experimento DESI.
 
@@ -370,6 +417,13 @@ redshift-space distortions around voids
   Para desarrollar el código se parte de la lectura de archivos estándar de catálogos de halos
   de materia oscura o distribución de galaxias. Estos puntos se ubican en un espacio tridimensional.
 
+  Se dispone de la librería ``NGL''\citep{ngl} (Neighborhood Graph Library)
+  para calcular la estructura $\beta$-Skeleton. Esta librería es de uso libre, está escrita en C++.
+  Inicialmente fue desarrollada para estudiar topología de conjuntos de datos con un número de muestra
+  pequeño. Puede encontrar vecinos en los conjuntos de puntos usando distintos métodos como los
+  Grafos de Gabriel y el $\beta$-Skeleton, estos métodos resultan computacionalmente más económicos
+  y rápidos que otros métodos más robustos como la trianguación de Delaunay.
+  
   Por definición los vacíos cósmicos son regiones con baja densidad de materia, así que se
   estudiarán regiones de un campo escalar. Para esto es conveniente dividir el espacio en
   celdas discretas. El tamaño de las celdas será el primer parámetro a calibrar en el código.
@@ -395,32 +449,6 @@ redshift-space distortions around voids
   las regiones donde el campo escalar de densidad tenga un valor alto, o se detendrán cuando
   se encuentren con otra región en crecimiento. Otro método a probar para identificar regiones
   es la construcción de esferas dentro de los vacíos de la red. 
-
-  \subsection{Análisis Estadístico de Catálogos de Vacíos de la Red Cósmica}
-
-  Se calculan propiedades de las regiones como tamaño, forma, orientación. (Tensor de momento de inercia) \citep{El-Ad1997}
-
-  Se estudian propiedades de distorsión de esferas hacia elipses por el efecto \citet{AlcockPaczynski1979}.
-
-  \medskip
-  PENDIENTE
-  \medskip  TBD
-  
-  \subsection{Análisis de Parámetros Cosmológicos}
-
-  \url{http://cosmo17.in2p3.fr/talks/parallel/Achitouv_COSMO17.pdf}
-
-    \medskip
-  PENDIENTE
-  \medskip
-  TBD
-  
-  \subsection{Posibles Resultados del Experimento DESI}
-
-  TBD
-    \medskip
-  PENDIENTE
-  \medskip
 
   \section{Cronograma}
 
@@ -465,32 +493,28 @@ redshift-space distortions around voids
   
   \section{Resultados Esperados}
 
-  \url{  https://arxiv.org/pdf/1204.5185.pdf} Void Galaxies from SDSS
-
-  \url{  https://arxiv.org/abs/0711.2480 } Alignments of voids in the cosmic web
-
+  Como punto de referencia se tiene el catálogo de vacíos generado por el código VIDE \citep{Sutter2015}.
   
-
-  
+%  \url{  https://arxiv.org/pdf/1204.5185.pdf} Void Galaxies from SDSS
+%  \url{  https://arxiv.org/abs/0711.2480 } Alignments of voids in the cosmic web
     
   \nocite{*}
 
   \begin{thebibliography}{}
-
     \bibitem[Aarseth(2003)]{Aarseth2003} Aarseth, S. J. \ 2003, ``Gravitational N-Body Simulations'', Cambridge University Press.
     \bibitem[Alcock-Paczynski(1979)]{AlcockPaczynski1979} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358    
     \bibitem[Correa \& Lindstrom(2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011,  IEEE TVCG\ 17,12 (Dec 2011), 1852-1861
     \bibitem[El-Ad \& Piran(1997)]{El-Ad1997} El-Ad, H. \& Piran, T. \ 1997, \apj, 491, 2, 421
     \bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
-    \bibitem[Leclercq(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
+    \bibitem[Hamaus et al.(2015)]{Hamaus2015} Hamaus, N.; Sutter, P.M.; Lavaux, G. \& Wandelt, B. D. \ 2015, \jcap, 11, 036    
+    \bibitem[Leclercq et al.(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
     \bibitem[Longair(2004)]{Longair2004} Longair, M. S. \ 2004, ``A Brief History of Cosmology'', ``Measuring and Modeling the Universe'', Carnegie Observatories Astrophysics Series, Vol 2.
-    \bibitem[Press \& Schechter(1974)]{Press&Schechter1974} Press, W. H. \& Schechter, P. \ 1974, \apj, 187, 425-438.
-    \bibitem[Schneider(2014)]{Schneider2014} Schneider, P. \ 2014, ``Extragalactic Astronomy and Cosmology'', Springer.
+    \bibitem[Press \& Schechter(1974)]{Press&Schechter1974} Press, W. H. \& Schechter, P. \ 1974, \apj, 187, 425-438
+    \bibitem[Schneider(2014)]{Schneider2014} Schneider, P. \ 2014, ``Extragalactic Astronomy and Cosmology'', Springer
     \bibitem[Springel et al.(2005)]{Springel2005} Springel, V. et al. \ 2005, \nat, 435, 639
-    \bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M. \& Lavaux G. \& Hamaus, N \& et al. \ 2015, A\&C, 9, 1-9
-    \bibitem[van de Weygaert(2014)]{2016IAUS..308..493V} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493   
+    \bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M.; Lavaux G.; Hamaus, N; et al. \ 2015, A\&C, 9, 1-9
+    \bibitem[van de Weygaert(2014)]{2016IAUS..308..493V} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493      
 
-      
     \bibitem[SDSS Collaboration(2017)]{SDSS-DR14-2017} SDSS Collaboration \ 2017, arxiv, 1707.09322 astro-ph
     \bibitem[Hinshaw et al.(2013)]{WMAP2013} Hinshaw, G. et al. \ 2013, \apjs, 208, 20.
   \end{thebibliography}                                                           
