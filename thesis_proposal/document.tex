@@ -179,7 +179,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
       como el SDSS y el 2dFGS (en azul) comparadas con resultados de
       la simulación Millenium (rojo). Max Planck Institute for
       Astrophysics.
-      Cada punto representa una galaxia. 
+      Cada punto representa una galaxia.
       \label{fig:pie_millenium_walls}}
   \end{figure}
   
@@ -190,9 +190,22 @@ conforman los vac\'ios que nos interesan en esta tesis.
 
   \section{Marco Teórico}
 
-  Actualmente se dispone tanto de catálogos de halos de materia oscura de simulaciones como de catálogos de
-  galaxias de observaciones.
 
+  Al estudiar la LSS se encuentra que la mayor parte del volúmen del Universo está dominado
+  por los vacíos de la red cósmica. 
+
+
+\begin{itemize}
+  \item {\bf Como se encuentran vacios en simulaciones:
+    https://arxiv.org/pdf/0803.0918.pdf, Hace falta una imagen de
+    algun paper que muestre los vacios dentro de las simulaciones}
+  \item {\bf Como se utilizan estos vacios para actotar parametros cosmologicos}.
+  \item {\bf el Beta skeleton como un nuevo metodo para describir la
+    red cosmica}
+\item {\bf Uso de las simulaciones presentadas en este paper
+  https://arxiv.org/abs/1809.07355 para encontrar los vacios que se
+  esperan en DESI}
+\end{itemize}
 
   El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{Fang2018} para
   encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
@@ -204,13 +217,6 @@ conforman los vac\'ios que nos interesan en esta tesis.
  % \url{Hamaus, N., Sutter, P. M., Lavaux, G., & Wandelt, B. D. "Testing cosmic geometry without dynamic distortions using voids". JCAP 12, 013, December (2014). https://arxiv.org/pdf/1409.3580.pdf}
 
 
-  Al estudiar la LSS se encuentra que la mayor parte del volúmen del Universo está dominado
-  por los vacíos de la red cósmica. Pero por el desarrollo histórico de la astrofísica, se ha
-  prestado más atención a las galaxias como marcadores de la estructura compuesta por materia
-  bariónica y materia oscura. No en todos los halos de materia oscura se forman galaxias, así
-  que hay un cierto sesgo (\textit{bias}) al tomar las galaxias como marcadores de los
-  halos de materia oscura. Se han desarrollado numerosas pruebas estadísticas para estudiar
-  estos marcadores, entre ellas las funciones de correlación galaxia-galaxia.
 
   Al construir los mapas tridimensionales del universo se convierten los observables (posición
   angular y corrimiento al rojo) en coordenadas cartesianas en el marco de referencia comovil.
@@ -280,51 +286,46 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \section{Objetivos}
 
   \subsection{Objetivo Principal}
-  Desarrollar un nuevo buscador de vacíos de la red cósmica (LSS) en catálogos de galaxias
+  Desarrollar un nuevo buscador de vacíos de la red cósmica en catálogos de galaxias
   basado en el método $\beta$-Skeleton.
   
   \subsection{Objetivos Específicos}
 
-  \begin{itemize}
-
-      \item Identificar y catalogar vacíos de la red cósmica en catálogos de halos de materia oscura de
-  simulaciones y en catálogos de galaxias desde observaciones.
-
-      \item Calcular el parámetro cosmológico asociado a la energía oscura a partir del catálogo de
-  vacíos de la red cósmica
-
-    \item  Estimar los posibles resultados observacionales que pueda medir el experimento DESI.
+  \begin{itemize}    
+      \item Identificar y catalogar vacíos de la red cósmica en
+        simulaciones y observaciones.
+      \item Acotar los parámetros cosmológicos asociado a la densidad
+        de materia y de energía oscura a partir del catálogo de
+        vacíos de la red cósmica
+    \item  Crear un cat\'alogo de vaci\'os con simulaciones del Dark
+      Energy Spectroscopic Instrument.
   \end{itemize}
   
   \section{Metodología}
 
   La primera parte de este trabajo consiste en desarrollar el código del buscador de vacíos
-  en la red cósmica. Aquí se incluye una etapa de calibración de parámetros libres del buscador.
-  En la segunda parte se utilizará el código para obtener catálogos
-  de vacíos de la red a partir de catálogos de halos de materia oscura de simulaciones o
-  catálogos de galaxias de observaciones, mediante análisis estadístico de los catálogos de
-  vacíos se compararán simulaciones y observaciones.
-  Se calculan propiedades de las regiones como tamaño, forma, orientación. \citep{El-Ad1997}.
-  Estas pueden ser comparadas con propiedades similares de catálogos generados por otros códigos
-  como VIDE \citep{Sutter2015}.
+  en la red cósmica. Aquí se incluye una etapa de calibración de parámetros libres del buscador
+  para obtener catálogos de vacíos de la red a partir de simulaciones y observaciones.
+   
 
   En la tercera parte se hará un análisis estadístico para determinar parámetros cosmológicos.
   Se espera encontrar estadísticamente que no hayan direcciones privilegiadas para la orientación
   de los ejes (asumiendo formas elipsoidales), funciones de correlación en distancias transversales
-  y longitudinales a la línea de observación para hacer pruebas de \citet{AlcockPaczynski1979}.
+  y longitudinales a la línea de observación para hacer pruebas de
+  \citet{AlcockPaczynski1979}. 
   
-  Finalmente se podrá dar un estimado de las observaciones que podrá llegar a medir el
-  experimento DESI.
+  Finalmente se crearemos un cat\'alogo de vac\'ios en simulaciones
+  que predicen el tipo de mapa que se producir\'a con el Dark Energy
+  Spectrocopic Instrument a finales del 2024. 
 
   \subsection{Desarrollo del código}
 
-  El código será escrito en Python3 o C++, podrá ejecutarse en el Colaboratorio o en el HPC de la
-  facultad de ciencas de la Universidad de los Andes.
+  El código será escrito en Python3 o C++, podrá ejecutarse en el
+  cluster HPC de la facultad de ciencas de la Universidad de los Andes.
   
   Para desarrollar el código se parte de la lectura de archivos estándar de catálogos de halos
   de materia oscura o distribución de galaxias. Estos puntos se ubican en un espacio tridimensional.
-
-  Se dispone de la librería ``NGL''\citep{ngl} (Neighborhood Graph Library)
+  Disponemos de la librería ``NGL''\citep{ngl} (Neighborhood Graph Library)
   para calcular la estructura $\beta$-Skeleton. Esta librería es de uso libre, está escrita en C++.
   Inicialmente fue desarrollada para estudiar topología de conjuntos de datos con un número de muestra
   pequeño. Puede encontrar vecinos en los conjuntos de puntos usando distintos métodos como los
@@ -383,7 +384,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   
   \begin{enumerate}
   \item Desarrollo del código del Buscador de Vacíos Basado en $\beta$-Skeleton.
-  \item Calibración de los parámetros del código y comparación con otros buscadores.
+  \item Calibración de los parámetros del código.
   \item Obtención de catálogos de vacíos de la red a partir de simulaciones.
   \item Obtención de catálogos de vacíos de la red a partir de observaciones.
   \item Comparación por análisis estadístico entre simulaciones y observaciones.
@@ -400,8 +401,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   
   \section{Resultados Esperados}
 
-  Como punto de referencia se tiene el catálogo de vacíos generado por el código VIDE \citep{Sutter2015}.
-  
+{\bf (Falta esta parte)}  
 %  \url{  https://arxiv.org/pdf/1204.5185.pdf} Void Galaxies from SDSS
 %  \url{  https://arxiv.org/abs/0711.2480 } Alignments of voids in the cosmic web
     

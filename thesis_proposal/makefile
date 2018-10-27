@@ -1,12 +1,19 @@
+
 FIGDIR := figures/
 
-all: document.tex ${FIGDIR}
-	rm -f document.pdf
+all: document.pdf
+
+document.pdf: document.tex ${FIGDIR}
 	pdflatex document.tex
 	pdflatex document.tex
-	rm -f document.log
-	rm -f document.aux
+
+view:
 	evince document.pdf
 
 ${FIGDIR}:
 	mkdir figures
+
+clean:
+	rm -f document.pdf
+	rm -f document.log
+	rm -f document.aux
