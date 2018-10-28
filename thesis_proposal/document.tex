@@ -192,9 +192,52 @@ conforman los vac\'ios que nos interesan en esta tesis.
 
 
   Al estudiar la LSS se encuentra que la mayor parte del volúmen del Universo está dominado
-  por los vacíos de la red cósmica. 
+  por los vacíos de la red cósmica donde la densidad de materia es inferior al $20\%$ de la
+  densidad media del universo. Es interesante ver el contraste de la dinámica no lineal de evolución de
+  las regiones con sobredensidades donde se forman estructuras ligadas gravitacionalmente
+  cuyos marcadores son las galaxias (agrupadas en filamentos, paredes, clústers y súperclusters),
+  contra las regiones de baja densidad que obedecen dinámicas lineales, están más cercanas a
+  las condiciones iniciales del Universo. En estas regiones de baja densidad la métrica está
+  dominada por la energía oscura. Aquí yace el interés por estudiar los vacíos en la
+  red cósmica para explorar parámetros cosmológicos.
 
+  
+  \citet{Aspen-Amsterdam2008} realizaron una comparación de distintos algoritmos para encontrar vacíos
+  en la red cósmica. Estos pueden clasificarse en dos: Métodos que utilizan distribución de materia
+  oscura y métodos que utilizan galaxias/halos.
 
+  Los métodos que buscan vacíos en la red cósmica usando materia oscura operan directamente sobre
+  resultados de simulaciones. De un \textit{snapshot} de la simulación extraen el catálogo de todas
+  las partículas en la simulación. Algunos algoritmos generan un campo de densidad suavizado de
+  materia a partir de la distribución discreta de partículas para identificar las regiones de
+  densidad inferior al $20\%$ de la densidad media del Universo\citep{Ref_Aspen-Amsterdam2008},
+  este campo puede dividirse en una grilla 3D y se detectan los vacíos como conjuntos de celdas
+  interconectadas que cumplan el criterio de baja densidad \citep{Ref_Aspen-Amsterdam2008},
+  otros métodos definen los vacíos de la red como regiones del espacio encerradas por superficies
+  donde la densidad de materia es constante \citep{Ref_Aspen-Amsterdam2008}.
+  Los vacíos en la red cósmica pueden verse también desde el espacio de fase como las regiones
+  donde las partículas tienden siempre a escapar, por medio de tensores de marea son identificados
+  como regiones de inestabilidad \citep{Ref_Aspen-Amsterdam2008}.
+  También pueden estudiarse los vacíos utilizando la Transformada de \textit{Watershed} para
+  identificar contornos y delimitar regiones a partir de un campo escalar de densidad
+  \citep{Ref_Aspen-Amsterdam2008}.
+
+  Otra aproximación consiste en buscar vacíos a partir de marcadores de la densidad de materia
+  en el Universo, estos marcadores pueden ser galaxias (directamente de \textit{surveys} experimentales como el
+  SDSS o el 2dFGS, o bien de simulaciones utilizando métodos semianalíticos para generación de
+  galaxias) o halos de materia oscura (desde catálogos producidos en simulaciones).
+
+  Una primera aproximación consiste en buscar regiones esféricas donde no haya galaxias encerradas
+  \citep{Ref_Aspen-Amsterdam2008}. Otra busca diferenciar galaxias que hacen parte efectiva del contorno
+  de los vacíos según número de vecinos y distancia a los primeros vecinos y repetir el proceso de
+  búsqueda de esferas huecas vacías o con escasas galaxias clasificadas como no pertenecientes a
+  los contornos \citep{Ref_Aspen-Amsterdam2008}. Otros algoritmos permiten a los vacíos tener
+  formas irregulares. Puede dividirse el espacio en celdas e identificar las celdas vacías o que
+  se encuentren a una cierta distancia mínima de las celadas con galaxias. \citep{Ref_Aspen-Amsterdam2008}.
+
+  
+  
+  
 \begin{itemize}
   \item {\bf Como se encuentran vacios en simulaciones:
     https://arxiv.org/pdf/0803.0918.pdf, Hace falta una imagen de
@@ -206,6 +249,32 @@ conforman los vac\'ios que nos interesan en esta tesis.
   https://arxiv.org/abs/1809.07355 para encontrar los vacios que se
   esperan en DESI}
 \end{itemize}
+
+
+https://arxiv.org/pdf/0906.4101.pdf
+
+A partir del análisis estadístico de la morfología y la dinámica de los vacíos se pueden estudiar
+los parámetros cosmológicos \citep{https://arxiv.org/pdf/0906.4101.pdf}. Pueden clasificarse los vacíos
+como verdaderos vacíos, filamentales y tipo pancake. La proporción de estos cambia con los parámetros
+cosmológicos que se utilicen de fondo.
+
+
+https://arxiv.org/pdf/astro-ph/0610520.pdf
+As can be seen, the ellipticity distribution depends
+quite sensitively on the cosmological parameters. Note
+that for the cases of low % Ωm and high h, voids tend to
+have more spherical shapes, which in fact can be understood
+as follows. The void ellipticity distribution is an
+outcome of the counterbalance between the tidal effect of
+the dark matter and the expansion of the universe: The
+tidal effect disturbs the void shapes from spherical symmetry,
+while the expansion of the universe resists such
+disturbance.It is also worth noting that the void ellipticity
+distribution moves toward the low ellipticity as the
+smoothing scale increases. It indicates that the larger a
+void is, the more spherical it is
+
+
 
   El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{Fang2018} para
   encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
@@ -410,6 +479,9 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \begin{thebibliography}{}
     \bibitem[Aarseth(2003)]{Aarseth2003} Aarseth, S. J. \ 2003, ``Gravitational N-Body Simulations'', Cambridge University Press.
     \bibitem[Alcock-Paczynski(1979)]{AlcockPaczynski1979} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358    
+
+      \bibitem[Colberg et al.(2008)]{Aspen-Amsterdam2008} Colbert, J. M. et al. \ 2008, \mnras, 387, 933.
+      
     \bibitem[Correa \& Lindstrom(2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011,  IEEE TVCG\ 17,12 (Dec 2011), 1852-1861
     \bibitem[El-Ad \& Piran(1997)]{El-Ad1997} El-Ad, H. \& Piran, T. \ 1997, \apj, 491, 2, 421
     \bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
