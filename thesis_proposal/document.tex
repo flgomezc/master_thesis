@@ -133,7 +133,7 @@
   oscura. 
   
   El reto de la cosmolog\'ia actual
- es aumentar la precisi\'on de las
+  es aumentar la precisi\'on de las
   mediciones de estos par\'ametros cosmol\'ogicos. 
   Esto no s\'olo se logra con mediciones m\'as precisas sino con
   m\'etodos independientes para acotar los par\'ametros
@@ -148,6 +148,7 @@
   grandes regiones del espacio que cuentan con una baja densidad de
   galaxias. 
 
+
   
 
   \section{Estado del Arte}
@@ -157,12 +158,13 @@ distribuci\'on tridimensional de galaxias hechos en las \'ultimas dos
 d\'ecadas \citep{SDSS-DR14-2017}.
 El proyecto de mapeo más emblem\'atico de la primera década del
 siglo XXI fue el \textit{Sloan Digital Sky Survey (SDSS)} el cu\'al
-ha estimado la posici\'on en el espacio de más de 1.5 milones de galaxias de redshift
+con el experimento BOSS ha estimado la posici\'on en el espacio de
+más de 1.5 milones de galaxias de redshift $0<z<1.0$.
 
 El trabajo de interpretaci\'on de estos mapas en t\'erminos de
 par\'ametros cosmol\'ogicos requiere la realizaci\'on de simulaciones
-que sigan la formaci\'on de estructuras en un inverso en expansi\'on.
-Una simulación m\'as emblem\'atica en este aspecto es el Millenium Run
+que sigan la formaci\'on de estructuras en un Universo en expansi\'on.
+Una simulación m\'as emblem\'atica en este aspecto es el \textit{Millenium Run}
 hecha en el Instituto Max Planck de Astrof\'isica hace 15 a\~nos. 
 
 La Figura \ref{fig:pie_millenium_walls} compara los mapas de la
@@ -170,26 +172,53 @@ distribuci\'on de galaxias obtenidos por simulaciones (rojo) y por
 observaciones (azul).
 Cada punto representa una galaxia.
 En estas im\'agenes los grandes filamentos donde se aglomeran la
-galaxia se complementan con las regiones donde hay menos galxias que
+galaxia se complementan con las regiones donde hay menos galaxias que
 conforman los vac\'ios que nos interesan en esta tesis.
 
   \begin{figure}
     \plotone{pie_millennium_walls}
-    \caption{Distribuci\'on espacial de galaxias observada en mapeos
-      como el SDSS y el 2dFGS (en azul) comparadas con resultados de
-      la simulación Millenium (rojo). Max Planck Institute for
-      Astrophysics.
-      Cada punto representa una galaxia.
+    \caption{Distribuci\'on espacial de galaxias observada en mapeos como el SDSS y
+      el 2dFRGS (en azul) comparadas con resultados de la simulación Millenium (rojo).
+      Instituto de Astrofísica Max Planck Institute. Cada punto representa una galaxia.
+      El punto de observación se encuentra en el vértice central de los mapas. Los mapas
+      se encuentran a escalas distintas apuntando a regiones distintas del cielo.
+      En el segmento de la izquierda vemos la estructura a gran escala compuesta por
+      filamentos donde se agrupan las galaxias y grandes vacíos donde es baja la densidad
+      de galaxias. Este segmento es un extracto del catálogo 2dFGRS, es difícil observar
+      las galáxias lejanas poco brillantes, por eso hacia el exterior se reduce la cantidad
+      de galaxias observadas. A la derecha vemos en un segmento del la simulación Millenium,
+      se tiene en cuenta el mismo efecto para galaxias lejanas poco brillantes. En los dos
+      segmentos superiores vemos estructuras de varias decenas de Mpc encontradas en dos
+      catálogos (SDSS y 2dFGRS). En los dos segmentos inferiores, vemos estructuras con
+      tamaños similares generadas por la misma simulación Millenium.
       \label{fig:pie_millenium_walls}}
   \end{figure}
   
-  DESI es un experimento que actualmente se encuentra en etapa de construcción. Usa un telescopio de 4m con
-  dispositivos de ubicación automática de fibras para realizar espectroscopía. Puede ser considerado una versión
-  potenciada del SDSS. 
-{\bf (Completar un parrafo mas sobre DESI)}
+  El \textit{Dark Energy Survey Instrument} (DESI) es uno de los catálogos de galaxias
+  de la nueva generación. DESI es un experimento que actualmente se encuentra en etapa
+  de construcción. Usa el telescopio Mayall de 4m en Kitt Peak, Californa. Tiene
+  dispositivos de ubicación automática brazos robóticos con fibra óptica para tomar en simultánea
+  el espectro de hasta 5,000 objetos por exposición. En la operación inicial se observará el cielo por
+  cinco años, tomando el espectro de más de 30 millones de galaxias previamente seleccionadas.
+  Puede ser considerado una versión potenciada del SDSS (640 espectros simultáneos con las
+  fibras ubicadas manualmente, en un telescopio de $2.5 \rm~m$).
+
+  El desarrollo de DESI ha involucrado varias partes: Por un lado el equipo de construcción
+  del \textit{hardware} de posicionamiento de las fibras, construcción del espectrógrafo y
+  montaje sobre el telescopio. Por otro lado se tiene el equipo de programación de la ubicación
+  de las fibras y el equipo de simulación, donde se corren simulaciones cosmológicas para
+  generar catálocos \textit{MOCKS} del cielo. Este equipo simula también las condiciones
+  observacionales y limitaciones que perturban cada observación, estos datos alimentan el sistema
+  de observación, reducción y análisis de datos para comparar el cielo ``verdadero'' de
+  los MOCKS contra el mapa que construye DESI.
+
+  Al estudiar el cielo en esta escala nunca antes vista, DESI generará catálogos de galaxias
+  que permitirán realizar una gran cantidad de pruebas para acotación de parámetros cosmológicos,
+  en particular densidad de materia oscura. Este parámetro puede estudiarse mediante análisis
+  de vacíos de la red cósmica.
+
 
   \section{Marco Teórico}
-
 
   Al estudiar la LSS se encuentra que la mayor parte del volúmen del Universo está dominado
   por los vacíos de la red cósmica donde la densidad de materia es inferior al $20\%$ de la
@@ -224,7 +253,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
 
   Otra aproximación consiste en buscar vacíos a partir de marcadores de la densidad de materia
   en el Universo, estos marcadores pueden ser galaxias (directamente de \textit{surveys} experimentales como el
-  SDSS o el 2dFGS, o bien de simulaciones utilizando métodos semianalíticos para generación de
+  SDSS o el 2dFGRS, o bien de simulaciones utilizando métodos semianalíticos para generación de
   galaxias) o halos de materia oscura (desde catálogos producidos en simulaciones).
 
   Una primera aproximación consiste en buscar regiones esféricas donde no haya galaxias encerradas
@@ -235,14 +264,38 @@ conforman los vac\'ios que nos interesan en esta tesis.
   formas irregulares. Puede dividirse el espacio en celdas e identificar las celdas vacías o que
   se encuentren a una cierta distancia mínima de las celadas con galaxias. \citep{Ref_Aspen-Amsterdam2008}.
 
+  \bigskip
+  \textbf{Hace falta una imagen de algun paper que muestre los vacios dentro de las simulaciones}
+  \bigskip
   
-  
-  
+  https://arxiv.org/pdf/0906.4101.pdf
+
+  A partir del análisis estadístico de la morfología y la dinámica de los vacíos se pueden estudiar
+  los parámetros cosmológicos. Las condiciones iniciales de distribución de materia en el Universo
+  se toman como el modelo analítico de Zel'dovich. 
+
+  \citet{https://arxiv.org/pdf/astro-ph/0610520.pdf} demuestran cómo la elipticidad de los vacíos
+  es sensible a los parámetros cosmológicos, como un balance entre efectos de marea producidos
+  por la componente de materia del Universo y la expansion misma del Universo: las perturbaciones
+  iniciales tienden a crecer esféricamente por la expansión del Universo, aquí entra el parámetro
+  $\Omega_\Lambda$, en tanto las fuerzas de marea (la contribución de $\Omega_m$)tienden a deformar
+  los vacíos, alejándolos de la forma esférica. Desarrollan modelos analíticos sobre la distribución
+  de elipticidad para la población de vacíos según los parámetros cosmológicos.
+
+  \citet{https://arxiv.org/pdf/0906.4101.pdf} clasifica los vacíos
+  según sus propiedades dinámicas como verdaderos vacíos, filamentales y tipo pancake.
+  La proporción de estos cambia con los parámetros
+  cosmológicos que se utilicen de fondo.
+
+  En ambos estudios se determina la validez de los métodos realizando la estadística de poblaciones
+  de vacíos de la red en simulaciones con distintas condiciones iniciales.
+
+
+  \citet{https://arxiv.org/pdf/1205.4238.pdf} Desarrollo completo.
+
+  \bigskip
+
 \begin{itemize}
-  \item {\bf Como se encuentran vacios en simulaciones:
-    https://arxiv.org/pdf/0803.0918.pdf, Hace falta una imagen de
-    algun paper que muestre los vacios dentro de las simulaciones}
-  \item {\bf Como se utilizan estos vacios para actotar parametros cosmologicos}.
   \item {\bf el Beta skeleton como un nuevo metodo para describir la
     red cosmica}
 \item {\bf Uso de las simulaciones presentadas en este paper
@@ -250,29 +303,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   esperan en DESI}
 \end{itemize}
 
-
-https://arxiv.org/pdf/0906.4101.pdf
-
-A partir del análisis estadístico de la morfología y la dinámica de los vacíos se pueden estudiar
-los parámetros cosmológicos \citep{https://arxiv.org/pdf/0906.4101.pdf}. Pueden clasificarse los vacíos
-como verdaderos vacíos, filamentales y tipo pancake. La proporción de estos cambia con los parámetros
-cosmológicos que se utilicen de fondo.
-
-
-https://arxiv.org/pdf/astro-ph/0610520.pdf
-As can be seen, the ellipticity distribution depends
-quite sensitively on the cosmological parameters. Note
-that for the cases of low % Ωm and high h, voids tend to
-have more spherical shapes, which in fact can be understood
-as follows. The void ellipticity distribution is an
-outcome of the counterbalance between the tidal effect of
-the dark matter and the expansion of the universe: The
-tidal effect disturbs the void shapes from spherical symmetry,
-while the expansion of the universe resists such
-disturbance.It is also worth noting that the void ellipticity
-distribution moves toward the low ellipticity as the
-smoothing scale increases. It indicates that the larger a
-void is, the more spherical it is
+\bigskip
 
 
 
@@ -299,8 +330,7 @@ void is, the more spherical it is
   distorsiones en la distribución de los objetos. Este es el principio del test de
   \citet{AlcockPaczynski1979}.
 
-  Al estudiar los vacíos de la red cósmica en simulaciones se encuentra estadísticamente una
-  forma esferoidal. Se quieren obtener resultados similares al convertir observaciones de
+  Se quieren obtener resultados similares al convertir observaciones de
   vacíos (a partir de las observaciones de galaxias como marcadores de sus límites) a coordenadas
   comóviles. Una descripción detallada de esta metodología se brinda en \citet{Hamaus2015}:
 
@@ -345,7 +375,7 @@ void is, the more spherical it is
   De este modo se puede ver cómo es necesario asumir los valores actuales correctos de los
   parámetros cosmológicos para generar mapas tridimensionales de los objetos en el cielo. Si
   estos valores no coinciden con los parámetros
-  cosmológicos reales, las distancias calculadas  en la lína de visión y perpendicular a ella serán
+  cosmológicos reales, las distancias calculadas en la lína de visión y perpendicular a ella serán
   incorrectas. Una de las herramientas fundamentales para realizar tests AP son las funciones
   de correlación. Estas pueden ser aplicadas entre pares de galaxias-vacíos o funciones de
   autocorrelación vacío-vacío.
