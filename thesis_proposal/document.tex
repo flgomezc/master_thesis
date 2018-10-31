@@ -41,6 +41,7 @@
 
 %%\begin{abstract}
 
+% Texto comentado para la versión en español.
 \iffalse
 \section*{Abstract}
 
@@ -200,8 +201,8 @@ conforman los vac\'ios que nos interesan en esta tesis.
   El \textit{Dark Energy Survey Instrument} (DESI) es uno de los catálogos de galaxias
   de la nueva generación. DESI es un experimento que actualmente se encuentra en etapa
   de construcción. Usa el telescopio Mayall de 4m en Kitt Peak, Californa. Tiene
-  dispositivos de ubicación automática brazos robóticos con fibra óptica para tomar en simultánea
-  el espectro de hasta 5,000 objetos por exposición. En la operación inicial se observará el cielo por
+  brazos robóticos con fibra óptica para tomar el espectro de hasta 5,000 objetos
+  simultáneamente en cada exposición. En la operación inicial se observará el cielo por
   cinco años, tomando el espectro de más de 30 millones de galaxias previamente seleccionadas.
   Puede ser considerado una versión potenciada del SDSS (640 espectros simultáneos con las
   fibras ubicadas manualmente, en un telescopio de $2.5 \rm~m$).
@@ -209,11 +210,12 @@ conforman los vac\'ios que nos interesan en esta tesis.
   El desarrollo de DESI ha involucrado varias partes: Por un lado el equipo de construcción
   del \textit{hardware} de posicionamiento de las fibras, construcción del espectrógrafo y
   montaje sobre el telescopio. Por otro lado se tiene el equipo de programación de la ubicación
-  de las fibras y el equipo de simulación, donde se corren simulaciones cosmológicas para
-  generar catálocos \textit{MOCKS} del cielo. Este equipo simula también las condiciones
-  observacionales y limitaciones que perturban cada observación, estos datos alimentan el sistema
-  de observación, reducción y análisis de datos para comparar el cielo ``verdadero'' de
-  los MOCKS contra el mapa que construye DESI.
+  de las fibras y el equipo de simulación, donde generan catálocos \textit{MOCKS} del cielo a
+  partir de simulaciones cosmológicas. Este equipo recrea las condiciones atmosféricas de observación
+  y demás fuentes de ruido que perturban cada observación, estos datos alimentan el sistema
+  de análisis de datos para comparar el cielo ``verdadero'' de los MOCKS contra el mapa que
+  construye DESI. Así que cuando la óptica de DESI vea su primera luz, el equipo de análisis
+  de datos ya habrá tenido suficientes prácticas de entrenamiento con MOCKS.
 
   Al estudiar el cielo en esta escala nunca antes vista, DESI generará catálogos de galaxias
   que permitirán realizar una gran cantidad de pruebas para acotación de parámetros cosmológicos,
@@ -403,25 +405,31 @@ conforman los vac\'ios que nos interesan en esta tesis.
 
 
 
-    
-  \bigskip
+  \subsection{Método $\beta$-Skeleton}
 
-\begin{itemize}
-  \item {\bf el Beta skeleton como un nuevo metodo para describir la
-    red cosmica}
-\item {\bf Uso de las simulaciones presentadas en este paper
+
+  El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente por \citet{Fang2018} para
+  encontrar el ``esqueleto'' de la  LSS en catálogos de simulaciones y datos observacionales.
+  Ha sido usado desde hace $\sim 40$ años para analizar imágenes en búsqueda de contornos e identificación
+  de objetos, tiene aplicaciones en machine learning, problemas de minimización en conexión de redes
+  inalámbricas. Este método es computacionalmente económico y rápido.
+  
+  Depende del parámetro contínuo $\beta \geq 0$ para establecer las conexiones entre conjuntos de
+  puntos en el espacio. Cuando este parámetro tiende a cero, el método calcula todas las conexiones
+  entre todos los puntos de la red. Se ha encontrado que valores de este parámetro cercanos a 3
+  generan las estructuras filamentales en la LSS. Valores cercanos a 10 reducen demasiado las
+  conexiones y se pierde la estructura filamental. 
+
+  Un análisis estadístico básico de las distancias en conexiones puede revelar información subyaciente
+  en la LSS. Al tomar $\beta = 0$ esta estadística se reduce a la bien conocida función de correlación
+  de dos puntos, con $\beta \sim 3$ pueden detectarse diferencias tradicionalmente no visibles entre
+  simulaciones de N cuerpos (que requieren pleno poder computacional) y simulaciones que incluyen
+  modelos semianalíticos para generación de catálogos MOCS que son computacionalmente más rápidos.
+
+
+    {\bf Uso de las simulaciones presentadas en este paper
   https://arxiv.org/abs/1809.07355 para encontrar los vacios que se
   esperan en DESI}
-\end{itemize}
-
-\bigskip
-
-
-
-  El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{Fang2018} para
-  encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
-  Ha probado ser una herramienta útil para detectar estructuras subyacentes diferentes en
-  simulaciones cosmológicas generadas por métodos distintos.
 
 
  % \url{Testing cosmic geometry without dynamic distortions using voids}
@@ -496,7 +504,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   en conexiones largas que pueden aparecer en un $\beta$-skeleton con parámetro $\beta$ bajo,
   pero no aparecen en la red obtenida con el valor de $\beta$ apropiado.
 
-  Ya identificados los centroides de los vacíos, se utiliza el método \textit{watershed}
+  Ya identificados los centroides de los vacíos, se utiliza un método simiar a \textit{watershed}
   para identificar las regiones de baja densidad \citep{Sutter2015}. Con este método
   se planta una semilla en los centroides, todas las semillas crecen a la misma velocidad; una
   celda vecina a la vez. Se establecen ciertas reglas, por ejemplo las regiones no crecerán en
@@ -547,10 +555,17 @@ conforman los vac\'ios que nos interesan en esta tesis.
   
   \section{Resultados Esperados}
 
-{\bf (Falta esta parte)}  
-%  \url{  https://arxiv.org/pdf/1204.5185.pdf} Void Galaxies from SDSS
-%  \url{  https://arxiv.org/abs/0711.2480 } Alignments of voids in the cosmic web
-    
+  {\bf (Falta esta parte)}  
+  %  \url{  https://arxiv.org/pdf/1204.5185.pdf} Void Galaxies from SDSS
+  %  \url{  https://arxiv.org/abs/0711.2480 } Alignments of voids in the cosmic web
+
+  \begin{figure}
+    \plotone{lavaux_wandelt-2010_ellipticity_prob_dens_function.png}
+    \caption{ Función de densidad de probabilidad de la elipticidad de los vacíos
+      \citep{https://arxiv.org/pdf/0906.4101.pdf} \label{fig:expected_results}}
+  \end{figure}
+
+
   \nocite{*}
 
   \begin{thebibliography}{}
