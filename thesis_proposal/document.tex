@@ -40,6 +40,8 @@
 
 
 %%\begin{abstract}
+
+\iffalse
 \section*{Abstract}
 
   We are living the golden age of observational cosmology. 
@@ -76,7 +78,8 @@
   Keywords: Large Scale Structure, cosmology, voids, computational astrophysics
 
   \keywords{ Large Scale Structure, cosmology, voids, computational astrophysics}
-  
+
+  \fi
 %%\end{abstract}
 
   \section*{Resumen}
@@ -264,59 +267,16 @@ conforman los vac\'ios que nos interesan en esta tesis.
   formas irregulares. Puede dividirse el espacio en celdas e identificar las celdas vacías o que
   se encuentren a una cierta distancia mínima de las celadas con galaxias. \citep{Ref_Aspen-Amsterdam2008}.
 
-  \bigskip
-  \textbf{Hace falta una imagen de algun paper que muestre los vacios dentro de las simulaciones}
-  \bigskip
-  
-  https://arxiv.org/pdf/0906.4101.pdf
+  \begin{figure}
+    \plottwo{msnras0414-a.png}{msnras0414-b.png}
+    \caption{ Izquierda: Distribución de materia oscura en una caja de
+      $50 \times 50 \times 20 \rm~h^{-1}~Mpc$ obtenida de una simulación de $512^3$ partículas
+      en un cubo de $100\rm~ h^{-1} ~ Mpc$ en cosmología $\Lambda$CDM. Derecha: Un vacío de la
+      red identificado con el algoritmo DisPerSE. Imágen de
+      \citet{https://arxiv.org/pdf/1009.4014.pdf}. \label{fig:voids_in_simulations}}
+  \end{figure}
 
-  A partir del análisis estadístico de la morfología y la dinámica de los vacíos se pueden estudiar
-  los parámetros cosmológicos. Las condiciones iniciales de distribución de materia en el Universo
-  se toman como el modelo analítico de Zel'dovich. 
-
-  \citet{https://arxiv.org/pdf/astro-ph/0610520.pdf} demuestran cómo la elipticidad de los vacíos
-  es sensible a los parámetros cosmológicos, como un balance entre efectos de marea producidos
-  por la componente de materia del Universo y la expansion misma del Universo: las perturbaciones
-  iniciales tienden a crecer esféricamente por la expansión del Universo, aquí entra el parámetro
-  $\Omega_\Lambda$, en tanto las fuerzas de marea (la contribución de $\Omega_m$)tienden a deformar
-  los vacíos, alejándolos de la forma esférica. Desarrollan modelos analíticos sobre la distribución
-  de elipticidad para la población de vacíos según los parámetros cosmológicos.
-
-  \citet{https://arxiv.org/pdf/0906.4101.pdf} clasifica los vacíos
-  según sus propiedades dinámicas como verdaderos vacíos, filamentales y tipo pancake.
-  La proporción de estos cambia con los parámetros
-  cosmológicos que se utilicen de fondo.
-
-  En ambos estudios se determina la validez de los métodos realizando la estadística de poblaciones
-  de vacíos de la red en simulaciones con distintas condiciones iniciales.
-
-
-  \citet{https://arxiv.org/pdf/1205.4238.pdf} Desarrollo completo.
-
-  \bigskip
-
-\begin{itemize}
-  \item {\bf el Beta skeleton como un nuevo metodo para describir la
-    red cosmica}
-\item {\bf Uso de las simulaciones presentadas en este paper
-  https://arxiv.org/abs/1809.07355 para encontrar los vacios que se
-  esperan en DESI}
-\end{itemize}
-
-\bigskip
-
-
-
-  El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{Fang2018} para
-  encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
-  Ha probado ser una herramienta útil para detectar estructuras subyacentes diferentes en
-  simulaciones cosmológicas generadas por métodos distintos.
-
-
- % \url{Testing cosmic geometry without dynamic distortions using voids}
- % \url{Hamaus, N., Sutter, P. M., Lavaux, G., & Wandelt, B. D. "Testing cosmic geometry without dynamic distortions using voids". JCAP 12, 013, December (2014). https://arxiv.org/pdf/1409.3580.pdf}
-
-
+  \subsection{Test AP}
 
   Al construir los mapas tridimensionales del universo se convierten los observables (posición
   angular y corrimiento al rojo) en coordenadas cartesianas en el marco de referencia comovil.
@@ -324,13 +284,12 @@ conforman los vac\'ios que nos interesan en esta tesis.
   expande el espacio en función del tiempo. El modelo cosmológico estándar $\Lambda$CDM
   describe esta rata de expansión en función de algunos parámetros como la densidad de materia
   y la densidad de energía oscura en el Universo. Estos datos se pueden obtener con precisión
-  de sondas como Planck y otro tipo de experimentos (BAO por ejemplo).
-
-  Si se construye un mapa del universo con los parámetros cosmológicos erroneos, se observarán
+  de sondas como Planck y otro tipo de experimentos (BAO por ejemplo). Si se construye un mapa
+  del universo con los parámetros cosmológicos erroneos, se observarán
   distorsiones en la distribución de los objetos. Este es el principio del test de
   \citet{AlcockPaczynski1979}.
 
-  Se quieren obtener resultados similares al convertir observaciones de
+  Se puede aplicar este test AP al convertir observaciones de
   vacíos (a partir de las observaciones de galaxias como marcadores de sus límites) a coordenadas
   comóviles. Una descripción detallada de esta metodología se brinda en \citet{Hamaus2015}:
 
@@ -380,6 +339,93 @@ conforman los vac\'ios que nos interesan en esta tesis.
   de correlación. Estas pueden ser aplicadas entre pares de galaxias-vacíos o funciones de
   autocorrelación vacío-vacío.
   
+  \subsection{Análisis de elipticidad}
+  
+  A partir del análisis estadístico de la morfología y la dinámica de los vacíos se pueden estudiar
+  los parámetros cosmológicos. Las condiciones iniciales de distribución de materia en el Universo
+  se toman como el modelo analítico de Zel'dovich. 
+
+  \citet{https://arxiv.org/pdf/astro-ph/0610520.pdf}
+  demuestran cómo la elipticidad de los vacíos
+  es sensible a los parámetros cosmológicos, como un balance entre efectos de marea producidos
+  por la componente de materia del Universo y la expansion misma del Universo: las perturbaciones
+  iniciales tienden a crecer esféricamente por la expansión del Universo, aquí entra el parámetro
+  $\Omega_\Lambda$, en tanto las fuerzas de marea (la contribución de $\Omega_m$)tienden a deformar
+  los vacíos, alejándolos de la forma esférica. Desarrollan modelos analíticos sobre la distribución
+  de elipticidad para la población de vacíos según los parámetros cosmológicos.
+
+  \citet{https://arxiv.org/pdf/0906.4101.pdf} clasifica los vacíos
+  según sus propiedades dinámicas como verdaderos vacíos, filamentales y tipo pancake.
+  La proporción de estos cambia con los parámetros cosmológicos que se utilicen de fondo.
+  En \citet{https://arxiv.org/pdf/1205.4238.pdf} se comparan incluso cosmologías distinas al modelo
+  estándar $\Lambda$CDM. Esta referencia muestra un desarrollo completo del principio de análisis de
+  la elipticidad de los vacíos en la red cósmica.
+
+  Una vez se han definido los vacíos se calcula su tensor de inercia, donde $a \geq b \geq c$ son los
+  valores propios del tensor análogos a los semiejes en un elipsoide. Se define la esfericidad en
+  términos de la elipticidad $s = 1 - \epsilon = c / a$ y el achatamiento como $ p = b / a$. Con esto
+  el volumen del elipsoide equivalente será $V = \frac{4}{3}\pi abc$. Se puede calcular el tensor de
+  marea $T_{ij}$ del potencial gravitacional $\phi$ como:
+
+  \begin{equation}
+    T_{ij} = \frac{\partial^2 \phi}{\partial x_i \partial x_j} - \frac{1}{3} \nabla^2 \phi \delta_{ij},
+  \end{equation}
+
+  los vectores propios de este tensor serán  $\lambda_1 > \lambda_2 > \lambda_3$, cuya suma es
+  $\delta_\nu = \sum \lambda_i$, y están relacionados con la esfericidad y el achatamiento según:
+
+  \begin{equation}
+    \lambda_1 = \frac{1 + (\delta_\nu -2)s^2 + p^2}{p^2 + s^2 + 1}
+ \end{equation}
+  y  
+  \begin{equation}
+    \lambda_2 = \frac{1 + (\delta_\nu -2)p^2 + s^2}{p^2 + s^2 + 1}.
+  \end{equation}
+
+
+  La función de densidad de probabilidad $f(s)$ para una esfericidad dada viene dada por:
+  
+  \begin{eqnarray}
+    f(1-\epsilon;z) = f(s;z, R_L) = \int_0^1 \mathcal{P}\left[ p,s|\delta = \delta_\nu;\sigma(z,R_L)\right] dp \nonumber\\
+    = \int_s^1 dp \frac{3375 \sqrt{2}}{ \sqrt{10 \pi} \sigma^5(z,R_L)}
+     \times \exp \left[ \frac{-5 \delta_\nu^2 + 15 \delta_\nu ( \lambda_1 + \lambda_2 )}{2 \sigma^2(z,R_L)} \right] \nonumber\\
+     \times \exp \left[ - \frac{ 15(\lambda_1^2 + \lambda_1 \lambda_2 + \lambda_2^2)}{ 2\sigma^2(z,R_L)}\right]
+    (2\lambda_1 + \lambda_2 - \delta_\nu) \nonumber \\
+    \times (\lambda_1 - \lambda_2)( \lambda_1 + 2\lambda_2 - \delta_\nu) \frac{ 4 (\delta_\nu - 3)^3 p s }{ ( p^2 + s^2 + 1)^3}
+  \end{eqnarray}
+  
+  $\sigma(z,R_L)$ es la fluctuación RMS del campo de materia suavizado en una escala $R_L$ a
+  redshift $z$:
+  
+  \begin{equation}
+    \sigma^2(z,R_L) = D^2(z) \int_o^{\infty} \frac{k^2dk}{2\pi^2}P(k) W^2(kR_l)d \ln k
+  \end{equation}
+
+
+
+    
+  \bigskip
+
+\begin{itemize}
+  \item {\bf el Beta skeleton como un nuevo metodo para describir la
+    red cosmica}
+\item {\bf Uso de las simulaciones presentadas en este paper
+  https://arxiv.org/abs/1809.07355 para encontrar los vacios que se
+  esperan en DESI}
+\end{itemize}
+
+\bigskip
+
+
+
+  El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente \citep{Fang2018} para
+  encontrar el grafo de la LSS en catálogos de halos de materia oscura de distintas simulaciones.
+  Ha probado ser una herramienta útil para detectar estructuras subyacentes diferentes en
+  simulaciones cosmológicas generadas por métodos distintos.
+
+
+ % \url{Testing cosmic geometry without dynamic distortions using voids}
+ % \url{Hamaus, N., Sutter, P. M., Lavaux, G., & Wandelt, B. D. "Testing cosmic geometry without dynamic distortions using voids". JCAP 12, 013, December (2014). https://arxiv.org/pdf/1409.3580.pdf}
 
   
   \section{Objetivos}
@@ -406,12 +452,13 @@ conforman los vac\'ios que nos interesan en esta tesis.
   en la red cósmica. Aquí se incluye una etapa de calibración de parámetros libres del buscador
   para obtener catálogos de vacíos de la red a partir de simulaciones y observaciones.
    
-
-  En la tercera parte se hará un análisis estadístico para determinar parámetros cosmológicos.
+  Luego se hará un análisis estadístico para determinar parámetros cosmológicos.
   Se espera encontrar estadísticamente que no hayan direcciones privilegiadas para la orientación
-  de los ejes (asumiendo formas elipsoidales), funciones de correlación en distancias transversales
-  y longitudinales a la línea de observación para hacer pruebas de
-  \citet{AlcockPaczynski1979}. 
+  de los ejes (asumiendo formas elipsoidales en los halos), funciones de correlación en distancias
+  transversales y longitudinales a la línea de observación para hacer pruebas de
+  \citet{AlcockPaczynski1979}. La estadística de la morfología de los halos puede ser comparada
+  con modelos analíticos para revisar proporciones entre poblaciones e identificar si los
+  parámetros cosmológicos con los que se han realizado los cálculos son los parámetros adecuados.
   
   Finalmente se crearemos un cat\'alogo de vac\'ios en simulaciones
   que predicen el tipo de mapa que se producir\'a con el Dark Energy
