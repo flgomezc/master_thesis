@@ -201,7 +201,8 @@ conforman los vac\'ios que nos interesan en esta tesis.
   El \textit{Dark Energy Survey Instrument} (DESI) es uno de los catálogos de galaxias
   de la nueva generación. DESI es un experimento que actualmente se encuentra en etapa
   de construcción. Usa el telescopio Mayall de 4m en Kitt Peak, Californa. Tiene
-  brazos robóticos con fibra óptica para tomar el espectro de hasta 5,000 objetos
+  5,000 fibras montadas sobre brazos robóticos posicionadores que permiten tomar  el espectro
+  de cerca de 2,000 objetos
   simultáneamente en cada exposición. En la operación inicial se observará el cielo por
   cinco años, tomando el espectro de más de 30 millones de galaxias previamente seleccionadas.
   Puede ser considerado una versión potenciada del SDSS (640 espectros simultáneos con las
@@ -385,7 +386,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \end{equation}
 
 
-  La función de densidad de probabilidad $f(s)$ para una esfericidad dada viene dada por:
+  La función de densidad de probabilidad $f(s)$ para una esfericidad de los vacíos de la red dada viene dada por:
   
   \begin{eqnarray}
     f(1-\epsilon;z) = f(s;z, R_L) = \int_0^1 \mathcal{P}\left[ p,s|\delta = \delta_\nu;\sigma(z,R_L)\right] dp \nonumber\\
@@ -427,13 +428,16 @@ conforman los vac\'ios que nos interesan en esta tesis.
   modelos semianalíticos para generación de catálogos MOCS que son computacionalmente más rápidos.
 
 
-    {\bf Uso de las simulaciones presentadas en este paper
-  https://arxiv.org/abs/1809.07355 para encontrar los vacios que se
-  esperan en DESI}
-
-
- % \url{Testing cosmic geometry without dynamic distortions using voids}
- % \url{Hamaus, N., Sutter, P. M., Lavaux, G., & Wandelt, B. D. "Testing cosmic geometry without dynamic distortions using voids". JCAP 12, 013, December (2014). https://arxiv.org/pdf/1409.3580.pdf}
+  Para encontrar los vacíos esperados en DESI se utilizarán catálogos MOCK de galaxias brillantes
+  generados en la simulación Millenium-XXL (MXXL) \ref{https://arxiv.org/abs/1701.06581}, que simula un
+  volúmen 216 veces más grande que la simulaciń Millenium original. Estos
+  son los mismos catálogos utilizados por el equipo de DESI para recrear el cielo que pueden
+  observar y calcular la posible incompletez del survey \ref{https://arxiv.org/pdf/1809.07355.pdf}.
+  Estos catálogos son conos de luz que van
+  desde galaxias cercanas ($\sim0$) hasta galaxias lejanas ($z\sim2.2$), con una distribución
+  media alrededor de $z\sim 0.2$. Se utilizan métodos Monte Carlo para poblar los halos de materia
+  oscura con galaxias con luminosidad y color distintos, basados en los resultados del SDSS y de
+  GAMA. Se incluyen BAO y distorsiones de redshift de acuerdo al movimiento propio de las galaxias.
 
   
   \section{Objetivos}
@@ -555,14 +559,16 @@ conforman los vac\'ios que nos interesan en esta tesis.
   
   \section{Resultados Esperados}
 
-  {\bf (Falta esta parte)}  
-  %  \url{  https://arxiv.org/pdf/1204.5185.pdf} Void Galaxies from SDSS
-  %  \url{  https://arxiv.org/abs/0711.2480 } Alignments of voids in the cosmic web
+  Se espera construir el código de un buscador de vacíos de la red cósmica basado en el
+  método $\beta$-Skeleton. Con este código se espera generar catálogos de vacíos con
+  suficiente precisión para realizar pruebas cosmológicas tipo test AP y de elipticidad,
+  realizar pruebas con catálogos de galaxias de simulaciones y observaciones, y finalmente
+  estimar la población de vacíos que encontrará el proyecto DESI.
 
   \begin{figure}
     \plotone{lavaux_wandelt-2010_ellipticity_prob_dens_function.png}
-    \caption{ Función de densidad de probabilidad de la elipticidad de los vacíos
-      \citep{https://arxiv.org/pdf/0906.4101.pdf} \label{fig:expected_results}}
+    \caption{ Función de densidad de probabilidad de la elipticidad de los vacíos típica
+      encontrada por \citep{https://arxiv.org/pdf/0906.4101.pdf} \label{fig:expected_results}}
   \end{figure}
 
 
