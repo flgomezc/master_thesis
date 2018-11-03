@@ -270,15 +270,17 @@ conforman los vac\'ios que nos interesan en esta tesis.
   formas irregulares. Puede dividirse el espacio en celdas e identificar las celdas vacías o que
   se encuentren a una cierta distancia mínima de las celadas con galaxias. \citep{Ref_Aspen-Amsterdam2008}.
 
-  \begin{figure}
-    \plottwo{msnras0414-a.png}{msnras0414-b.png}
-    \caption{ Izquierda: Distribución de materia oscura en una caja de
-      $50 \times 50 \times 20 \rm~h^{-1}~Mpc$ obtenida de una simulación de $512^3$ partículas
-      en un cubo de $100\rm~ h^{-1} ~ Mpc$ en cosmología $\Lambda$CDM. Derecha: Un vacío de la
-      red identificado con el algoritmo DisPerSE. Imágen de
-      \citet{https://arxiv.org/pdf/1009.4014.pdf}. \label{fig:voids_in_simulations}}
-  \end{figure}
 
+  \begin{figure}
+    \plotone{fractional_anisotropy_voids_fig1.png}
+    \caption{Una fracción de la simulación Boshoi \ref{} de $250 \times 250 \times \times 1 \rm ~h^{-1}~Mpc$
+      Izquierda: Análisis del campo de densidad mediante el método VWEB.
+      Medio: Clasificación de las estructuras de la red cósmica como vacíos (blanco),
+      paredes (gris claro), filamentos (gris oscuro) y nudos (negro).
+      Derecha: Vacíos encontrados. Los colores representan el radio efectivo de los vacíos.
+      \citet{https://arxiv.org/pdf/1009.}. \label{fig:voids_in_simulations}}
+  \end{figure}
+  
   \subsection{Test AP}
 
   Al construir los mapas tridimensionales del universo se convierten los observables (posición
@@ -427,6 +429,15 @@ conforman los vac\'ios que nos interesan en esta tesis.
   simulaciones de N cuerpos (que requieren pleno poder computacional) y simulaciones que incluyen
   modelos semianalíticos para generación de catálogos MOCS que son computacionalmente más rápidos.
 
+  \begin{figure}
+    \plotone{beta_skeleton_analysis.jpg}
+    \caption{Grafo encontrado por el método $\beta$-Skeleton para un conjunto de galaxias. Al aumentar el
+      parámetro $\beta$ se reduce el número de conexiones permitidas para cada galaxia.
+      \citep{https://arxiv.org/pdf/1809.00438.pdf} \label{fig:beta_skeleton_analysis}}
+  \end{figure}
+
+
+  
 
   Para encontrar los vacíos esperados en DESI se utilizarán catálogos MOCK de galaxias brillantes
   generados en la simulación Millenium-XXL (MXXL) \ref{https://arxiv.org/abs/1701.06581}, que simula un
