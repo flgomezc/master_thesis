@@ -130,8 +130,8 @@
   gravitacional. 
 
   Las observaciones del fondo de radiaci\'on c\'osmica de microondas
-  ({\bf referencia}) y de la distribuci\'on de galaxias a gran escala
-  ({\bf referencias}) apuntan a que esta evoluci\'on puede ser descrita
+  \citep{WMAP2013} y de la distribuci\'on de galaxias a gran escala
+  \citep{SDSS-DR14-2017} apuntan a que esta evoluci\'on puede ser descrita
   por un pu\~nado de par\'ametros cosmol\'ogicos, donde los m\'as
   importantes son la densidad de materia y la densidad de energ\'ia
   oscura. 
@@ -183,15 +183,15 @@ conforman los vac\'ios que nos interesan en esta tesis.
     \plotone{pie_millennium_walls}
     \caption{Distribuci\'on espacial de galaxias observada en mapeos como el SDSS y
       el 2dFRGS (en azul) comparadas con resultados de la simulación Millenium (rojo).
-      Instituto de Astrofísica Max Planck Institute. Cada punto representa una galaxia.
-      El punto de observación se encuentra en el vértice central de los mapas. Los mapas
-      se encuentran a escalas distintas apuntando a regiones distintas del cielo.
-      En el segmento de la izquierda vemos la estructura a gran escala compuesta por
+      Instituto de Astrofísica Max Planck. Cada punto representa una galaxia.
+      La Vía Láctea se encuentra en el centro de los mapas, que cubren diferentes regiones
+      del cielo en escalas distintas.
+      En el segmento de la izquierda muestra la estructura a gran escala compuesta por
       filamentos donde se agrupan las galaxias y grandes vacíos donde es baja la densidad
-      de galaxias. Este segmento es un extracto del catálogo 2dFGRS, es difícil observar
-      las galáxias lejanas poco brillantes, por eso hacia el exterior se reduce la cantidad
-      de galaxias observadas. A la derecha vemos en un segmento del la simulación Millenium,
-      se tiene en cuenta el mismo efecto para galaxias lejanas poco brillantes. En los dos
+      de galaxias, del catálogo 2dFGRS. Hacia la periferia distante solo se puedne ver las
+      galaxias más brillantes, por eso la baja densidad hacia el borde.
+      A la derecha vemos en un segmento del la simulación Millenium,
+     En los
       segmentos superiores vemos estructuras de varias decenas de Mpc encontradas en dos
       catálogos (SDSS y 2dFGRS). En los dos segmentos inferiores, vemos estructuras con
       tamaños similares generadas por la misma simulación Millenium.
@@ -199,26 +199,25 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \end{figure}
   
   El \textit{Dark Energy Survey Instrument} (DESI) es uno de los catálogos de galaxias
-  de la nueva generación. DESI es un experimento que actualmente se encuentra en etapa
+  de la nueva generación. DESI es un experimento en etapa
   de construcción. Usa el telescopio Mayall de 4m en Kitt Peak, Californa. Tiene
   5,000 fibras montadas sobre brazos robóticos posicionadores que permiten tomar  el espectro
   de cerca de 2,000 objetos
-  simultáneamente en cada exposición. En la operación inicial se observará el cielo por
-  cinco años, tomando el espectro de más de 30 millones de galaxias previamente seleccionadas.
-  Puede ser considerado una versión potenciada del SDSS (640 espectros simultáneos con las
-  fibras ubicadas manualmente, en un telescopio de $2.5 \rm~m$).
+  simultáneamente en cada exposición. La perimera fase observará el cielo por
+  cinco años, tomando el espectro de más de 30 millones de galaxias.
+  %Puede ser considerado una versión potenciada del SDSS (640 espectros simultáneos con las
+  %fibras ubicadas manualmente, en un telescopio de $2.5 \rm~m$).
 
-  El desarrollo de DESI ha involucrado varias partes: Por un lado el equipo de construcción
+  El desarrollo de DESI involucrada varias partes: un lado el equipo de construcción
   del \textit{hardware} de posicionamiento de las fibras, construcción del espectrógrafo y
-  montaje sobre el telescopio. Por otro lado se tiene el equipo de programación de la ubicación
-  de las fibras y el equipo de simulación, donde generan catálocos \textit{MOCKS} del cielo a
-  partir de simulaciones cosmológicas. Este equipo recrea las condiciones atmosféricas de observación
-  y demás fuentes de ruido que perturban cada observación, estos datos alimentan el sistema
-  de análisis de datos para comparar el cielo ``verdadero'' de los MOCKS contra el mapa que
-  construye DESI. Así que cuando la óptica de DESI vea su primera luz, el equipo de análisis
-  de datos ya habrá tenido suficientes prácticas de entrenamiento con MOCKS.
+  montaje sobre el telescopio. Por otro lado está el equipo de programación de la ubicación
+  de las fibras y simulación de observaciones, usan catálogos \textit{MOCKS} del cielo a
+  partir de simulaciones cosmológicas, recrean las condiciones atmosféricas 
+  de observación, para alimentan el sistema
+  de análisis de datos. Así se compara el desempeño del análisis de datos de DESI contra
+  el cielo ``verdadero'' de los MOCKS.
 
-  Al estudiar el cielo en esta escala nunca antes vista, DESI generará catálogos de galaxias
+  DESI generará catálogos de galaxias nunca antes vistos 
   que permitirán realizar una gran cantidad de pruebas para acotación de parámetros cosmológicos,
   en particular densidad de materia oscura. Este parámetro puede estudiarse mediante análisis
   de vacíos de la red cósmica.
@@ -226,16 +225,16 @@ conforman los vac\'ios que nos interesan en esta tesis.
 
   \section{Marco Teórico}
 
-  Al estudiar la LSS se encuentra que la mayor parte del volúmen del Universo está dominado
-  por los vacíos de la red cósmica donde la densidad de materia es inferior al $20\%$ de la
-  densidad media del universo. Es interesante ver el contraste de la dinámica no lineal de evolución de
-  las regiones con sobredensidades donde se forman estructuras ligadas gravitacionalmente
-  cuyos marcadores son las galaxias (agrupadas en filamentos, paredes, clústers y súperclusters),
-  contra las regiones de baja densidad que obedecen dinámicas lineales, están más cercanas a
+  La LSS muestra que la mayor parte del volúmen del Universo está dominado
+  por los vacíos de la red cósmica. Allí la densidad de materia es inferior al $20\%$ de la
+  densidad media del universo \citep{Weygaert2014}.
+  El universo inicialmente homogeneo tiene una evolución con dinámica no lineal en regiones
+  con sobredensidad donde se forman estructuras  de materia ligadas gravitacionalmente
+  cuyos marcadores son las galaxias (agrupadas en filamentos, paredes y nodos),
+  Las regiones de baja densidad que obedecen dinámicas lineales, están más cercanas a
   las condiciones iniciales del Universo. En estas regiones de baja densidad la métrica está
   dominada por la energía oscura. Aquí yace el interés por estudiar los vacíos en la
   red cósmica para explorar parámetros cosmológicos.
-
   
   \citet{Aspen-Amsterdam2008} realizaron una comparación de distintos algoritmos para encontrar vacíos
   en la red cósmica. Estos pueden clasificarse en dos: Métodos que utilizan distribución de materia
@@ -243,38 +242,34 @@ conforman los vac\'ios que nos interesan en esta tesis.
 
   Los métodos que buscan vacíos en la red cósmica usando materia oscura operan directamente sobre
   resultados de simulaciones. De un \textit{snapshot} de la simulación extraen el catálogo de todas
-  las partículas en la simulación. Algunos algoritmos generan un campo de densidad suavizado de
-  materia a partir de la distribución discreta de partículas para identificar las regiones de
-  densidad inferior al $20\%$ de la densidad media del Universo\citep{Ref_Aspen-Amsterdam2008},
-  este campo puede dividirse en una grilla 3D y se detectan los vacíos como conjuntos de celdas
-  interconectadas que cumplan el criterio de baja densidad \citep{Ref_Aspen-Amsterdam2008},
-  otros métodos definen los vacíos de la red como regiones del espacio encerradas por superficies
-  donde la densidad de materia es constante \citep{Ref_Aspen-Amsterdam2008}.
-  Los vacíos en la red cósmica pueden verse también desde el espacio de fase como las regiones
-  donde las partículas tienden siempre a escapar, por medio de tensores de marea son identificados
-  como regiones de inestabilidad \citep{Ref_Aspen-Amsterdam2008}.
-  También pueden estudiarse los vacíos utilizando la Transformada de \textit{Watershed} para
-  identificar contornos y delimitar regiones a partir de un campo escalar de densidad
-  \citep{Ref_Aspen-Amsterdam2008}.
+  las partículas en la simulación. En \citet{Aspen-Amsterdam2008} se comparan algunos algoritmos
+  generan un campo de densidad suavizado de materia a partir de la distribución discreta de partículas
+  para identificar las regiones de  densidad inferior al $20\%$ de la densidad media del Universo
+  discretizando el espacio en celdas y buscando aquellas con baja densidad, 
+  otros métodos definen los vacíos como regiones del espacio encerradas por superficies
+  donde la densidad de materia es constante.  Los vacíos pueden identificarse desde el espacio de
+  fase como las regiones donde las partículas tienden siempre a escapar. Otros métodos usan la
+  Transformada de \textit{Watershed} para identificar contornos y delimitar los vacíos desde
+  generando contraste en el campo escalar de densidad y encerrando las regiones.
 
-  Otra aproximación consiste en buscar vacíos a partir de marcadores de la densidad de materia
-  en el Universo, estos marcadores pueden ser galaxias (directamente de \textit{surveys} experimentales como el
-  SDSS o el 2dFGRS, o bien de simulaciones utilizando métodos semianalíticos para generación de
-  galaxias) o halos de materia oscura (desde catálogos producidos en simulaciones).
+  La aproximación de nuestro interés busca vacíos a partir de marcadores de la sobredensidad de materia
+  en el Universo, en catálogos de halos de materia oscura (de simulaciones) o
+  catálogos de galaxias (directamente de \textit{surveys} experimentales como el SDSS o el 2dFGRS, o bien
+  de simulaciones utilizando métodos semianalíticos para generación de galaxias).
 
-  Una primera aproximación consiste en buscar regiones esféricas donde no haya galaxias encerradas
-  \citep{Ref_Aspen-Amsterdam2008}. Otra busca diferenciar galaxias que hacen parte efectiva del contorno
-  de los vacíos según número de vecinos y distancia a los primeros vecinos y repetir el proceso de
-  búsqueda de esferas huecas vacías o con escasas galaxias clasificadas como no pertenecientes a
-  los contornos \citep{Ref_Aspen-Amsterdam2008}. Otros algoritmos permiten a los vacíos tener
-  formas irregulares. Puede dividirse el espacio en celdas e identificar las celdas vacías o que
-  se encuentren a una cierta distancia mínima de las celadas con galaxias. \citep{Ref_Aspen-Amsterdam2008}.
+  Un modelo sencillo busca las esféras más grandes posibles  donde no haya galaxias encerradas.
+  Un modelo más avanzado diferencia galaxias de los contornos (en filamentos y paredes)
+  de galaxias dentro de vacíos según número de vecinos distancia a los primeros vecinos, luego se repite
+  el esquema de búsqueda de esferas las esferas huecas más grandes posibles con escasas galaxias
+  internas clasificadas como no pertenecientes a los contornos. Algoritmos más avanzados
+  encuentran vacíos irregulares más grandes, discretizando el espacio en celdas e identificando las celdas
+  vacías a una distancia mínima de las celdas con galaxias. \citep{Aspen-Amsterdam2008}.
 
 
   \begin{figure}
     \plotone{fractional_anisotropy_voids_fig1.png}
-    \caption{Una fracción de la simulación Boshoi \ref{} de $250 \times 250 \times \times 1 \rm ~h^{-1}~Mpc$
-      Izquierda: Análisis del campo de densidad mediante el método VWEB.
+    \caption{Una fracción de la simulación Bolshoi \ref{Multidark2013} de $250 \times 250 \times \times 1 \rm ~h^{-1}~Mpc$
+      Izquierda: Análisis del campo de densidad mediante el método VWEB que analiza espacio de fase..
       Medio: Clasificación de las estructuras de la red cósmica como vacíos (blanco),
       paredes (gris claro), filamentos (gris oscuro) y nudos (negro).
       Derecha: Vacíos encontrados. Los colores representan el radio efectivo de los vacíos.
@@ -421,7 +416,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   puntos en el espacio. Cuando este parámetro tiende a cero, el método calcula todas las conexiones
   entre todos los puntos de la red. Se ha encontrado que valores de este parámetro cercanos a 3
   generan las estructuras filamentales en la LSS. Valores cercanos a 10 reducen demasiado las
-  conexiones y se pierde la estructura filamental. 
+  conexiones y se pierde la estructura filamental (figura \ref{fig:beta_skeleton_analysis}). 
 
   Un análisis estadístico básico de las distancias en conexiones puede revelar información subyaciente
   en la LSS. Al tomar $\beta = 0$ esta estadística se reduce a la bien conocida función de correlación
@@ -432,8 +427,9 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \begin{figure}
     \plotone{beta_skeleton_analysis.jpg}
     \caption{Grafo encontrado por el método $\beta$-Skeleton para un conjunto de galaxias. Al aumentar el
-      parámetro $\beta$ se reduce el número de conexiones permitidas para cada galaxia.
-      \citep{https://arxiv.org/pdf/1809.00438.pdf} \label{fig:beta_skeleton_analysis}}
+      parámetro $\beta$ se reduce el número de conexiones permitidas para cada galaxia. Con un valor cercano
+      a 3 se reproducen filamentos y vacíos de la LSS.
+      \citep{Fang2018} \label{fig:beta_skeleton_analysis}}
   \end{figure}
 
 
@@ -586,28 +582,32 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \nocite{*}
 
   \begin{thebibliography}{}
-    \bibitem[Aarseth(2003)]{Aarseth2003} Aarseth, S. J. \ 2003, ``Gravitational N-Body Simulations'', Cambridge University Press.
+    
     \bibitem[Alcock-Paczynski(1979)]{AlcockPaczynski1979} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358    
-
-      \bibitem[Colberg et al.(2008)]{Aspen-Amsterdam2008} Colbert, J. M. et al. \ 2008, \mnras, 387, 933.
+    \bibitem[Colberg et al.(2008)]{Aspen-Amsterdam2008} Colbert, J. M. et al. \ 2008, \mnras, 387, 933. % Comparison of multiple void finders 2008
       
     \bibitem[Correa \& Lindstrom(2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011,  IEEE TVCG\ 17,12 (Dec 2011), 1852-1861
     \bibitem[El-Ad \& Piran(1997)]{El-Ad1997} El-Ad, H. \& Piran, T. \ 1997, \apj, 491, 2, 421
     \bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
     \bibitem[Hamaus et al.(2015)]{Hamaus2015} Hamaus, N.; Sutter, P.M.; Lavaux, G. \& Wandelt, B. D. \ 2015, \jcap, 11, 036    
     \bibitem[Leclercq et al.(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
-    \bibitem[Longair(2004)]{Longair2004} Longair, M. S. \ 2004, ``A Brief History of Cosmology'', ``Measuring and Modeling the Universe'', Carnegie Observatories Astrophysics Series, Vol 2.
+    \bibitem[Park \& Lee(2004]{Park-Lee2004} Park, D. \& Lee, J. \ 2007, \prl 98, 1301 % Void Ellipticity as a probe of Cosmology
     \bibitem[Press \& Schechter(1974)]{Press&Schechter1974} Press, W. H. \& Schechter, P. \ 1974, \apj, 187, 425-438
+    \bibitem[Riebe et al.(2013)]{Multidark2013} Riebe, K. et al \ 2013, Astronomical Notes, 334, 691 % Bolshoi Simulation      
     \bibitem[Schneider(2014)]{Schneider2014} Schneider, P. \ 2014, ``Extragalactic Astronomy and Cosmology'', Springer
-    \bibitem[Springel et al.(2005)]{Springel2005} Springel, V. et al. \ 2005, \nat, 435, 639
-    \bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M.; Lavaux G.; Hamaus, N; et al. \ 2015, A\&C, 9, 1-9
-    \bibitem[van de Weygaert(2014)]{2016IAUS..308..493V} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493      
+    \bibitem[Springel et al.(2005)]{Springel2005} Springel, V. et al. \ 2005, \nat, 435, 639 % Millenium Simulation
+    \bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M.; Lavaux G.; Hamaus, N; et al. \ 2015, A\&C, 9, 1-9 % Void Finder VIDE
+    \bibitem[van de Weygaert(2014)]{Weygaert2014} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493 % Review of Voids
 
-    \bibitem[SDSS Collaboration(2017)]{SDSS-DR14-2017} SDSS Collaboration \ 2017, arxiv, 1707.09322 astro-ph
-    \bibitem[Hinshaw et al.(2013)]{WMAP2013} Hinshaw, G. et al. \ 2013, \apjs, 208, 20.
+    \bibitem[SDSS Collaboration(2017)]{SDSS-DR14-2017} SDSS Collaboration \ 2017, arxiv, 1707.09322 astro-ph % SDSS Data Release 14, 2017
+    \bibitem[Hinshaw et al.(2013)]{WMAP2013} Hinshaw, G. et al. \ 2013, \apjs, 208, 20. % WMAP last release
   \end{thebibliography}                                                           
                        
 
 %\listofchanges
 
 \end{document}
+
+
+% \bibitem[Aarseth(2003)]{Aarseth2003} Aarseth, S. J. \ 2003, ``Gravitational N-Body Simulations'', Cambridge University Press. % Book
+% \bibitem[Longair(2004)]{Longair2004} Longair, M. S. \ 2004, ``A Brief History of Cosmology'', ``Measuring and Modeling the Universe'', Carnegie Observatories Astrophysics Series, Vol 2. % BOOK
