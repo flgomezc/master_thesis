@@ -17,7 +17,11 @@
 %%\accepted{\today}
 \shorttitle{A LSS Void Identifier based on $\beta$-Skeleton}
 \shortauthors{F. L. Gómez-Cortés}
-  
+
+\renewcommand{\abstractname}{RESUMEN}
+\renewcommand{\figurename}{Figura}
+
+
 \begin{document}
 
 \title{A Large Scale Structure Void Identifier for Galaxy Surveys
@@ -37,9 +41,6 @@
 \author{Jaime E. Forero-Romero}
 \affiliation{Physics Department, Universidad de Los Andes}
 \collaboration{Advisor}
-
-
-%%\begin{abstract}
 
 % Texto comentado para la versión en español.
 \iffalse
@@ -83,8 +84,9 @@
   \fi
 %%\end{abstract}
 
-  \section*{Resumen}
+  %%  \begin{abstract}
 
+  \section{Resumen}
   Estamos viviendo en la era dorada de la cosmolog\'ia observacional.
   Existe un modelo est\'andar comol\'ogico ($\Lambda$-CDM) consolidado que explica
   las observaciones de la Estructura de Gran Escala (LSS) de galaxias mediante
@@ -118,6 +120,7 @@
   Palabras clave: estructura de gran escala, cosmología, vacíos,
   astrofísica computacional.
 
+%%  \end{abstract}
 
   \section{Introducción}
 
@@ -264,20 +267,16 @@ conforman los vac\'ios que nos interesan en esta tesis.
   internas clasificadas como no pertenecientes a los contornos. Algoritmos más avanzados
   encuentran vacíos irregulares más grandes, discretizando el espacio en celdas e identificando las celdas
   vacías a una distancia mínima de las celdas con galaxias. \citep{Aspen-Amsterdam2008}.
-
-
   \begin{figure}
     \plotone{fractional_anisotropy_voids_fig1.png}
-    \caption{Una fracción de la simulación Bolshoi \ref{Multidark2013} de $250 \times 250 \times \times 1 \rm ~h^{-1}~Mpc$
+    \caption{Una fracción de la simulación Bolshoi \citep{Multidark2013} de $250 \times 250 \times \times 1 \rm ~h^{-1}~Mpc$
       Izquierda: Análisis del campo de densidad mediante el método VWEB que analiza espacio de fase..
       Medio: Clasificación de las estructuras de la red cósmica como vacíos (blanco),
       paredes (gris claro), filamentos (gris oscuro) y nudos (negro).
       Derecha: Vacíos encontrados. Los colores representan el radio efectivo de los vacíos.
-      \citet{https://arxiv.org/pdf/1009.}. \label{fig:voids_in_simulations}}
+      \citep{Fang2018}. \label{fig:voids_in_simulations}}
   \end{figure}
-  
   \subsection{Test AP}
-
   Al construir los mapas tridimensionales del universo se convierten los observables (posición
   angular y corrimiento al rojo) en coordenadas cartesianas en el marco de referencia comovil.
   Para hacer esta conversión es necesario conocer la métrica de nuestro Universo; cómo se
@@ -295,42 +294,32 @@ conforman los vac\'ios que nos interesan en esta tesis.
 
   Sea $x$ el vector que denota las coordenadas de un objeto en el espacio. La distancia comovil en la
   dirección de la línea de visión se calcula como:
-
   \begin{equation}
-    x_{\parallel} = \int _0 ^z \frac{c}{H(z')}dz'
+    x_{\parallel} = \int _0 ^z \frac{c}{H(z')}dz',
   \end{equation}
-
-  Donde $c$ es la velocidad de la luz y $H(z)$ describe la expansión de Hubble como función del
+  donde $c$ es la velocidad de la luz y $H(z)$ describe la expansión de Hubble como función del
   corrimento al rojo $z$. Si el objeto tiene velocidad radial, esta induce un corrimiento adicional
   hacia el rojo o hacia el azul. Al tener esto en cuenta queda:
-
   \begin{equation}
     \tilde{x}_{\parallel} = \int _0 ^{z + \frac{v_\parallel}{c}}(1+z) \frac{c}{H(z')}dz'
     \simeq x_\parallel + \frac{v_\parallel}{H(z)}(1+z)
   \end{equation}
-
   En tanto el ángulo $\theta$  entre un par de objetos objetos se relaciona con la distancia comovil según
-
   \begin{equation}
     x_{\perp} = D_A(z)\theta
-  \end{equation}
-  
+  \end{equation} 
   En una métrica de  Friedmann-Lema\^itre-Robertson-Walker de curvatura $k$, la distancia
   comovil angular viene dada por:
-  
   \begin{equation}
     D_A(z) = \frac{c}{H_0\sqrt{-\Omega_k}} \sin \left( H_o\sqrt{-\Omega_k}
     \int_0^z \frac{1}{H(z'} dz' \right).
   \end{equation}
-  
   Este término es bastante sensible al parámetro de curvatura
   $\Omega_k = 1 - \Omega_m - \Omega_\Lambda$, en tanto la rata de expansión de Hubble
   depende en sí misma del contenido de energía y materia en el Universo como:
-
   \begin{equation}
     H(z) = H_0 \sqrt{ \Omega_m(1+z)^3 + \Omega_k(1+z)^2+\Omega_\Lambda}
   \end{equation}
-
   De este modo se puede ver cómo es necesario asumir los valores actuales correctos de los
   parámetros cosmológicos para generar mapas tridimensionales de los objetos en el cielo. Si
   estos valores no coinciden con los parámetros
@@ -345,7 +334,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   los parámetros cosmológicos. Las condiciones iniciales de distribución de materia en el Universo
   se toman como el modelo analítico de Zel'dovich. 
 
-  \citet{https://arxiv.org/pdf/astro-ph/0610520.pdf}
+  \citet{Park-Lee2007}
   demuestran cómo la elipticidad de los vacíos
   es sensible a los parámetros cosmológicos, como un balance entre efectos de marea producidos
   por la componente de materia del Universo y la expansion misma del Universo: las perturbaciones
@@ -354,10 +343,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   los vacíos, alejándolos de la forma esférica. Desarrollan modelos analíticos sobre la distribución
   de elipticidad para la población de vacíos según los parámetros cosmológicos.
 
-  \citet{https://arxiv.org/pdf/0906.4101.pdf} clasifica los vacíos
-  según sus propiedades dinámicas como verdaderos vacíos, filamentales y tipo pancake.
-  La proporción de estos cambia con los parámetros cosmológicos que se utilicen de fondo.
-  En \citet{https://arxiv.org/pdf/1205.4238.pdf} se comparan incluso cosmologías distinas al modelo
+  En \citet{Bos2012} se comparan incluso cosmologías distinas al modelo
   estándar $\Lambda$CDM. Esta referencia muestra un desarrollo completo del principio de análisis de
   la elipticidad de los vacíos en la red cósmica.
 
@@ -366,14 +352,11 @@ conforman los vac\'ios que nos interesan en esta tesis.
   términos de la elipticidad $s = 1 - \epsilon = c / a$ y el achatamiento como $ p = b / a$. Con esto
   el volumen del elipsoide equivalente será $V = \frac{4}{3}\pi abc$. Se puede calcular el tensor de
   marea $T_{ij}$ del potencial gravitacional $\phi$ como:
-
   \begin{equation}
     T_{ij} = \frac{\partial^2 \phi}{\partial x_i \partial x_j} - \frac{1}{3} \nabla^2 \phi \delta_{ij},
   \end{equation}
-
   los vectores propios de este tensor serán  $\lambda_1 > \lambda_2 > \lambda_3$, cuya suma es
   $\delta_\nu = \sum \lambda_i$, y están relacionados con la esfericidad y el achatamiento según:
-
   \begin{equation}
     \lambda_1 = \frac{1 + (\delta_\nu -2)s^2 + p^2}{p^2 + s^2 + 1}
  \end{equation}
@@ -381,31 +364,21 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \begin{equation}
     \lambda_2 = \frac{1 + (\delta_\nu -2)p^2 + s^2}{p^2 + s^2 + 1}.
   \end{equation}
-
-
   La función de densidad de probabilidad $f(s)$ para una esfericidad de los vacíos de la red dada viene dada por:
-  
   \begin{eqnarray}
     f(1-\epsilon;z) = f(s;z, R_L) = \int_0^1 \mathcal{P}\left[ p,s|\delta = \delta_\nu;\sigma(z,R_L)\right] dp \nonumber\\
     = \int_s^1 dp \frac{3375 \sqrt{2}}{ \sqrt{10 \pi} \sigma^5(z,R_L)}
-     \times \exp \left[ \frac{-5 \delta_\nu^2 + 15 \delta_\nu ( \lambda_1 + \lambda_2 )}{2 \sigma^2(z,R_L)} \right] \nonumber\\
-     \times \exp \left[ - \frac{ 15(\lambda_1^2 + \lambda_1 \lambda_2 + \lambda_2^2)}{ 2\sigma^2(z,R_L)}\right]
-    (2\lambda_1 + \lambda_2 - \delta_\nu) \nonumber \\
-    \times (\lambda_1 - \lambda_2)( \lambda_1 + 2\lambda_2 - \delta_\nu) \frac{ 4 (\delta_\nu - 3)^3 p s }{ ( p^2 + s^2 + 1)^3}
+      \exp \left[ \frac{-5 \delta_\nu^2 + 15 \delta_\nu ( \lambda_1 + \lambda_2 )}{2 \sigma^2(z,R_L)} \right] 
+      \exp \left[ - \frac{ 15(\lambda_1^2 + \lambda_1 \lambda_2 + \lambda_2^2)}{ 2\sigma^2(z,R_L)}\right] \\
+      \times (2\lambda_1 + \lambda_2 - \delta_\nu) 
+       (\lambda_1 - \lambda_2)( \lambda_1 + 2\lambda_2 - \delta_\nu) \frac{ 4 (\delta_\nu - 3)^3 p s }{ ( p^2 + s^2 + 1)^3}
   \end{eqnarray}
-  
   $\sigma(z,R_L)$ es la fluctuación RMS del campo de materia suavizado en una escala $R_L$ a
   redshift $z$:
-  
   \begin{equation}
     \sigma^2(z,R_L) = D^2(z) \int_o^{\infty} \frac{k^2dk}{2\pi^2}P(k) W^2(kR_l)d \ln k
   \end{equation}
-
-
-
   \subsection{Método $\beta$-Skeleton}
-
-
   El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente por \citet{Fang2018} para
   encontrar el ``esqueleto'' de la  LSS en catálogos de simulaciones y datos observacionales.
   Ha sido usado desde hace $\sim 40$ años para analizar imágenes en búsqueda de contornos e identificación
@@ -423,7 +396,6 @@ conforman los vac\'ios que nos interesan en esta tesis.
   de dos puntos, con $\beta \sim 3$ pueden detectarse diferencias tradicionalmente no visibles entre
   simulaciones de N cuerpos (que requieren pleno poder computacional) y simulaciones que incluyen
   modelos semianalíticos para generación de catálogos MOCS que son computacionalmente más rápidos.
-
   \begin{figure}
     \plotone{beta_skeleton_analysis.jpg}
     \caption{Grafo encontrado por el método $\beta$-Skeleton para un conjunto de galaxias. Al aumentar el
@@ -432,20 +404,17 @@ conforman los vac\'ios que nos interesan en esta tesis.
       \citep{Fang2018} \label{fig:beta_skeleton_analysis}}
   \end{figure}
 
-
-  
-
+  \subsection{Datos esperados en DESI}
   Para encontrar los vacíos esperados en DESI se utilizarán catálogos MOCK de galaxias brillantes
-  generados en la simulación Millenium-XXL (MXXL) \ref{https://arxiv.org/abs/1701.06581}, que simula un
+  generados en la simulación Millenium-XXL (MXXL) \citep{Smith2017}, que simula un
   volúmen 216 veces más grande que la simulaciń Millenium original. Estos
   son los mismos catálogos utilizados por el equipo de DESI para recrear el cielo que pueden
-  observar y calcular la posible incompletez del survey \ref{https://arxiv.org/pdf/1809.07355.pdf}.
+  observar y calcular la posible incompletez del survey \citep{Smith2018}.
   Estos catálogos son conos de luz que van
   desde galaxias cercanas ($\sim0$) hasta galaxias lejanas ($z\sim2.2$), con una distribución
   media alrededor de $z\sim 0.2$. Se utilizan métodos Monte Carlo para poblar los halos de materia
   oscura con galaxias con luminosidad y color distintos, basados en los resultados del SDSS y de
   GAMA. Se incluyen BAO y distorsiones de redshift de acuerdo al movimiento propio de las galaxias.
-
   
   \section{Objetivos}
 
@@ -526,6 +495,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \section{Cronograma}
 
   \begin{table}[htb]
+    \centering
     \begin{tabular}{|c|cccccccccccccccc| }
       \hline
       Tareas $\backslash$ Semanas & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16  \\
@@ -541,7 +511,6 @@ conforman los vac\'ios que nos interesan en esta tesis.
       9 &   &   &   &   &   &   & X & X & X &   &   &   &   &   &   &   \\
       10&   &   &   &   &   &   &   &   &   & X & X & X & X &   &   &   \\
       11&   &   &   &   &   &   &   &   &   &   &   &   &   & X & X & X \\
-      12&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & X \\
       \hline
     \end{tabular}
   \end{table}
@@ -559,42 +528,45 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \item Escritura del Documento: Introducción y marco teórico.
   \item Escritura del Documento: Desarrollo y calibración del Código.
   \item Escritura del Documento: Análisis de catálogos de vacíos de la red cósmica. 
-  \item Escritura del Documento: Estimación de posibles resultados del experimento DESI.
-  \item Escritura del Documento: Conclusiones
+  \item Escritura del Documento: Estimación de posibles resultados del experimento DESI y Conclusiones.
   \end{enumerate}
-  
   
   \section{Resultados Esperados}
 
   Se espera construir el código de un buscador de vacíos de la red cósmica basado en el
   método $\beta$-Skeleton. Con este código se espera generar catálogos de vacíos con
-  suficiente precisión para realizar pruebas cosmológicas tipo test AP y de elipticidad,
+  suficiente precisión para realizar pruebas cosmológicas tipo test AP y de elipticidad
+  \ref{fig:expected_results}, \citep{Bos2012,Lavaux-Wandelt2009,Park-Lee2007},
   realizar pruebas con catálogos de galaxias de simulaciones y observaciones, y finalmente
   estimar la población de vacíos que encontrará el proyecto DESI.
 
   \begin{figure}
     \plotone{lavaux_wandelt-2010_ellipticity_prob_dens_function.png}
     \caption{ Función de densidad de probabilidad de la elipticidad de los vacíos típica
-      encontrada por \citep{https://arxiv.org/pdf/0906.4101.pdf} \label{fig:expected_results}}
+      encontrada por \citep{Lavaux-Wandelt2009} evaluada en una cosmología específica.
+      \label{fig:expected_results}}
   \end{figure}
-
 
   \nocite{*}
 
   \begin{thebibliography}{}
-    
-    \bibitem[Alcock-Paczynski(1979)]{AlcockPaczynski1979} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358    
+
+  \bibitem[Alcock-Paczynski(1979)]{AlcockPaczynski1979} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358    
     \bibitem[Colberg et al.(2008)]{Aspen-Amsterdam2008} Colbert, J. M. et al. \ 2008, \mnras, 387, 933. % Comparison of multiple void finders 2008
-      
+
+    \bibitem[Bos et al.(2012)]{Bos2012} Bos, P. et al. \ 2012, \mnras, 426, 440 % Testing cosmologies using void ellipticity
     \bibitem[Correa \& Lindstrom(2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011,  IEEE TVCG\ 17,12 (Dec 2011), 1852-1861
     \bibitem[El-Ad \& Piran(1997)]{El-Ad1997} El-Ad, H. \& Piran, T. \ 1997, \apj, 491, 2, 421
-    \bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph
+    \bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph % Beta-Skeleton analysis of the Cosmic Web
     \bibitem[Hamaus et al.(2015)]{Hamaus2015} Hamaus, N.; Sutter, P.M.; Lavaux, G. \& Wandelt, B. D. \ 2015, \jcap, 11, 036    
+    \bibitem[Lavaux \& Wandelt(2009)]{Lavaux-Wandelt2009} Lavaux, G. \& Wandelt, B. D. \ 2009, \mnras, 403, 1392
     \bibitem[Leclercq et al.(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
-    \bibitem[Park \& Lee(2004]{Park-Lee2004} Park, D. \& Lee, J. \ 2007, \prl 98, 1301 % Void Ellipticity as a probe of Cosmology
+    \bibitem[Park \& Lee(2007)]{Park-Lee2007} Park, D. \& Lee, J. \ 2007, \prl 98, 1301 % Void Ellipticity as a probe of Cosmology
     \bibitem[Press \& Schechter(1974)]{Press&Schechter1974} Press, W. H. \& Schechter, P. \ 1974, \apj, 187, 425-438
     \bibitem[Riebe et al.(2013)]{Multidark2013} Riebe, K. et al \ 2013, Astronomical Notes, 334, 691 % Bolshoi Simulation      
     \bibitem[Schneider(2014)]{Schneider2014} Schneider, P. \ 2014, ``Extragalactic Astronomy and Cosmology'', Springer
+    \bibitem[Smith et al.(2017)]{Smith2017} Smith, A. et al. \ 2017, \mnras, 470, 4646 % Lightcone Millenium MXXL
+    \bibitem[Smith et al.(2018)]{Smith2018} Smith, A. et al. \ 2018, arXiv, 1809.07355 astro-ph % Fibre assignament incompleteness in DESI
     \bibitem[Springel et al.(2005)]{Springel2005} Springel, V. et al. \ 2005, \nat, 435, 639 % Millenium Simulation
     \bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M.; Lavaux G.; Hamaus, N; et al. \ 2015, A\&C, 9, 1-9 % Void Finder VIDE
     \bibitem[van de Weygaert(2014)]{Weygaert2014} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493 % Review of Voids
@@ -607,7 +579,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
 %\listofchanges
 
 \end{document}
-
+% \citet{https://arxiv.org/pdf/astro-ph/0610520.pdf} Bayes for SDSS LSS reconstruction
 
 % \bibitem[Aarseth(2003)]{Aarseth2003} Aarseth, S. J. \ 2003, ``Gravitational N-Body Simulations'', Cambridge University Press. % Book
 % \bibitem[Longair(2004)]{Longair2004} Longair, M. S. \ 2004, ``A Brief History of Cosmology'', ``Measuring and Modeling the Universe'', Carnegie Observatories Astrophysics Series, Vol 2. % BOOK
