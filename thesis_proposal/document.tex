@@ -88,28 +88,28 @@
 
   \section{Resumen}
   Estamos viviendo en la era dorada de la cosmolog\'ia observacional.
-  Existe un modelo est\'andar comol\'ogico ($\Lambda$-CDM) consolidado que explica
-  las observaciones de la Estructura de Gran Escala (LSS) de galaxias mediante
+  Existe un modelo est\'andar comol\'ogico ($\Lambda$-CDM) consolidado 
+  que explica las observaciones de la Estructura de Gran Escala (EGE) de galaxias mediante
   la introducci\'on de materia oscura y energ\'ia oscura como las componentes
-  dominantes del Universo junto con la materia bari\'onica. M\'as a\'un, somos capaces de
-  realizar mediciones precisas de los par\'ametros cosmol\'ogicos de este modelo a partir de
-  observaciones. Gran parte de estos alcances es debido a la cosmolog\'ia computacional
-  que es ahora una herramienta fuertemente establecida para probar modelos te\'oricos y
-  compararlos con las observaciones. Las caracter\'isticas principales de la LSS pueden
-  ser reproducidas en grandes simulaciones cosmol\'ogicas de N-cuerpos.
+  dominantes del Universo.
+  Actualmente es posible realizar mediciones precisas de los
+  par\'ametros cosmol\'ogicos de este modelo a partir de observaciones. 
+  Gran parte de estos alcances se debe a la cosmolog\'ia computacional
+  que es ahora una herramienta establecida para probar modelos te\'oricos y
+  compararlos con las observaciones. 
 
-  Una de las caracter\'isticas m\'as prominentes en la LSS son los vac\'ios: vol\'umenes
+  Una de las caracter\'isticas m\'as prominentes en la EGE son los vac\'ios: vol\'umenes
   irregulares de escalas del orden de decenas de Mpc, donde la densidad de materia est\'a
   por debajo de la densidad media en el Universo. El an\'alisis estad\'istico de propiedades
   de los vac\'ios, como su volumen, forma y orientaci\'on tambi\'en nos puede dar informaci\'on
   cosmol\'ogica. Por esta raz\'on existe un gran inter\'es en algoritmos que encuentren y
-  caractericen vac\'ios tanto en simulaciones como en observaciones.
+  caractericen vac\'ios cosmol\'ogicos tanto en simulaciones como en observaciones.
 
   El objetivo de este trabajo es desarrollar un nuevo buscador de vac\'ios basado en el
   m\'etodo $\beta$-Skeleton. El m\'etodo $\beta$-Skeleton ha sido ampliamente utilizado
-  en reconocimiento, procesamiento de im\'agenes y aplicaciones de \textit{machine learning},
-  recientemente ha sido introducido en el an\'alisis de LSS. Esta es una herramienta r\'apida
-  para identificar estructuras filamentarias en la LSS, y promete ser una herramienta robusta
+  en procesamiento de im\'agenes y aplicaciones de \textit{machine learning},
+  recientemente ha sido introducido en el an\'alisis de EGE. Esta es una herramienta r\'apida
+  para identificar estructuras filamentarias en la EGE, y promete ser una herramienta robusta
   para realizar an\'alisis cosmol\'ogicos. Luego de desarrollar el buscador de vac\'ios
   caracterizaremos los vac\'ios del $\beta$-Skeleton en simulaciones y observaciones. Tambi\'en
   realizaremos predicciones para el experimento en desarrollo Dark Energy Spectroscopic
@@ -214,11 +214,12 @@ conforman los vac\'ios que nos interesan en esta tesis.
   El desarrollo de DESI involucrada varias partes: un lado el equipo de construcción
   del \textit{hardware} de posicionamiento de las fibras, construcción del espectrógrafo y
   montaje sobre el telescopio. Por otro lado está el equipo de programación de la ubicación
-  de las fibras y simulación de observaciones, usan catálogos \textit{MOCKS} del cielo a
+  de las fibras y simulación de observaciones, usan catálogos ficticios del cielo a
   partir de simulaciones cosmológicas, recrean las condiciones atmosféricas 
   de observación, para alimentan el sistema
-  de análisis de datos. Así se compara el desempeño del análisis de datos de DESI contra
-  el cielo ``verdadero'' de los MOCKS.
+  de análisis de datos. 
+  Así se compara el desempeño del análisis de datos de DESI en el
+  cielo simulado de los cat\'alogs ficticios. 
 
   DESI generará catálogos de galaxias nunca antes vistos 
   que permitirán realizar una gran cantidad de pruebas para acotación de parámetros cosmológicos,
@@ -228,7 +229,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
 
   \section{Marco Teórico}
 
-  La LSS muestra que la mayor parte del volúmen del Universo está dominado
+  La EGE muestra que la mayor parte del volúmen del Universo está dominado
   por los vacíos de la red cósmica. Allí la densidad de materia es inferior al $20\%$ de la
   densidad media del universo \citep{Weygaert2014}.
   El universo inicialmente homogeneo tiene una evolución con dinámica no lineal en regiones
@@ -276,7 +277,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
       Derecha: Vacíos encontrados. Los colores representan el radio efectivo de los vacíos.
       \citep{Fang2018}. \label{fig:voids_in_simulations}}
   \end{figure}
-  \subsection{Test AP}
+  \subsection{Test Alcock-Paczynski}
   Al construir los mapas tridimensionales del universo se convierten los observables (posición
   angular y corrimiento al rojo) en coordenadas cartesianas en el marco de referencia comovil.
   Para hacer esta conversión es necesario conocer la métrica de nuestro Universo; cómo se
@@ -380,7 +381,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   \end{equation}
   \subsection{Método $\beta$-Skeleton}
   El método $\beta$-Skeleton ha sido introducido en astrofísica recientemente por \citet{Fang2018} para
-  encontrar el ``esqueleto'' de la  LSS en catálogos de simulaciones y datos observacionales.
+  encontrar el ``esqueleto'' de la  EGE en catálogos de simulaciones y datos observacionales.
   Ha sido usado desde hace $\sim 40$ años para analizar imágenes en búsqueda de contornos e identificación
   de objetos, tiene aplicaciones en machine learning, problemas de minimización en conexión de redes
   inalámbricas. Este método es computacionalmente económico y rápido.
@@ -388,11 +389,11 @@ conforman los vac\'ios que nos interesan en esta tesis.
   Depende del parámetro contínuo $\beta \geq 0$ para establecer las conexiones entre conjuntos de
   puntos en el espacio. Cuando este parámetro tiende a cero, el método calcula todas las conexiones
   entre todos los puntos de la red. Se ha encontrado que valores de este parámetro cercanos a 3
-  generan las estructuras filamentales en la LSS. Valores cercanos a 10 reducen demasiado las
+  generan las estructuras filamentales en la EGE. Valores cercanos a 10 reducen demasiado las
   conexiones y se pierde la estructura filamental (figura \ref{fig:beta_skeleton_analysis}). 
 
   Un análisis estadístico básico de las distancias en conexiones puede revelar información subyaciente
-  en la LSS. Al tomar $\beta = 0$ esta estadística se reduce a la bien conocida función de correlación
+  en la EGE. Al tomar $\beta = 0$ esta estadística se reduce a la bien conocida función de correlación
   de dos puntos, con $\beta \sim 3$ pueden detectarse diferencias tradicionalmente no visibles entre
   simulaciones de N cuerpos (que requieren pleno poder computacional) y simulaciones que incluyen
   modelos semianalíticos para generación de catálogos MOCS que son computacionalmente más rápidos.
@@ -400,12 +401,13 @@ conforman los vac\'ios que nos interesan en esta tesis.
     \plotone{beta_skeleton_analysis.jpg}
     \caption{Grafo encontrado por el método $\beta$-Skeleton para un conjunto de galaxias. Al aumentar el
       parámetro $\beta$ se reduce el número de conexiones permitidas para cada galaxia. Con un valor cercano
-      a 3 se reproducen filamentos y vacíos de la LSS.
+      a 3 se reproducen filamentos y vacíos de la EGE.
       \citep{Fang2018} \label{fig:beta_skeleton_analysis}}
   \end{figure}
 
   \subsection{Datos esperados en DESI}
-  Para encontrar los vacíos esperados en DESI se utilizarán catálogos MOCK de galaxias brillantes
+  Para encontrar los vacíos esperados en DESI se utilizarán catálogos
+  ficticios de galaxias brillantes
   generados en la simulación Millenium-XXL (MXXL) \citep{Smith2017}, que simula un
   volúmen 216 veces más grande que la simulaciń Millenium original. Estos
   son los mismos catálogos utilizados por el equipo de DESI para recrear el cielo que pueden
@@ -579,7 +581,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
 %\listofchanges
 
 \end{document}
-% \citet{https://arxiv.org/pdf/astro-ph/0610520.pdf} Bayes for SDSS LSS reconstruction
+% \citet{https://arxiv.org/pdf/astro-ph/0610520.pdf} Bayes for SDSS EGE reconstruction
 
 % \bibitem[Aarseth(2003)]{Aarseth2003} Aarseth, S. J. \ 2003, ``Gravitational N-Body Simulations'', Cambridge University Press. % Book
 % \bibitem[Longair(2004)]{Longair2004} Longair, M. S. \ 2004, ``A Brief History of Cosmology'', ``Measuring and Modeling the Universe'', Carnegie Observatories Astrophysics Series, Vol 2. % BOOK
