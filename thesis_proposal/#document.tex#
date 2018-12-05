@@ -1,4 +1,4 @@
-\documentclass[RNAAS]{aastex62}
+\documentclass[preprint]{aastex62}
 % \documentclass[manuscript]{aastex62}
 %%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
 \usepackage[utf8]{inputenc}
@@ -539,7 +539,7 @@ conforman los vac\'ios que nos interesan en esta tesis.
   Se espera construir el código de un buscador de vacíos de la red cósmica basado en el
   método $\beta$-Skeleton. Con este código se espera generar catálogos de vacíos con
   suficiente precisión para realizar pruebas cosmológicas tipo test AP y de elipticidad
-  (figura \ref{fig:expected_results}), \citep{Bos2012,Lavaux-Wandelt2009,Park-Lee2007},
+  \ref{fig:expected_results}, \citep{Bos2012,Lavaux-Wandelt2009,Park-Lee2007},
   realizar pruebas con catálogos de galaxias de simulaciones y observaciones, y finalmente
   estimar la población de vacíos que encontrará el proyecto DESI.
 
