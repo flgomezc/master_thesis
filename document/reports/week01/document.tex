@@ -1,0 +1,158 @@
+\documentclass[preprint]{aastex62}
+% \documentclass[manuscript]{aastex62}
+%%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
+\usepackage[utf8]{inputenc}
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+%% Tells LaTeX to search for image files in the 
+%% current directory as well as in the figures/ folder.
+\graphicspath{{./}{figures/}}
+%% Reintroduced the \received and \accepted commands from AASTeX v5.2
+%%\received{January 1, 2018}
+%%\revised{January 7, 2018}
+%%\accepted{\today}
+\shorttitle{Weekly Activity Report}
+\shortauthors{Felipe L. G\'omez-Cort\'es}
+
+%\renewcommand{\abstractname}{RESUMEN}
+%\renewcommand{\figurename}{Figura}
+
+
+\begin{document}
+
+\title{Weekly Activity Report\\A Large Scale Structure Void Identifier for Galaxy Surveys
+  Based on the $\beta$-Skeleton Graph Method}
+
+\correspondingauthor{Felipe Leonardo Gómez-Cortés}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo Gómez-Cortés}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{Master Student}
+
+\nocollaboration
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{Advisor}
+
+
+\begin{abstract}
+  The beta parameter graph, its definition.
+
+  The testing catalogs.
+
+  How the graph changes while variying $\beta$.
+
+  
+  
+  \keywords{ Beta Skeleton Graph, Beta Parameter}
+
+\end{abstract}
+
+\newpage
+
+\section{The Algorythm}
+
+The algorytm uses the NGL library % #################################################(CITAR NGRAPH.ORG)
+to create the $\beta$-Skeleton graph of a given set of points.
+Then, the histogram of connection lenghts is created
+(in a similar fashion to the two-point correlation function)
+for hhe 0.90-Skeleton and 1-Skeleton graphs.
+The average lenght for points inside a structure is defined
+(using the 1-Skeleton), and then those small conections are
+removed from the 0.9-Skeleton graph. The remainig graph
+contains the points over the surface of the voids.
+
+
+
+\subsection{Mock Catalog}
+In order to test the algorythm, two catalogs of points where
+created to emulate voids in the LSS.
+
+The emulated space is a cubic region of 60 Mpc/h.
+There where placed $\sim 5 \times10^4$ points to have a similar
+volume density of points to the halo volumetric density in
+the AbacusCosmos simulations. ($8.7\times10^6$ halos in a cubic
+box of 720 Mpc/h length,
+$2.335\times10^{-2}\mathrm{halo/(Mpc/h)^3}$).
+Points where placed using an uniform density probability distribution.
+
+The first set of points has an spherical empty region of radius
+20 Mpc/h centered in the middle of the volume.
+
+The second catalog has four non-overlapping spherical empty
+regions of radius between 8 and 20 Mpc/h.
+
+
+\subsection{The $\beta$-Skeleton Graph}
+
+The $\beta$-Skeleton graph is defined by the relative distance
+between points and a geometrical criterion using a real
+parameter $\beta\geq 0$.
+
+Two points are connected in the graph if there is an empty region
+between them, without any other point. The shape of the empty region
+is function of the $\beta$/parameter.
+
+The authors define the $\beta$-skeleton as folows:
+
+``The so-called lune-based $\beta$-skeleton is a one-parameter
+generalization of the RNG [Relative Neighborhood Graph] and
+GG [Gabriel Graph], defined as follows:
+
+\begin{itemize}
+\item For $0<beta<1$, the empty region is the intersection of all
+  d-balls with diameter $d(p,q) / \beta$ that have p and q on the
+  boundary.
+\item For $\beta \geq 1$, the empty region is the intersection of
+  two d-balls with diameter $\beta d(p,q)$ centered at
+  $(1-\frac{\beta}{2})p + \frac{\beta}{2}q$ and
+  $\frac{\beta}{2}p + (1-\frac{\beta}{2})q$.
+\end{itemize}.
+
+It follows that $\beta = 2$ gives the RGN, while $\beta = 1$ is
+the GG.''
+  
+In the limit when $\beta$ tends to zero, every point is conected
+to each point on the set, it corresponds to the graph used in
+the classic two-point correlation function. Each point has N
+connections. (With N as the number of points in the set).
+
+When $/beta$ is increasing, the number of connections per point
+is reduced. The first connections to vanish are the longer ones,
+while the near connections persists.
+
+\subsection{Structure deppendence of $\beta$ parameter}
+
+\begin{figure}
+  \gridline{
+    \fig{beta_0_70.png}{0.3 \textwidth}{(a)}
+    \fig{beta_0_90.png}{0.3 \textwidth}{(b)}
+    \fig{beta_0_99.png}{0.3 \textwidth}{(c)}}
+  \gridline{
+    \fig{beta_1_00.png}{0.3 \textwidth}{(d)}}
+  \gridline{
+    \fig{beta_3_00.png}{0.3 \textwidth}{(e)}
+    \fig{beta_6_00.png}{0.3 \textwidth}{(f)}
+    \fig{beta_9_00.png}{0.3 \textwidth}{(g)}}
+  \caption{Beta variations}
+  % ###################################### Figures must be in PDF format.
+  % ###################################### And thight margins.
+\end{figure}
+
+
+
+  \nocite{*}
+
+  \begin{thebibliography}{20}
+
+    %\bibitem[Bos et al.(2012)]{Bos2012} Bos, P. et al. \ 2012, \mnras, 426, 440 % Testing cosmologies using void ellipticity
+
+  \end{thebibliography}                                                           
+                       
+
+%\listofchanges
+
+\end{document}
