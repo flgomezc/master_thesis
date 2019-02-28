@@ -1,0 +1,2 @@
+gfortran LSS_tools.f90 LSS_BSK.f90 LSS_main_BSK_calc.f90 LSS_settings_init.f90  LSS_cosmo_funs.f90 LSS_cell.f90 LSS_smooth.f90 -o LSS_BSK_calc.o
+
