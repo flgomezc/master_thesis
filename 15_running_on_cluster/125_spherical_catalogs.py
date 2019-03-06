@@ -143,7 +143,7 @@ for center_i in [-2,-1,0,1,2]:
                 #                                                           #
                 #############################################################
                 
-                subp.run("LSS_BSK_calc -input  " + FC_filename + " -output " + str(cut) +"-beta 1.0 -printinfo True -numNNB 300", shell=True, check=True)
+                subp.run("LSS_BSK_calc -input  " + FC_filename + " -output " + str(cut) +" -beta 1.0 -printinfo True -numNNB 300", shell=True, check=True)
 
                 
                 subp.run( "echo " + str(cut) + " >> progress.txt", shell=True, check=True)
