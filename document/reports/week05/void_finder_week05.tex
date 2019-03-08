@@ -1,0 +1,151 @@
+\documentclass[preprint]{aastex62}
+% \documentclass[manuscript]{aastex62}
+%%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
+\usepackage[utf8]{inputenc}
+\usepackage{lineno}
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+%% Tells LaTeX to search for image files in the 
+%% current directory as well as in the figures/ folder.
+\graphicspath{{./}{figures/}}
+%% Reintroduced the \received and \accepted commands from AASTeX v5.2
+%%\received{January 1, 2018}
+%%\revised{January 7, 2018}
+%%\accepted{\today}
+\shorttitle{Weekly Activity Report}
+\shortauthors{Felipe L. G\'omez-Cort\'es}
+
+%\renewcommand{\abstractname}{RESUMEN}
+%\renewcommand{\figurename}{Figura}
+
+\linenumbers
+\begin{document}
+
+\title{Weekly Activity Report\\Week 4\\Tagging voids using the Random Point Algorithm\\and the 1-Skeleton}
+
+\correspondingauthor{Felipe Leonardo Gómez-Cortés}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo Gómez-Cortés}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{Master Student}
+
+\nocollaboration
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{Advisor}
+
+
+\begin{abstract}
+  A kind of ``Volume Function'' is plotted. Installing libraries on the Uniandes HPC.
+  
+\end{abstract}
+
+
+\section{A kind of Volume Function}
+
+The algorithm ran again over the 3N:N dataset, (by mistake it has run over the 2N:N
+dataset) (fig \ref{Tagging voids}). A huge void is detected in the 2N:N dataset, this
+void is a big patch over the sphere's surface. It was suposed to be related to a
+percolation phenomenom in the 1-Skeleton formation, due the higher density,
+random-random point conections on the surface, where voids are trunked.
+
+It was proposed to run the algorithm again, but having a slightly diminished radius
+for the Random Points Catalog ($R_{\mathrm{rnd}} = 0.95 R_{\mathrm{obs}}$).
+
+For the record, running times of the $\beta$-Skeleton library on a sphericall
+distribution, along to the number of detected voids.
+
+A kind of volume function was calculated asuming that the volume of the void is directly
+proportional to the number of particles. Then the void volume is compared to the total
+catalog volume in order to get a volume fraction having the same scale and allowing comparissons
+between the three datasets. (The straightforward interpretation is particle fraction
+instead volume fraction). In the figure \ref{fig:volume_function} the volume fraction
+function is shown. Is early to make conclusions, due to frontier effects.
+
+The outer voids are connected by the algorithm. A proposed solution is to create a random
+point catalog slightly smaller (in volume) than the observed catalog. Those detected
+outer voids will be trunked, they must be deprecated on the statistics at that time.
+
+
+
+Is not possible to make a good estimation using only three points, but seems interesting
+that the higher number of detected voids was achived with the ratio 2:1. Another
+intriguing area is the low volume voids regimen. Is there a sweet spot in the ratio that
+maximises the number of small voids? Few runnings more are necessary.
+
+\startlongtable
+\begin{deluxetable}{c|c c}
+\tablecaption{Running Time of NGL $\beta$-Skeleton \label{tab:running_time}}
+\tablehead{
+\colhead{Number of Particles} & \colhead{Time (s)} & \colhead{Detected Voids}\\
+}
+%\colnumbers
+\startdata
+ 5000 & 35    & n.a.\\
+10000 & 189   & n.a.\\
+20000 & 1717  & 142\\
+30000 & 5871  & 165\\
+40000 & 14259 & 163\\
+\enddata
+%\tablenotetext{a}{Adjusted for inflation}
+\tablecomments{Running on my laptop: Acer Aspire 4750 (Core i5 2nd gen.). The first
+two runs where in order to measure running time.}
+\end{deluxetable}
+
+\begin{figure}
+  \gridline{
+    \fig{tagging_voids_1N.pdf}{0.48 \textwidth}{(a)}
+    \fig{tagging_voids_2N.pdf}{0.48 \textwidth}{(b)}}
+  \gridline{
+    \fig{tagging_voids_3N.pdf}{0.48 \textwidth}{(c)}}
+  \caption{Tagging Abacus-Cosmos Voids. This is the first test over ``real''
+    data, not a toy model. The LSS shows highly dense packed halos, where
+    voids have almost none of them. The idea is to increase the ratio of
+    Random Points over Catalog points to study (in later weeks) how void
+    detection can be affected. (a) Ratio 1:1 detected 142 voids,
+    (b) ratio 2:1 detected 165 voids and (c) ratio 3:1 detected 163 voids.
+    The catalog is a spherical set of points, with radius $100 \mathrm{Mpc/h}$,
+    N halos = 9981, N random points = 10000 (a), 2N (b) and 3N (c).
+    \label{Tagging voids}}
+\end{figure}
+
+\begin{figure}
+\plotone{volume_function_log}
+\caption{A kind of Volume Function. The volume fraction is calculated as the
+  particle number in the halo over the total Random Points in the catalog.
+  The percolaton over the frontier can be seen as four big voids (2:1 in orange)
+  (around the 4\% each one), and
+  one huge void (3:1 green) that occupies almost the $20\%$ of the total volume.
+  \label{fig:volume_function}}
+\end{figure}
+
+
+\section{To do:}
+
+\begin{itemize}
+\item Change the shape of the Random Points Catalog (maybe outer voids are
+  connected by mistake) taking a sphere of radius $R_{\mathrm{rnd}} = 0.95R_{\mathrm{obs}}$
+\item Run using other number of random particles.
+\item Think about how to calculate volume (not just particle number times density).
+\item Calculate Intertia Tensor and find eigen-values.
+\end{itemize} 
+
+%\section{Conclusions}
+
+
+
+ % \nocite{*}
+
+  %\begin{thebibliography}{20}
+
+    %\bibitem[Bos et al.(2012)]{Bos2012} Bos, P. et al. \ 2012, \mnras, 426, 440 % Testing cosmologies using void ellipticity
+
+  %\end{thebibliography}                                                           
+                       
+
+%\listofchanges
+
+\end{document}
