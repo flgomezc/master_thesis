@@ -1,0 +1,157 @@
+\documentclass[preprint]{aastex62}
+\usepackage[utf8]{inputenc}
+\usepackage{lineno}
+\usepackage{multirow}
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+\graphicspath{{./}{figures/}}
+\shorttitle{Weekly Activity Report}
+\shortauthors{Felipe L. G\'omez-Cort\'es}
+
+\linenumbers
+\begin{document}
+
+\title{Weekly Activity Report\\Week 6\\The Xiao-Dong Li's $\beta$-Skeleton Finder}
+
+\correspondingauthor{Felipe Leonardo Gómez-Cortés}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo Gómez-Cortés}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{Master Student}
+
+\nocollaboration
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{Advisor}
+
+
+\begin{abstract}
+  Xiao-Dong Li developed a series of codes to run over LSS data. I used part of the code
+  available from his repo at github. The code was installed at the Magnus Cluster.
+  
+\end{abstract}
+
+\section{LSS Codes}
+Xiao-Dong Li cerated in 2015 a big Fortran90 library whith tools to study the LSS.
+The $\beta$-Skeleton finder is part of the library, as well two and three point
+correlation functions, redshift corrections, lightcone generators and some
+statistical tools to run over mocks.
+
+This library was created using the ifort compiler (Intel-Fortran). This is privative
+software, not available at the Magnus Cluster (the Uniandes HPC facility). Ifort
+has been developed to run 5-10 times faster than gfortran over Intel-Xeon
+processores.
+
+During the installation over the Magnus Cluster some errors rise. It was necessary
+to modify the original code to compile using gfortran.
+
+This fortran code runs in the cluster near to $\sim 100-1000$ times faster than the NGL
+library on my laptop. XDL code divides the space in cells to search closest neighbours
+instead searching over the whole set of points. This search has the parameter
+``neighbours'' to reduce the number of close points to make the search. The code can
+switch between exact and non-exact calculaton of nearest neighbours for the
+$\beta$-skeleton graph. It gives some differences in the final graph.
+
+In the table \ref{tab:running_timeNGLvsXDL}
+is possible to see how an threshold value of the
+neighbour parameter gives different running times and number of connections.
+The author suggests a value around 100 neighbours to make calculations for the
+fixed value $\beta=1$. But with valuse from 200 neighbours and above the final
+$\beta$-graph is identical. The files marked with asterisks where checked with the
+md5sum algorithm.
+
+The output file from booth algorithms differs. NGL shows the full list of connections
+for each one of the N points. It means that each connection is counted a twice.
+E.g. If the points 15 and 99 are connected, in the output file appears (15,99) and
+(99,15). XDL avoids to count repeated pairs, following the example, only (15,99) will
+appear on the output file. It gives a different size of output files.
+
+\section{Comparing NGL and XDL $\beta$-Graphs}
+
+A mandatory check when a novel method is implemented is to compare against
+previous methods and results.  I was focused on the 2N:N dataset (N = 9998
+observed points from Abacus Simulations), having a total number of points
+of $\sim 30000$.
+
+Setting the shearching parameter in 100 neighbours throws the same number
+of connections as in XDL as in NGL graphs. But a detailed search shows that 
+there are four points missmatching: one pair connection that appears on NGL
+but not in XDL (indices 1878-13682) and another extra connection on XDL
+missing in NGL (indices 6765-12474).
+
+Setting the searching parameter in 200 and above throws one extra connection
+in the XDL graph respect to the NGL graph. (Is the same connection of indices
+6752-12474). It means one extra connection in 110225. Plotting the data it
+seems a legal one (figure \ref{fig:extra_connection}).
+
+\startlongtable
+\begin{deluxetable}{c|cc|ccc}
+  \tablecaption{Running Time of $\beta$-Skeleton using NGL and XDL libraries.
+    \label{tab:running_timeNGLvsXDL}}
+\tablehead{
+  \colhead{Number} & \multicolumn{2}{c}{NGL} & \multicolumn{3}{c}{Xiao-Dong Li's Library}\\
+  \colhead{Particles}
+  & \colhead{Time (s)} & \colhead{Connections}
+  & \colhead{Time (s)} & \colhead{Neighbours} & \colhead{Connections}
+}%\colnumbers
+\startdata
+\multirow{5}[0]{*}{20000}&
+\multirow{5}[0]{*}{1717} &
+\multirow{5}[0]{*}{139504}&1.4&   50 &  69427 \\
+      &       &        & 2.4  &  100 &  69749 \\
+      &       &        & 6.4  &  300 &  69752 \\
+      &       &        & 11   &  600 &  69752 \\
+      &       &        & 21   & 1000 &  69752 \\ \hline \hline
+\multirow{6}[0]{*}{30000} &
+\multirow{6}[0]{*}{5871}  &
+\multirow{6}[0]{*}{220448}&1.8&   50 & 109950 \\
+      &       &        & 3.9  &  100 & 110224 \\
+      &       &        & 5.5  &  200 & 110225* \\
+      &       &        & 10   &  300 & 110225* \\
+      &       &        & 18   &  600 & 110225* \\
+      &       &        & 32   & 1000 & 110225* \\ \hline \hline
+\multirow{5}[0]{*}{40000} &
+\multirow{5}[0]{*}{14259} &
+\multirow{5}[0]{*}{299912}&3.1&  50 & 149666 \\
+      &       &        & 5.4  &  100 & 149954 \\
+      &       &        & 13   &  300 & 149957 \\
+      &       &        & 26   &  600 & 149957 \\
+      &       &        & 37   & 1000 & 149957 \\
+\enddata
+%\tablenotetext{a}{Adjusted for inflation}
+\tablecomments{* $\beta$-graph files have identical md5sums. NGL returns
+  the list of connections for each particle, the pairs (15, 99) and
+  (99,15) appear in the catalog. XDL returns only unique connections,
+  it means that in the output file has the half of the length, then, for
+example, only (15,99) appears in the output file to avoid repetitions.}
+\end{deluxetable}
+
+
+\begin{figure}
+  \plotone{extra_connection.pdf}
+  \caption{Black crosses shows the new pair of points connected with the
+    XDL graph finder. This is the unique difference with the NGL graph
+    finder.\label{fig:extra_connection}}
+\end{figure}
+
+
+\begin{figure}
+  \plotone{Particle_density_function_log2.pdf}
+  \caption{The void density function. It is normalized to the volume
+    of the catalog (a sphere of radius $R=100\mathrm{Mpc/h}$).
+    \label{fig:void_density_function}}
+\end{figure}
+
+\begin{figure}
+  \plotone{Particle_density_function_log.pdf}
+  \caption{The void density function. It is normalized to the volume
+    of the catalog (a sphere of radius $R=100\mathrm{Mpc/h}$).
+    \label{fig:void_density_function}}
+\end{figure}
+
+
+
+\end{document}
