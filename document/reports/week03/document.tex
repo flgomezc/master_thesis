@@ -1,0 +1,119 @@
+\documentclass[preprint]{aastex62}
+% \documentclass[manuscript]{aastex62}
+%%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
+\usepackage[utf8]{inputenc}
+\usepackage{lineno}
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+%% Tells LaTeX to search for image files in the 
+%% current directory as well as in the figures/ folder.
+\graphicspath{{./}{figures/}}
+%% Reintroduced the \received and \accepted commands from AASTeX v5.2
+%%\received{January 1, 2018}
+%%\revised{January 7, 2018}
+%%\accepted{\today}
+\shorttitle{Weekly Activity Report}
+\shortauthors{Felipe L. G\'omez-Cort\'es}
+
+%\renewcommand{\abstractname}{RESUMEN}
+%\renewcommand{\figurename}{Figura}
+
+\linenumbers
+\begin{document}
+
+\title{Weekly Activity Report\\Week 3\\A second algorithm using a random point catalog\\and the 1-Skeleton}
+
+\correspondingauthor{Felipe Leonardo Gómez-Cortés}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo Gómez-Cortés}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{Master Student}
+
+\nocollaboration
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Physics Department, Universidad de Los Andes}
+\collaboration{Advisor}
+
+
+\begin{abstract}
+  The new algorithm relies on a random set of points. The $\beta$-Skeleton is build
+  over the junction set of points (observations plus random points).
+  
+  \keywords{ Beta Skeleton Graph, Random set of points}
+
+\end{abstract}
+
+\section{The Algorithm}
+
+The main goal of this project is to identify voids in the large scale structure
+of the universe, using the nobel method in astrophysics: the $\beta$-Skeleton
+graph. In order to develop the code, a toy model catalog structure is used,
+then a second catalog of random points populates the same volume, the graph is
+calculated and then the voids are identified as the second catalog points
+without connections with the first catalog points.
+
+\begin{figure}
+    \plotone{slice_OC_plus_RC.pdf}
+    \caption{The Algorithm uses two sets of points: The Observed Catalog
+      (LSS like in blue with a spherical void in the middle) and the
+      random Catalog (orange). \label{slice_OC_plus_RC}}
+\end{figure}
+
+We start with a sample of N points randomly placed inside a cubic box of lenght L. (Figure \ref{slice_OC_plus_RC}.
+In the middle of the box there is a spherical void, i.e. an spherical region
+without points. This set of points is called ``the observed catalog''
+(\textbf{OC}). This toy model
+will represent -in a gross aproximation- the LSS with galaxies and voids.
+
+Then another set of N random points populates the whole box, without restrictions.
+This set is called ``the random catalog'' (\textbf{RC}). It will populate even
+the void region. It's only necesary to know the volume of the OC and the number
+of points N to create the RC.
+
+The NGRAPH library can operate over a single set of points. This set is called
+``the full catalog'' (\textbf{FC}). This set of points is created using the
+\texttt{vstack} python function. The first N elements are the RC points, the last
+N elements are the OC points, then the FC has 2N elements.
+
+The 1-Skeleton graph is calculated over the FC. Runing the code over a FC of
+$\sim 10^4$ points in a Core i5 (2nd gen.) Linux machine, it takes 192 seconds
+to complete the calculus. The result is stored as the Full Catalog Beta
+Skeleton Graph (\textbf{fcBSk}).
+
+The fcBSk is chopped to the half, we are interested about the RC points that
+are not connected with the OC points. Then a droplist is created as the
+subset of connections where the second point belongs to the OC, i.e., its index
+is greater than N.
+
+Using the python  \texttt{set} class, its easy to find the complement of the
+droplist in the fsBSk. After droping the RC points connected with the OC, it
+remains the points inside the void.
+
+
+\begin{figure}
+    \plotone{slice_OC_RC_VoidPoints.pdf}
+    \caption{The Algorithm is currently under development. It fails
+      to recognize void points (Green).
+      \label{slice_OC_RC_VoidPoints}}
+\end{figure}
+
+
+\section{Conclusions}
+
+This new algorithm looks promising. Must be fully developed.
+
+  \nocite{*}
+
+  \begin{thebibliography}{20}
+
+    %\bibitem[Bos et al.(2012)]{Bos2012} Bos, P. et al. \ 2012, \mnras, 426, 440 % Testing cosmologies using void ellipticity
+
+  \end{thebibliography}                                                           
+                       
+
+%\listofchanges
+
+\end{document}
