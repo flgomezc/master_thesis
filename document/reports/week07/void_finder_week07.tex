@@ -1,0 +1,101 @@
+\documentclass[preprint]{aastex62}
+\usepackage[utf8]{inputenc}
+\usepackage{lineno}
+\usepackage{multirow}
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+\graphicspath{{./}{figures/}}
+\shorttitle{Weekly Activity Report}
+\shortauthors{Felipe L. G\'omez-Cort\'es}
+
+\linenumbers
+\begin{document}
+
+\title{A $\beta$-Skeleton LSS Void Finder\\Week 07\\Beta-Skeleton Repo. \& Running in the Cluster.}
+
+\correspondingauthor{Felipe Leonardo Gómez-Cortés}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo Gómez-Cortés}
+\affiliation{Physics Department, Universidad de Los Andes, Bogotá, 111711, Colombia}
+
+%\author{Jaime E. Forero-Romero}
+%\affiliation{Physics Department, Universidad de Los Andes, Bogotá, 111711, Colombia}
+%
+%\author{Xiao-Dong Li}
+%\affiliation{School of Physics and Astronomy, Sun Yat-Sen University, Guangzhou 510297, P. R. China}
+
+\section*{To-Do list}
+
+Tasks for the week:
+\begin{itemize}
+    \item Create a new repo with the light version of Xiao-Dong Li's LSSCode.
+    \item Calculate 1-Skeleton over 125 spherical catalogs (from Abacus Plank Simulation).
+    \item Find volume and triaxial parameters of present voids.
+    \item Find and Compare Void abundance (by volume) with references.
+    \item Take a rest.
+\end{itemize}
+
+\section{The HackingLSSCode repository}
+
+I have checked the Xiao-Dong Li's repository LSSCodes (hereafter as XDL). It has many features to do
+hard statistics over LSS catalogs like two and three point correlation functions,
+$\beta$-Skeleton calculator, redshift corrections (using supposed different cosmologies),
+just for name few of them.
+
+The code was written in Fortran90, once is compiled has one executable binary file for
+each statistical feature. The $\beta$-Skeleton is of particular interest for my thesis
+and ongoing research at the Astroandes Group. So I create a light version of the original
+code that only calculates the $\beta$-skeleton without the other features.
+
+This version can be compiled using the gnu compiler \textbf{gfortran} instead the privative
+compiler \textbf{ifort}. It works on the Uniandes HPC Magnus cluster. The url of the
+``lightwight'' version of the code is available at: 
+\url{https://github.com/flgomezc/HackingLSSCode}
+
+\section{Calculate 1-Skeleton for 125 shperical Abacus catalogs}
+
+Once having the $\beta$-skeleton calculator installed on the Magnus Cluster, I wrote a
+\href{https://github.com/flgomezc/master_thesis/blob/master/15_running_on_cluster/125_spherical_catalogs.py}
+{python main program} to download the catalogs from the \href{https://github.com/forero/abacus/}{repo},
+create the Random Catalog using the proportion 2:1 (two random particles per halo point).
+
+The whole process (download + calculations) takes $\sim 34$ minutes, almost 1000 times faster
+tha using NGL. With NGL it would have taken $\sim 24$ days, 4.5 hours per catalog over 125 catalogs.
+
+\section{Find Volume and Triaxial parameters of existing voids}
+
+Ongoing. An issue happend with the previous algorithm because of the output format of XDL:
+the $\beta$-Skeleton index has not repeated connections. The $\beta$-Skeleton NGL index lists
+the connection for each point in the dataset. NGL index is a twice larger than XDL index. 
+
+This issue makes the algorithm identify voids made of a single particle. By the algoritm definition
+that is not possible. The bug was fixed by extending the XDL $\beta$-Skel index with the permuted
+columns.
+
+Once this problem was solved, some huge voids appeared in the ``Catalog 0''. (the same where
+previos NGL calculations where performed).
+
+I have been thinking about using a higher $\beta$ value (maybe $\beta=2$?) or returnig to the
+ratio 1:1 between random points and observed points.
+
+\section{Find and compare Void Abundance graph with references}
+
+Some references where found. The Void Volume Abundance graph is not ready, I have not finished yet
+the volume calculator. About the references, there is not an standar scale among them.
+
+\href{ArXiv 1902.04585}{https://arxiv.org/abs/1902.04585} Abundances from simulaions. $z = 0, 0.5, 1.0 \text{ \& } 1.5$
+
+\href{ArXiv 1812.05532}{https://arxiv.org/abs/1812.05532} Observational Abundances from SDSS. $0.02<z<0.3$
+
+\href{ArXiv 1807.02938}{https://arxiv.org/abs/1807.02938} Abundances from simulations. $z = 0, 1.0, 2.2$ and others.
+
+\href{Arxiv 1710.01730}{https://arxiv.org/abs/1710.01730} Abudances from sumulations. $z=0.0, 0.5$
+
+\section{Take a rest}
+
+Ongoing.
+
+
+\end{document}
