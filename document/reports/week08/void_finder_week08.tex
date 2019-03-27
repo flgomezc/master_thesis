@@ -1,0 +1,119 @@
+\documentclass[preprint]{aastex62}
+\usepackage[utf8]{inputenc}
+\usepackage{lineno}
+\usepackage{multirow}
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+\graphicspath{{./}{figures/}}
+\shorttitle{Weekly Activity Report}
+\shortauthors{Felipe L. G\'omez-Cort\'es}
+
+\linenumbers
+\begin{document}
+
+\title{A Large Scale Structure Void Identifier for Galaxy Surveys based on the $\beta$-Skeleton Graph}
+
+\correspondingauthor{Felipe L. Gómez-Cortés}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo Gómez-Cortés}
+\affiliation{Physics Department, Universidad de Los Andes, Bogotá, 111711, Colombia}
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Physics Department, Universidad de Los Andes, Bogotá, 111711, Colombia}
+
+\author{Xiao-Dong Li}
+\affiliation{School of Physics and Astronomy, Sun Yat-Sen University, Guangzhou 510297, P. R. China}
+
+\section{The Algorithm}
+
+Our approach solving the problem of finding voids in the cosmic web is from
+a geometrical point of view. We use the $\beta$-Skeleton graph to generate
+the connections between a big set of points belonging to $\mathbb{R}^3$
+in comoving coordinates. This collection consists of two subsets: LSS points
+and Random Points.
+
+We call the subset of Large Scale Structure tracers as The Observed Catalog
+(\textbf{OC}). They may come from observed galaxies (\textit{e.g.} SDSS)
+or dark matter halo catalogs from N-body simulations (\textit{e.g.} Abacus
+Cosmos). The OC shows the well-known filamentary structure tha can be found
+easily by the $\beta$-Skeleton libraries. The number of OC points is named
+$N_{OC}$.
+
+The conterpart is the random set of points. They uniformly fill the space,
+its $\beta$-skeleton shows that the mean number of connections different
+from the filamentary structure mean connections. This Random Catalog
+(\textbf{RC}) is generated using an uniform PDF. The number of RC points
+is named $N_{RC}$.
+
+The Full Catalog (\textbf{FC}) of points is created merging the observed
+catalog and the random catalog. The random points fill the cosmic voids.
+Then we calculate the FC's $\beta$-skeleton. We find random points connected
+to the LSS tracers near and into the filaments. But we find random points
+connected only to random points exclusively inside voids, they can be
+named ``pure void points''.
+
+The algorithm uses the FC's $\beta$-Skeleton to discard random points
+connected to LSS tracers. This first filtered $\beta$-Skeleton graph is
+used by the algoritm to identify the first connections of pure void points
+and stores the list of results in a first particle void list.
+The algorithm checks element by element if pure voids are connected or
+share connections, if the condition is true, then the two sets are merged.
+At the ending we have a set of voids. Each void is a list of points
+connected between them. Two voids never are connected.
+
+\subsection{Calibrating our free parameters}
+How to select $\beta$ and the ratio $N_{rand}/N_{obs}$
+
+\subsection{Measuring Void Size}
+
+A first approach is to asign a volume proportional to the number of particles
+in the void times the density (total number of random particles over total
+catalog volume.
+
+A second method asumes the voids as ellipsoid objects. 
+We use the standard equation for the surface of an ellipsoid:
+\begin{equation}
+\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1 
+\end{equation}
+so, $a$, $b$ and $c$ are the semi-axes of the ellipsoid. The volume enclosed is:
+$V = \frac{4\pi}{3}abc$.
+Semi-axes are found using the inertia tensor of the point distribution.
+\begin{equation}
+    I = \frac{m}{5} \left( 
+    \begin{array}{ccc}
+    b^2 + c^2 &  0  &  0 \\
+    0   & a^2 + c^2 &  0 \\ 
+    0   &  0  &  a^2 + b^2 
+    \end{array}\right)
+\end{equation}
+
+Numpy's \textit{linalg} module calcules the eigenvalues. It
+returns
+\begin{equation}
+    I = \left( 
+    \begin{array}{ccc}
+    I_a &  0  &  0 \\
+    0   & I_b &  0 \\ 
+    0   &  0  &  I_c 
+    \end{array}\right)
+\end{equation}
+and the rotation matrix (eigenvectors).
+
+Asuming $m=1$, or giving a mass $m_i = 1/N_{void}$ for each one of the $N_{void}$
+particles of the void, we can calculate the void semi-axes independently from the
+number of particles in the void.
+
+\begin{eqnarray}
+  a &=& \sqrt{ \frac{5}{2N} \left(-I_a + I_b + I_c \right)} \nonumber\\
+  b &=& \sqrt{ \frac{5}{2N} \left( I_a - I_b + I_c \right)} \nonumber\\
+  c &=& \sqrt{ \frac{5}{2N} \left( I_a + I_b - I_c \right)} \nonumber\\
+\end{eqnarray}
+
+They may not be sort as $a>b>c$, but this is solved in a few code lines.
+
+
+\subsection{Void Abundance}
+
+\end{document}
