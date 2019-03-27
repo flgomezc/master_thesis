@@ -2,6 +2,7 @@
 % \documentclass[manuscript]{aastex62}
 %%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
 \usepackage[utf8]{inputenc}
+\usepackage{lineno}
 \newcommand{\vdag}{(v)^\dagger}
 \newcommand\aastex{AAS\TeX}
 \newcommand\latex{La\TeX}
@@ -18,11 +19,10 @@
 %\renewcommand{\abstractname}{RESUMEN}
 %\renewcommand{\figurename}{Figura}
 
-
+\linenumbers
 \begin{document}
 
-\title{Weekly Activity Report\\A Large Scale Structure Void Identifier for Galaxy Surveys
-  Based on the $\beta$-Skeleton Graph Method}
+\title{Weekly Activity Report\\Weeks 1-2\\A first algorythm comparing two $\beta$-Skeletons}
 
 \correspondingauthor{Felipe Leonardo Gómez-Cortés}
 \email{fl.gomez10@uniandes.edu.co}
@@ -39,37 +39,39 @@
 
 
 \begin{abstract}
-  The beta parameter graph, its definition.
-
+  The beta parameter graph and its definition.
+  
   The testing catalogs.
 
   How the graph changes while variying $\beta$.
 
-  
+  How this first attemp fails over very excentric ellipsoidal voids.
   
   \keywords{ Beta Skeleton Graph, Beta Parameter}
 
 \end{abstract}
 
-\newpage
-
 \section{The Algorythm}
 
-The algorytm uses the NGL library % #################################################(CITAR NGRAPH.ORG)
-to create the $\beta$-Skeleton graph of a given set of points.
-Then, the histogram of connection lenghts is created
-(in a similar fashion to the two-point correlation function)
-for hhe 0.90-Skeleton and 1-Skeleton graphs.
-The average lenght for points inside a structure is defined
-(using the 1-Skeleton), and then those small conections are
-removed from the 0.9-Skeleton graph. The remainig graph
-contains the points over the surface of the voids.
+The algorytm uses the NGL library % ######################(CITAR NGRAPH.ORG)
+to create two $\beta$-Skeleton graph of a given set of points,
+and comparing the diferences between them to identify the
+voids in the structure of points.
 
+The graphs of the 0.9-Skeleton and the 1-Skeleton are
+calculated, then compared.
+Each lenght is measured and the histogram of connection
+lenghts is created for both $\beta$ values.
+(in a similar fashion to the two-point correlation function)
+By removing the short
+connections -common in both skeletons-, and preserving the
+long connections -those that cross througth the voids-,
+the points envolving the voids are identified.
 
 
 \subsection{Mock Catalog}
-In order to test the algorythm, two catalogs of points where
-created to emulate voids in the LSS.
+In order to test the algorythm, three catalogs of points in a 3D space
+where created with empty regions emulating voids in the LSS.
 
 The emulated space is a cubic region of 60 Mpc/h.
 There where placed $\sim 5 \times10^4$ points to have a similar
@@ -79,70 +81,258 @@ box of 720 Mpc/h length,
 $2.335\times10^{-2}\mathrm{halo/(Mpc/h)^3}$).
 Points where placed using an uniform density probability distribution.
 
+Then, using the equation for the sphere and the ellipsoid, the subset
+of points within the surface is removed from the catalog.
+
 The first set of points has an spherical empty region of radius
 20 Mpc/h centered in the middle of the volume.
 
 The second catalog has four non-overlapping spherical empty
 regions of radius between 8 and 20 Mpc/h.
 
+The third catalog has four overlapping ellipsoidal voids.
 
 \subsection{The $\beta$-Skeleton Graph}
 
 The $\beta$-Skeleton graph is defined by the relative distance
-between points and a geometrical criterion using a real
-parameter $\beta\geq 0$.
+between points (vertices) in a N-dimentional space, and a
+geometrical criterion using a real
+parameter $\beta\geq 0$. This graph is not directed, there is no
+a preferential direction in the edges connecting vertices.
 
-Two points are connected in the graph if there is an empty region
+The geometrical criterion is the following:
+two points ($p$,$q$) are connected in the graph if there is an empty region
 between them, without any other point. The shape of the empty region
-is function of the $\beta$/parameter.
+is function of the $\beta$/parameter and the distance $d(p,q)$ between the
+points. In the case $\beta=0$ the empty region is a N-ball of
+diameter $d$ centered in the midpoint between 
 
-The authors define the $\beta$-skeleton as folows:
+The NGraph authors define the $\beta$-skeleton as folows:
 
 ``The so-called lune-based $\beta$-skeleton is a one-parameter
 generalization of the RNG [Relative Neighborhood Graph] and
 GG [Gabriel Graph], defined as follows:
 
 \begin{itemize}
-\item For $0<beta<1$, the empty region is the intersection of all
+\item For $0<\beta<1$, the empty region is the intersection of all
   d-balls with diameter $d(p,q) / \beta$ that have p and q on the
   boundary.
 \item For $\beta \geq 1$, the empty region is the intersection of
   two d-balls with diameter $\beta d(p,q)$ centered at
   $(1-\frac{\beta}{2})p + \frac{\beta}{2}q$ and
-  $\frac{\beta}{2}p + (1-\frac{\beta}{2})q$.
-\end{itemize}.
-
-It follows that $\beta = 2$ gives the RGN, while $\beta = 1$ is
-the GG.''
+  $\frac{\beta}{2}p + (1-\frac{\beta}{2})q$.''
+\end{itemize}
   
 In the limit when $\beta$ tends to zero, every point is conected
 to each point on the set, it corresponds to the graph used in
 the classic two-point correlation function. Each point has N
 connections. (With N as the number of points in the set).
 
-When $/beta$ is increasing, the number of connections per point
+When $\beta$ is increasing, the number of connections per point
 is reduced. The first connections to vanish are the longer ones,
-while the near connections persists.
+while the short connections persists.
 
-\subsection{Structure deppendence of $\beta$ parameter}
+\section{Structure deppendence of $\beta$ parameter}
+
+By the nature of its definition, the $\beta$-skeleton structure
+changes with the continuous $\beta$ parameter, from a highly connected
+structure (when $\beta \rightarrow 0$) to an empty graph when $\beta$ 
+grows to large positive values. 
+
+The Skeleton, the number of connections per point, and the length of
+connections, they deppend also from the distribution of points in the
+space. Is expected to have diferent values for the cosmic web, but is
+necessary to have a testing catalog with well well known structures
+to test the algorythm.
+
+The testing set was generated using a uniform density probability to place
+the points inside the box. There is a transition in the Skeleton of this
+catalog when $\beta$ is close to 1, it is shown in the figure
+\ref{beta_graphs}. Small $\beta$ values allows the large
+connections in the skeleton. (a, b and c). When $\beta \geq 1$ the large
+connections through the spherically uniform void vanish.
 
 \begin{figure}
   \gridline{
-    \fig{beta_0_70.png}{0.3 \textwidth}{(a)}
-    \fig{beta_0_90.png}{0.3 \textwidth}{(b)}
-    \fig{beta_0_99.png}{0.3 \textwidth}{(c)}}
+    \fig{single_spherical_void/beta_0_70.png}{0.32 \textwidth}{(a)}
+    \fig{single_spherical_void/beta_0_90.png}{0.32 \textwidth}{(b)}
+    \fig{single_spherical_void/beta_0_99.png}{0.32 \textwidth}{(c)}}
   \gridline{
-    \fig{beta_1_00.png}{0.3 \textwidth}{(d)}}
+    \fig{single_spherical_void/beta_1_00.png}{0.32 \textwidth}{(d)}}
   \gridline{
-    \fig{beta_3_00.png}{0.3 \textwidth}{(e)}
-    \fig{beta_6_00.png}{0.3 \textwidth}{(f)}
-    \fig{beta_9_00.png}{0.3 \textwidth}{(g)}}
-  \caption{Beta variations}
-  % ###################################### Figures must be in PDF format.
-  % ###################################### And thight margins.
+    \fig{single_spherical_void/beta_3_00.png}{0.32 \textwidth}{(e)}
+    \fig{single_spherical_void/beta_6_00.png}{0.32 \textwidth}{(f)}
+    \fig{single_spherical_void/beta_9_00.png}{0.32 \textwidth}{(g)}}
+  \caption{\label{beta_graphs}
+    Skeleton Structure dependence of $\beta$ around
+    a single void. Seven different values for $\beta$ (0.7, 0.9, 0.99, 1, 3, 6,
+    and 9). A transition can be observed when $\beta \rightarrow 1^-$. }
+\end{figure}
+
+\section{Detecting the First Void}
+
+The 0.9 and 0.99-Skeleton where calculated and compared
+with the 1-Skeleton. The histograms of number of connections per
+point (figure \ref{Fig_Connections_per_point}) show that the
+1-Skeleton he nodes tend to have 7 connections, while for the 0.9
+and 0.99-Skeletons he mean goes around 16 and 10 connections per
+node respectively. This graph may be useful in advanced stages of
+this project, it doesn't give more information than the Skeletons
+where sucesfully constructed by the NGRAPH library.
+
+\begin{figure}
+  \gridline{
+    \fig{single_spherical_void/connections_per_point_090_and_100skeleton.pdf}
+        {0.45 \textwidth}{(a)}
+    \fig{single_spherical_void/connections_per_point_099_and_100skeleton.pdf}
+        {0.45 \textwidth}{(b)}}
+  \caption{Connections per point. \label{Fig_Connections_per_point}}
+\end{figure}
+
+More information can be inferred by analyzing the histograms of
+connection lengths (figure \ref{Fig_Length_connection}):
+the 1-Skeleton has short connections, none of
+them larger than the radius of the spherical void (R=20Mpc/h). But
+0.9 and 0.99 Skeletons show a peak close to the diameter of the
+void in the testing catalog.
+
+\begin{figure}
+  \gridline{
+    \fig{single_spherical_void/connection_length_090_and_100skeleton.pdf}
+        {0.45 \textwidth}{(a)}
+    \fig{single_spherical_void/connection_length_099_and_100skeleton.pdf}   
+        {0.45 \textwidth}{(b)}}
+  \caption{Lenght connection for different $\beta$ values.
+    \label{Fig_Length_connection}}
+\end{figure}
+
+\subsection{Selecting Surface Ponits}
+
+Once the typical length for the 1-Skeleton is detected, a low limit
+distance can be established to separate long and short distances.
+\textbf{This $d_{cut}$ was hand-selected} as $d_{cut}=20 \mathrm{Mpc/h}$.
+The histograms a and b in figure \ref{Fig_Length_connection} show a
+second point close to the diameter of the void. By keeping the nodes with
+connections around that value (40 Mpc/h), and discarding the short
+connections, the surface enclosing the void appears
+(figure \ref{3d_scatter_single_void}). This method is good enough
+for a single spherical void in a random set of points.
+
+\begin{figure}
+  \gridline{
+    \fig{single_spherical_void/3d_scatter_detected_void_090.pdf}
+        {0.45 \textwidth}{(a)}
+    \fig{single_spherical_void/3d_scatter_detected_void_099.pdf}   
+        {0.45 \textwidth}{(b)}}
+  \caption{Surface points enclosing the void choosen by comparing
+    connection lenghts in the 0.90 and 0.99-Skeleton versus the
+    1-Skeleton.
+    \label{3d_scatter_single_void}}
+\end{figure}
+
+\subsection{Detecting Multiple Spherical Voids}
+
+The testing catalog used has four non-overlapping spherical voids
+with different radius (10, 10, 12 and 20 Mpc/h) in the same cubic box
+of 60 Mpc/h length.
+
+The connection lenght histograms show the short connections for
+regular populated space (all the contribution for the 1-Skeleton)
+and the large connections for $\beta<1$, with peaks around the
+diameter of the voids, as expected.
+(Figure \ref{Fig_Length_connection_4V})
+
+The difference between the voids and the populated structure is visible
+at $\beta=0.99$; three different clusters appears in the rigth panel.
+But in the left panel, the two bells are overlapping. There is no a
+clear difference between the low scale connections and connections
+through voids. (May it be visible with another bin selection?)
+
+Again, the limit between short and large connections is handmade
+selected as $d_{cut} = 15 \mathrm{Mpc/h}$. 
+
+\begin{figure}
+  \gridline{
+    \fig{four_spherical_voids/connection_length_4voids_090_and_100skeleton}
+        {0.45 \textwidth}{(a)}
+    \fig{four_spherical_voids/connection_length_4voids_099_and_100skeleton}     
+        {0.45 \textwidth}{(b)}}
+  \caption{Lenght connection for different $\beta$ values with four
+    voids inside the structure. Diameter of the voids: 20, 20, 24 and 40
+    Mpc/h.
+    \label{Fig_Length_connection_4V}}
+\end{figure}
+
+With this handmade selection of long connections, the algorythm sucesfully
+identifies the four voids (figure \ref{3d_scatter_four_voids}).
+
+\begin{figure}
+  \gridline{
+    \fig{four_spherical_voids/3d_scatter_detected_4voids_090.pdf}
+        {0.45 \textwidth}{(a)}
+    \fig{four_spherical_voids/3d_scatter_detected_4voids_099.pdf}
+        {0.45 \textwidth}{(b)}}
+  \caption{Surface points enclosing the four void choosen by comparing
+    connection lenghts in the 0.90 and 0.99-Skeleton versus the
+    1-Skeleton.
+    \label{3d_scatter_four_voids}}
 \end{figure}
 
 
+
+\section{The Ellipsoidal Catastrophe}
+
+Triying to give a leap, instead going step by step, the third catalog of points
+includes three connected ellipsoidal voids, variying the coefficients in the
+standard ellipsoid equation between 0.5 and 2.0. The algorytm fails to identify
+the ellipsoidal voids, but detects the spherical control void.
+
+\begin{figure}
+  \gridline{
+    \fig{ellipsoidal_catastrophe/ConnectionLenghtHistogram_for_090-100-skeletons.pdf}
+        {0.45 \textwidth}{(a)}
+    \fig{ellipsoidal_catastrophe/ConnectionLenghtHistogram_for_099-100-skeletons.pdf}
+        {0.45 \textwidth}{(a)}}
+  \gridline{
+    \fig{ellipsoidal_catastrophe/ConnectionLenghtHistogram_for_07-13-skeletons.pdf}
+        {0.45 \textwidth}{(c)}
+    \fig{ellipsoidal_catastrophe/ConnectionLenghtHistogram_for_08-13-skeletons.pdf}
+        {0.45 \textwidth}{(d)}}
+  \caption{Lenght connection for different $\beta$ values with four
+    connected ellipsoidal voids. There is no a clear difference in the histograms
+    about connection lenght in populated space and empty regions.
+    Upper Panels: using the previous $\beta$
+    diference comparing aginst 1-Skeleton, it worked for spheroidal voids, but
+    not for connected ellipsoidal voids.
+    Lower panels: increasing the $\beta$ difference, comparing against 1.3-Skeleton.
+    \label{Fig_Length_connection_Ellipsoids}}
+\end{figure}
+
+
+\begin{figure}
+  \gridline{
+    \fig{ellipsoidal_catastrophe/IrregularVoidSurface_for_090-100-skeletons.pdf}
+        {0.45 \textwidth}{(a)}
+    \fig{ellipsoidal_catastrophe/IrregularVoidSurface_for_08-13-skeletons.pdf}
+        {0.45 \textwidth}{(b)}}
+  \caption{Surface points enclosing the four connected ellipsoidal voids
+    choosen by comparing connection lenghts in the 0.90-Skeleton versus the
+    1-Skeleton (left panel). There is a notable lack of points in the upper
+    and lower regions of the ellipsoids, as the front and the bottom. The algorytm
+    fails to identify the spheroidal voids in the structure.
+    In the right pannel there is an intent to fix the issue using a larger
+    difference in the $\beta$ values, using the 0.8 and 1.3-Skeletons. The algorythm
+    stills without identify the voids.
+    \label{3d_scatter_four_voids}}
+\end{figure}
+
+
+
+\section{Conclusions}
+
+An important factor as $d_{cut}$ cannot be arbitrarily selected. 
+
+A diferent method is going to be implemented.
 
   \nocite{*}
 

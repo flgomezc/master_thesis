@@ -1,18 +1,23 @@
+##################### Libraries
 **/ngl-beta
 **/ann_1.1.2
+./
+##################### Heavy folders with data 
 **/testing_scripts
 **/data
 
+##################### Heavy files
+*.cat
+*.bsk
+*.dat
 
+#################### Ipython Notebook Checkpoints
 .ipynb_checkpoints/
 *.ipynb_checkpoints/
 
-# Latex Files
+################### Latex Files (in case Makefile didn't remove them)
 *.aux
 *.cls
 *.log
 *~
 
-*.cat
-*.bsk
-*.dat
