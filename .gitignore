@@ -1,15 +1,18 @@
 **/ngl-beta
 **/ann_1.1.2
 **/testing_scripts
-
+**/data
 
 
 .ipynb_checkpoints/
 *.ipynb_checkpoints/
 
+# Latex Files
+*.aux
 *.cls
 *.log
 *~
 
 *.cat
 *.bsk
+*.dat
