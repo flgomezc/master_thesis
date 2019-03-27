@@ -1,9 +1,15 @@
 **/ngl-beta
-
 **/ann_1.1.2
+**/testing_scripts
 
-*.cls
+
 
 .ipynb_checkpoints/
-
 *.ipynb_checkpoints/
+
+*.cls
+*.log
+*~
+
+*.cat
+*.bsk
