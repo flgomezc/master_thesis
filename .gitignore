@@ -1,1 +1,9 @@
 **/ngl-beta
+
+**/ann_1.1.2
+
+*.cls
+
+.ipynb_checkpoints/
+
+*.ipynb_checkpoints/

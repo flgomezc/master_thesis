@@ -1,0 +1,23 @@
+EXEC_PATH=/home/filipo/master_thesis/ngl-beta/build/binsrc/
+
+# Number of Particles
+NPARTICLES=1000
+
+# Skeleton parameters
+METHOD=BSkeleton
+BETA=1.3
+DIMENSION=3
+
+FILENAME=FC_N$(NPARTICLES).cat
+FILE_IN=$(FILENAME)
+FILE_SKEL=FC_N$(NPARTICLES)_Beta$(BETA).bsk
+
+
+$(FILE_SKEL): $(FILE_IN)
+	echo Input File to NGL: $(FILE_IN)
+	$(EXEC_PATH)./getNeighborGraph -i $(FILE_IN) -d $(DIMENSION) -m $(METHOD) -b $(BETA)c > $(FILE_SKEL)
+
+
+clean:
+	rm $(FILE_SKEL)
+#rm -f *~
