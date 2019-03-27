@@ -3,7 +3,7 @@
 # Be sure to load the anaconda/python3 module.
 
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import subprocess as subp
 
 
@@ -88,13 +88,12 @@ r_list = np.array(r_list)
 
 
 # Checking outer shell.
-fig, ax = plt.subplots()
-index = np.where(r_list> 0.95*r_max )[0]
-plt.scatter( OC[index,1], OC[index,0], s=0.1)
-ax.set_aspect(1.0)
-plt.tight_layout()
-
-plt.savefig(fig_path+"outer_shell_cut_{}.pdf".format(cut))              
+#fig, ax = plt.subplots()
+#index = np.where(r_list> 0.95*r_max )[0]
+#plt.scatter( OC[index,1], OC[index,0], s=0.1)
+#ax.set_aspect(1.0)
+#plt.tight_layout()
+#plt.savefig(fig_path+"outer_shell_cut_{}.pdf".format(cut))              
 
  
 #############################################################
@@ -103,21 +102,28 @@ plt.savefig(fig_path+"outer_shell_cut_{}.pdf".format(cut))
 #                                                           #
 #############################################################
 
+
 ### Using the cut as seed
 np.random.seed(cut)
 
 ### A sigthly smaller radius to avoid surface percolation.
 R_rc = radius * 0.95
 
+
+### File Identifier:
+### Will be useful to have the same name here, there and everywhere.
+fileId = "cat_R_{}_cut_{}_Nrand_{}_Beta_{}_".format(R_rc,cut,N_rand,beta)
+
+
 ### Create Random Catalog
 RC = np.zeros([2*N_obs,3])
 for x in RC:
     x += sph_random_point(R_rc)
-np.savetxt(rc_path + "rnd_sph_cat_R_{}_cut_{}_Nrand_{}_Beta_{}_.cat".format(R_rc,cut,N_rand,beta), RC)
+np.savetxt(rc_path + "rnd_sph_" + fileId + ".cat", RC)
 
 # Create the full catalog (to calculate Beta Skeleton Graph)
 FC = np.vstack([RC,OC])
-FC_filename = fc_path + "FC_CUT_{}_Nrand_{}_Beta_{}_.cat".format(cut, N_rand, beta)
+FC_filename = fc_path + "FC_" + fileId + ".cat"
 
 # Store FullCatalog
 np.savetxt(FC_filename, FC)
@@ -130,9 +136,9 @@ np.savetxt(FC_filename, FC)
 #                                                           #
 #############################################################
 
-"""
+
 subp.run("LSS_BSK_calc -input  " + FC_filename + 
-         " -output " + "BetaSkeleton_CUT_{}_Nrand_{}_Beta_{}" + 
+         " -output " + "BetaSkeleton_" + fileId + 
          " -beta " + str(beta) + 
          " -printinfo True -numNNB 300"
          , shell=True, check=True)
@@ -140,4 +146,4 @@ subp.run("LSS_BSK_calc -input  " + FC_filename +
 subp.run( "echo " + str(cut) + " >> progress.txt", shell=True, check=True)
 
 cut += 1
-"""
+
