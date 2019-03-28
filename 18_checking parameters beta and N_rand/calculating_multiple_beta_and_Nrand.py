@@ -2,9 +2,16 @@
 # Runing on the Magnus Cluster.
 # Be sure to load the anaconda/python3 module.
 
+TIMES = 500
+DO_SKELETON = True
+
 import numpy as np
-#import matplotlib.pyplot as plt
 import subprocess as subp
+import timeit
+
+toc = timeit.default_timer()
+
+print("toc {}".format(toc))
 
 
 def sph_random_point(Radius):
@@ -28,46 +35,38 @@ def generateParams():
 
     return beta, N
 
-np.random.seed(27)
-B, N = [], []
 
-for i in range(300):
-    beta, N_rand = generateParams()
-    B.append(beta)
-    N.append(N_rand)
     
-# plt.scatter(B,N, s=1)
-
 cut = 0
 radius = 100
 
-# Create figures folder
+#############################################################
+#                                                           #
+#                     Create Folders                        #                       
+#                                                           #
+#############################################################
+
 fig_path = "./figures/"
+oc_path  = "./observed_catalogs/"
+rc_path  = "./random_catalogs/"
+fc_path  = "./full_catalogs/"
+
 subp.run("mkdir -p " + fig_path, shell=True, check=True)
-
-# Create Observed Catalogs folder
-oc_path = "./observed_catalogs/"
 subp.run("mkdir -p " + oc_path, shell=True, check=True)
-
-# Create Random Catalog folder                                                                                                                                            
-rc_path = "./random_catalogs/"
 subp.run("mkdir -p " + rc_path, shell=True, check=True)
-
-# Create Full Catalog folder                                                                                                                                              
-fc_path = "./full_catalogs/"
 subp.run("mkdir -p " + fc_path, shell=True, check=True)
-
-
+    
 filename = "sphere_data_cut_{}.dat".format(cut)
 
-
+subp.run( "echo # Count, Beta, n_rand > progress.txt", shell=True, check=True)
+     
 ## Read the file
 OC = np.loadtxt(oc_path + filename)
 
 ## Number of observations.
 N_obs = OC.shape[0]
 
-## Center of Data
+## Center of the dataset cut=0
 center = np.array([-400,-400,-400])
 
 ## Move to Center of Data Coord. Syst. 
@@ -78,72 +77,85 @@ for i in range(N_obs):
 
     r = 0
     for j in range(3):
-           r += OC[i,j]**2
-    r = r**0.5
-    r_list.append(r)
-    if r > r_max:
-        r_max = r
+        r += OC[i,j]**2
+        r = r**0.5
+        r_list.append(r)
+        if r > r_max:
+            r_max = r
 
 r_list = np.array(r_list)
 
 
-# Checking outer shell.
-#fig, ax = plt.subplots()
-#index = np.where(r_list> 0.95*r_max )[0]
-#plt.scatter( OC[index,1], OC[index,0], s=0.1)
-#ax.set_aspect(1.0)
-#plt.tight_layout()
-#plt.savefig(fig_path+"outer_shell_cut_{}.pdf".format(cut))              
 
- 
-#############################################################
-#                                                           #
-#     Generate 2N Random Catalog (R = 0.95 r_max)           #
-#                                                           #
-#############################################################
+np.random.seed(27)
+B, N = [], []
 
 
-### Using the cut as seed
-np.random.seed(cut)
+for maxiCounter in range(TIMES):
+    beta, n_rand = generateParams()
+    B.append(beta)
+    N.append(n_rand)
 
-### A sigthly smaller radius to avoid surface percolation.
-R_rc = radius * 0.95
-
-
-### File Identifier:
-### Will be useful to have the same name here, there and everywhere.
-fileId = "cat_R_{}_cut_{}_Nrand_{}_Beta_{}_".format(R_rc,cut,N_rand,beta)
-
-
-### Create Random Catalog
-RC = np.zeros([2*N_obs,3])
-for x in RC:
-    x += sph_random_point(R_rc)
-np.savetxt(rc_path + "rnd_sph_" + fileId + ".cat", RC)
-
-# Create the full catalog (to calculate Beta Skeleton Graph)
-FC = np.vstack([RC,OC])
-FC_filename = fc_path + "FC_" + fileId + ".cat"
-
-# Store FullCatalog
-np.savetxt(FC_filename, FC)
+    #############################################################
+    #                                                           #
+    #     Generate 2N Random Catalog (R = 0.95 r_max)           #
+    #                                                           #
+    #############################################################
 
 
+    ### Using the maxiCounter as seed, because "cut" is constant.
+    np.random.seed(maxiCounter)
 
-#############################################################
-#                                                           #
-#     Call BetaSkeletonCalc from Xiao-Dong Li's Lib         #
-#                                                           #
-#############################################################
+    ### A sigthly smaller radius to avoid surface percolation.
+    R_rc = radius * 0.95
 
 
-subp.run("LSS_BSK_calc -input  " + FC_filename + 
-         " -output " + "BetaSkeleton_" + fileId + 
-         " -beta " + str(beta) + 
-         " -printinfo True -numNNB 300"
-         , shell=True, check=True)
+    ### File Identifier:
+    ### Will be useful to have the same name here, there and everywhere.
+    fileId = "cat_R_{}_cut_{}_nrand_{}_Beta_{}_".format(R_rc,cut,n_rand,beta)
 
-subp.run( "echo " + str(cut) + " >> progress.txt", shell=True, check=True)
+    ### Create Random Catalog
 
-cut += 1
+    # N_rand: Number of Random must be integer. 
+    N_rand = round(n_rand * N_obs)
 
+    RC = np.zeros([N_rand, 3])
+    for x in RC:
+        x += sph_random_point(R_rc)
+    np.savetxt(rc_path + "rnd_sph_" + fileId + ".cat", RC)
+
+    # Create the full catalog (to calculate Beta Skeleton Graph)
+    FC = np.vstack([RC,OC])
+
+    FC_filename = fc_path + "FC_" + fileId + ".cat"
+
+    # Store FullCatalog
+    np.savetxt(FC_filename, FC)
+
+
+    #############################################################
+    #                                                           #
+    #     Call BetaSkeletonCalc from Xiao-Dong Li's Lib         #
+    #                                                           #
+    #############################################################
+
+
+    if(DO_SKELETON):
+        subp.run("LSS_BSK_calc -input  " + FC_filename + 
+                 " -output " + "BetaSkeleton_" + fileId + 
+                 " -beta " + str(beta) + 
+                 " -printinfo True -numNNB 300"
+                 , shell=True, check=True)
+
+    t = timeit.default_timer()
+    subp.run( "echo {}, {}, {}, {} >> progress.txt".format(maxiCounter, beta, n_rand, t), shell=True, check=True)
+
+    print( "Step {} of {} done".format(maxiCounter+1, TIMES) )
+
+
+
+tic = timeit.default_timer()
+
+print("tic {}".format(tic))
+
+print("Time Elapsed: ", tic - toc)
