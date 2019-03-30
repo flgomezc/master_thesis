@@ -34,7 +34,7 @@ for l in List_Random_Catalogs:
     beta.append(l.split("_")[10])
     
 Times = len(List_Random_Catalogs)
-#Times = 2
+#Times = 3
 
 # Some constants:
 cut = List_Random_Catalogs[0].split("_")[6]
@@ -46,7 +46,7 @@ cut = List_Random_Catalogs[0].split("_")[6]
 #                    Void Finder Main Loop                      #
 #                                                               #
 #################################################################
-
+subp.run( "echo # Count, Beta, n_rand > Void_Finder_progress.txt", shell=True, check=True)
 for maxiCounter in range(Times):
     toc = timeit.default_timer()
     #maxiCounter = 0
@@ -368,3 +368,6 @@ for maxiCounter in range(Times):
     FinalMessage += "\n\n ########################"
 
     print(FinalMessage)
+
+
+    subp.run( "echo {}, {}, {}, {} > Void_Finder_progress.txt".format(maxiCounter, beta[maxiCounter], n_rand[maxiCounter], tic-toc), shell=True, check=True)
