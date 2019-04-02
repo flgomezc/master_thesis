@@ -3,6 +3,8 @@ import subprocess as subp
 import os
 import timeit
 
+TESTING = True
+
 ### Create MasterLists directory
 ML_path = "masterlists/"
 subp.run("mkdir -p " + ML_path, shell=True, check=True)
@@ -32,12 +34,16 @@ beta   = []
 for l in List_Random_Catalogs:
     n_rand.append( l.split("_")[8] )
     beta.append(l.split("_")[10])
-    
-Times = len(List_Random_Catalogs)
-#Times = 3
+
+if (TESTING == True):
+    Times = 3
+else:
+    Times = len(List_Random_Catalogs)
 
 # Some constants:
 cut = List_Random_Catalogs[0].split("_")[6]
+
+
 
 
 
@@ -46,8 +52,12 @@ cut = List_Random_Catalogs[0].split("_")[6]
 #                    Void Finder Main Loop                      #
 #                                                               #
 #################################################################
-subp.run( "echo # Count, Beta, n_rand > Void_Finder_progress.txt", shell=True, check=True)
+subp.run( "echo  > 02_Void_Finder_progress.txt", shell=True, check=True)
+
+# debug starts here
 for maxiCounter in range(Times):
+    #maxiCounter = 1
+
     toc = timeit.default_timer()
     #maxiCounter = 0
 
@@ -63,7 +73,6 @@ for maxiCounter in range(Times):
     RC_filename = List_Random_Catalogs[maxiCounter]
     FC_filename = List_Full_Catalogs[maxiCounter]
     BS_filename = List_BetaSkeleton[maxiCounter]
-
     OC_filename = List_Observed_Catalogs[0]
 
     ML_filename  = "VoidMasterList_cut_{}_nrand_{}_Beta_{}_.vml".format(cut, 
@@ -79,9 +88,10 @@ for maxiCounter in range(Times):
     ##### RE-CENERING!!!!  ############################################# Hey! To Do Centering
     for x in OC:
         x += np.array([400,400,400])
+    # The centering has been done.
+    ######################################################################
 
     FC = np.loadtxt(FC_path + FC_filename)
-
     BS = np.loadtxt(BS_path + BS_filename)
 
     print("Previous BetaSkeleton Shape before Stacking: ", BS.shape)
@@ -89,9 +99,9 @@ for maxiCounter in range(Times):
 
     ### Transforms Xiao-Dong Li's Beta Skeleton Index to long list
 
-    a = BS[:,0]
+    a = BS[:,0].astype(int)
     a = list(a)
-    b = BS[:,1]
+    b = BS[:,1].astype(int)
     b = list(b)
 
     c = []
@@ -105,48 +115,54 @@ for maxiCounter in range(Times):
     d = np.array(d, dtype=int)
 
     fcBSkel = np.vstack((c,d)).T
-    a = b = c = d = 0
+    # debug
+    # a = b = c = d = 0
 
     print("Next BetaSkeleton Shape after Stacking: ", fcBSkel.shape)
 
-
-    VOID_TYPE = "Real"
-
-    N = N_rnd   # Search for the first N points in the FC.
-                # They are Random Points. So N = N_rnd
+    ### Search for the first N_rnd points in the FC.
 
     # Find RANDOM POINTS in the fcBeta-Skeleton Graph.
-    index = np.where(fcBSkel[:,0] < N)  
+    first_filter_index = np.where(fcBSkel[:,0] < N_rnd)  
+
     # Store the partial Beta-Skeleton Graph of Random Points and
     # its connections. They may have connections with Obs. points
     # and other Random points.
-    first_filter = np.array(fcBSkel[index]).astype(int)
+    first_filter_BSkel = np.array(fcBSkel[first_filter_index]).astype(int)
 
     # Find the Random Points connected only to Random Points.
 
     # To do this, first we find those points whom are connected to 
     # observational points.
-    index = np.where( first_filter[:,1] >= N )[0]
+    second_filter_index = np.where( first_filter_BSkel[:,1] >= N_rnd )[0]
+
     # They are going to be dropped.
-    droplist_raw = first_filter[index,0]
+    particle_ID_to_drop = first_filter_BSkel[second_filter_index,0]
+    particle_ID_to_drop.sort()
     # A set of the Random Points connected to Observational points
     # is created, there are not repeated items.
-    droplist = set(droplist_raw)
+    droplist = set(particle_ID_to_drop)
 
-    print( "First filter shape:", first_filter.shape, 
-          "\nHow many of them have direct connections with galaxies", len(droplist) )
+    print( "First filter shape:", first_filter_BSkel.shape, 
+          "\nHow many of them have direct connections"+
+          " with galaxies (i.e. droplist length)", 
+          len(droplist),
+          "\nThen, must survive", first_filter_BSkel.shape[0]-len(droplist), 
+          "trueVoidPoints")
 
 
     # We have the Random points set:
-    rndmcat_index = set(range(N))
+    Points_in_Skeleton = set(first_filter_BSkel[:N_rnd,0])
     # and the droplist. The complement(difference) is the
     # pure void points set.
-    trueVoidPointsIndex = rndmcat_index.difference(droplist)
+    trueVoidPointsIndex = Points_in_Skeleton.difference(droplist)
     # This set is converted to list, it will be used as an index to find 
     # True Voids.
     trueVoidPointsIndex = list(trueVoidPointsIndex)
+    trueVoidPointsIndex.sort()
 
     # This is the first definition of TRUE VOID POINTS.
+    # Catalog of particles in voids
     void_cat = FC[trueVoidPointsIndex]
 
     ### True Voids have been foud. #########################################
@@ -168,11 +184,6 @@ for maxiCounter in range(Times):
     print(" Void BetaSkeleton Shape: ", VoidsBS.shape)
     print(" The len of trueVoidPointsIndex", len(trueVoidPointsIndex))
 
-    ### Is it necessary to keep this info?
-    # np.savetxt("BS_of_TrueVoidPoints.bsk", VoidsBS)
-
-
-
     # This is the MasterList of Voids.
 
     # Each TrueVoidPoint_index is checked.
@@ -180,11 +191,10 @@ for maxiCounter in range(Times):
     # If it exists already, the point and its connections are added to the existing void sublist.
 
     print("\n\n Initialize MasterList.")
-    
+
     MasterList = []
 
     for search in trueVoidPointsIndex:
-
         # Does the TrueVoidPoint belongs to any existing Void?
         is_in_master = any( search in sublist for sublist in MasterList)
 
@@ -238,7 +248,7 @@ for maxiCounter in range(Times):
                     MasterList[j]=[]              # Empty the merged lists.
                 my_list.sort()
                 MasterList.append(my_list)
-    
+
     # Emtpy lists removed. 
     while( [] in MasterList):
         MasterList.remove([])
@@ -248,6 +258,11 @@ for maxiCounter in range(Times):
     for j in range(len(MasterList)):
         MasterList[j] = list( set(MasterList[j]))
         MasterList[j].sort()
+
+    print("\nRaw Masterlist created\n")           
+
+
+
 
     # Some lists may share elements (FrontierPoints).
     # Those FrontierPoints may be in a BottleNeck
@@ -325,6 +340,7 @@ for maxiCounter in range(Times):
     while( [] in MasterList):
         MasterList.remove([])
 
+
     print("Total number of Void Particles", len(trueVoidPointsIndex))
 
     aux = 0
@@ -332,7 +348,13 @@ for maxiCounter in range(Times):
         #print( len(Void))
         aux += len(Void)
 
+        if len(Void)<2:
+            print( Void)
+
     print("Total number of particles in Voids and close to filaments:", aux , "(Void + Frontier particles)")
+
+
+
 
 
     #################################################################
@@ -347,15 +369,15 @@ for maxiCounter in range(Times):
 
     with open(ML_path + ML_filename, 'w') as file:
 
-        for halo in MasterList:   
-            for particle in halo:
-                line  = str(MasterList.index(halo) *1.0) + " " 
+        for k in range(len(MasterList)):   
+            for particle in MasterList[k]:
+                line  = str( k *1.0) + " " 
                 line += str(X[particle]) + " " 
                 line += str(Y[particle]) + " " 
                 line += str(Z[particle] ) + "\n"
 
                 file.write(line)
-    
+
     tic = timeit.default_timer()
 
     FinalMessage = "\n ·##@@@** \n\n We have fihished the process of "
@@ -370,4 +392,4 @@ for maxiCounter in range(Times):
     print(FinalMessage)
 
 
-    subp.run( "echo {}, {}, {}, {} > Void_Finder_progress.txt".format(maxiCounter, beta[maxiCounter], n_rand[maxiCounter], tic-toc), shell=True, check=True)
+    subp.run( "echo {}, {}, {}, {} >> 02_Void_Finder_progress.txt".format(maxiCounter, beta[maxiCounter], n_rand[maxiCounter], tic-toc), shell=True, check=True)
