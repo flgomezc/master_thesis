@@ -3,7 +3,7 @@ import subprocess as subp
 import os
 import timeit
 
-TESTING = True
+TESTING = False
 
 ### Create MasterLists directory
 ML_path = "masterlists/"
