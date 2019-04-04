@@ -1,1 +1,4 @@
-We have developed a new algorithm based on the $\beta$-Skeleton graph to find voids in the LSS. The Beta-Skeleton has been widely used on machine learning, optimization algorithms and image recognition and processing. It has been introduced recently in the LSS analysis as a fast tool to identify LSS filamentary structure, and now can detect voids also. We will present some predictions for the upcoming DESI void population, using the voids morphology statistics as cosmological test. 
+We have developed a new algorithm based on the $\beta$-Skeleton graph to find voids in the LSS. 
+The Beta-Skeleton has been widely used on machine learning, optimization algorithms and image recognition and processing. 
+It has been introduced recently in the LSS analysis as a fast tool to identify LSS filamentary structure, and now can detect voids also.
+We will present some predictions for the upcoming DESI void population, using the voids morphology statistics as cosmological test. 
