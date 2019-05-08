@@ -1,4 +1,4 @@
-Large underdense regions in the Large Scale Structure (LSS), also known as voids,
+Large underdense regions in the Large Scale Structure (LSS) of the Universe, also known as voids,
 are a prominent feature of the cosmic web that can also be used as a cosmological probe.
 In this talk, I will present a new void-finding algorithm that can be applied
 to both observational and simulated data.
