@@ -1,0 +1,15 @@
+We present a new algorithm based on the $\beta$-Skeleton graph to find cosmic
+void in the LSS. Our method finds voids in dark matter halo catalogs from
+N-body simulations as well as in galaxy redshift surveys.
+
+The Beta-Skeleton has been widely used on machine learning, optimization
+algorithms and image recognition and processing. It has been introduced
+recently in the LSS analysis as a fast tool to identify LSS filamentary
+structure, and now can detect voids also.
+
+The morphological analysis we have performed considers voids as ellipsoids,
+we study statistical properties as population size, volumes and
+ellipticity. It shows a good agreement with other void finders.
+
+The aim of this project is to use the voids as cosmic probe of Dark Energy to
+make predictions for the upcoming DESI observations.
