@@ -11,3 +11,7 @@ data:
 
 clean:
 	rm *~
+	rm -r full_catalogs
+	rm -r masterlists
+	rm -r volume_and_excentricity
+	rm -r xdl_beta_skeleton
