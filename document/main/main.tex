@@ -1,0 +1,309 @@
+\documentclass[preprint]{aastex62}
+\usepackage[utf8]{inputenc}
+\usepackage{lineno}
+\usepackage{multirow}
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+\graphicspath{{./}{figures/}}
+\shorttitle{A LSS Void Identifier based on the $\beta$-Skeleton Graph Method}
+\shortauthors{G\'omez-Cort\'es, Forero-Romero, Li}
+
+\linenumbers
+\begin{document}
+
+\title{A Large Scale Structure Void Identifier for Galaxy Surveys Based on the 
+$\beta$-Skeleton Graph Method}
+
+\correspondingauthor{Felipe Leonardo Gómez-Cortés}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo Gómez-Cortés}
+\affiliation{Physics Department, Universidad de Los Andes}
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Physics Department, Universidad de Los Andes}
+
+\author{Xiao-Dong Li}
+\affiliation{Shcool of Physics, Korean Institute for Advanced Study}
+
+
+\begin{abstract}
+  We present a new LSS Void Finder Algorithm based on the $\beta$-Skeleton Graph.
+  Some tests where done to check the algorithms performance in toy model
+  structures, then the algorithm ran over halo catalogs from simulations
+  and galaxy catalogs.
+\end{abstract}
+
+
+
+
+\section{The Algorithm}
+
+The main goal of this project is to identify voids in the large scale structure
+of the universe, using the nobel method in astrophysics: the $\beta$-Skeleton
+graph. In order to develop the code, a toy model catalog structure is used,
+then a second catalog of random points populates the same volume, the graph is
+calculated and then the voids are identified as the second catalog points
+without connections with the first catalog points.
+
+\begin{figure}
+    \plotone{slice_OC_plus_RC.pdf}
+    \caption{The Algorithm uses two sets of points: The Observed Catalog
+      (LSS like in blue with a spherical void in the middle) and the
+      random Catalog (orange). This is a slice of the Toy Model Catalog to
+      test the Algorithm; a cubic box with an random uniform distribution of
+      points over the box volume with a spherical void at the center.
+      \label{slice_OC_plus_RC}}
+\end{figure}
+
+\subsection{Random Points in Empty Regions}
+We start with a sample of N points randomly placed inside a cubic box of
+lenght L. (Figure \ref{slice_OC_plus_RC}. In the middle of the box there is a
+spherical void, i.e. an spherical region without points. This set of points is
+called ``the observed catalog'' (\textbf{OC}). This toy model will represent
+-in a gross aproximation- the LSS with galaxies and voids.
+
+Then another set of N random points populates the whole box, without restrictions.
+This set is called ``the random catalog'' (\textbf{RC}). It will populate even
+the void region. It's only necesary to know the volume of the OC and the number
+of points N to create the RC.
+
+The Li's Skeleton library can operate over a single set of points. This set is called
+``the full catalog'' (\textbf{FC}). This set of points is created using the
+\texttt{vstack} python function. The first N elements are the RC points, the last
+N elements are the OC points, then the FC has 2N elements.
+
+The 1-Skeleton graph is calculated over the FC. Runing the code over a FC of
+$\sim 10^4$ points in a Core i5 (2nd gen.) Linux machine, it takes 192 seconds
+to complete the calculus. The result is stored as the Full Catalog Beta
+Skeleton Graph (\textbf{fcBSk}).
+
+The fcBSk is chopped to the half, we are interested about the RC points that
+are not connected with the OC points. Then a droplist is created as the
+subset of connections where the second point belongs to the OC, i.e., its index
+is greater than N.
+
+Using the python  \texttt{set} class, its easy to find the complement of the
+droplist in the fsBSk. After droping the RC points connected with the OC, it
+remains the points inside the void. Those points are labelled as
+\textbf{true void points}.
+
+There are some points that belong to the void but they have connections in the
+$\beta$-Skeleton with some observational points. They are identified as
+frontier points.
+
+
+\begin{figure}
+  \plotone{single_sphere_N5000_R37_BL100/RandomPoints_Recognized_Void_1_0-skeletons.pdf}
+  \caption{Points identified as ``Void Points''. They are points from the Random Catalog
+    connected by the 1-Skeleton only to other Random Catalog points. 
+    N=5000 points, BoxLength = 100 units and void radius R=37 units.
+    \label{fig:First void recognition}}
+\end{figure}
+
+The algorithm sucessfully recognized the spherical void, and also identified
+some other underdense regions. (Fig. \ref{fig:First void recognition}).
+
+A second test was designed with four spherical voids in different locations, showing
+how well defined where the two bigger voids, but there is a lower resolution limit
+related to the void size and the lenght of the Random Points Catalog.
+(Fig. \ref{fig:slice for multiple spherical voids}).
+
+\begin{figure}
+  \plotone{multiple_spheres_limit_radius_N5000_R5_10_15_20_BL100/slice_OC_plus_RC_at_z70.pdf}
+  \caption{Slice at z=70 of an structure with four
+    spherical voids of radii 5, 10, 5 and 20 units.
+    N=5000, BoxLength = 100, the voids radius where selected as R= 5, 10, 15
+    and 20.
+    \label{fig:slice for multiple spherical voids}}
+\end{figure}
+
+
+
+\begin{figure}
+  \plotone{multiple_spheres_limit_radius_N5000_R5_10_15_20_BL100/RandomPoints_Recognized_Voids.pdf}
+  \caption{Points identified as ``Void Points''. This tests aims to check
+    the resolution of the algorithm. Some scattered micro-voids appear.
+    The ``biggest'' voids are recognized (R=15,20), but small structures doesn't
+    appear (R=5,10).
+    N=5000, BoxLength = 100, the voids radius where selected as R= 5, 10, 15
+    and 20.
+    \label{Testing multiple spherical voids}}
+\end{figure}
+
+
+
+
+
+\subsection{Tagging Voids}
+
+Once true void points are identified, the $\beta$-Skeleton Graph is used
+again to identify their neighbours. The set of True Void Points connected
+between them, together with the frontier points is tagged as a void.
+
+From the Full Catalog Beta-Skeleton Graph (\textbf{fcBSk}), that is just a
+$M \times2$ dimentional array of indexes,
+we can extract the connections of void points. Each void point
+must be conected solely with other points from the RC. They may be other
+void points or frontier points.
+
+Frontier points are poins from the RC than
+are connected to RC points as well to OC points. Frontier points where
+rejected on early stages of the algorithm, but now they are taken into account.
+Frontier points are over the ``Void Surface''. A similar surface was the aiming
+of the previous algorithm (comparing two different $\beta$-Skeletons).
+
+We did not achieve the stage of exploring voids with sparse galaxies in the
+previous algorithm, but now, a void with sparse galaxies is easily identified
+as a ``plum pudding'', where the void is the pudding with frontier points
+enclosing the ``plums'' (sparse galaxies), 
+
+The algorithm starts looking for the connections of the first Void Point in the
+Random Catalog. A list including the first void point and their neighbohrs is
+created. This list is going to be the first voids tagged. Then the second point
+is checked, if it appears in the list the the second point and its neighbohrs
+are added to the previous list, they are identified as part of the first void.
+If not, then a new list is created with the second point and their neighbohrs,
+giving place to the second void. When the $n$-th  is reached, a search is
+performed over the existent lists of voids. The $n$-th point may belong to
+a previous lists of voids, or may create its own list for a $m$-th void
+($ m \leq n$). 
+
+The master list of catalogs at this moment is incomplete, all the Void Points
+in the list are counted and checked if they belong to another list. But frontier
+points are not checked. The master lists contains voids sharing frontiers.
+Is necesary to run again a recount, looking for repetitions between lists,
+thinking each list as a set of points,
+and looking for intersection between sets. (Python offers this implementation
+using sets by invoking the class \texttt{set}). When a intersection between voids
+is detected, the two voids are merged into a new one. Finally, the voids are
+tagged (by the ID of the first void particle).
+
+
+This algorithm was able to detect irregular voids made of intersecting
+ellipsoids. This test was performed over a artificial structure, a toy model catalog.
+
+
+\begin{figure}
+  \plotone{multiple_irregular_void_N5000_R_40_30_30_40/tagging_voids.pdf}
+  \caption{Tagging Voids. This algorithm can indentify irregular structures,
+    a step ahead the previous algorithm. The irregular voids are made of
+    overlapping ellipsoidal voids, with semiaxes proportion 1:0.7:0.5 as the 
+    literature suggets.  
+    N=5000, BoxLength = 100, the voids major semiaxes where chosen as
+    R= 40, 30, 30 and 40.
+    \label{fig:Tagging Toy Model Voids}}
+\end{figure}
+
+
+\section{Finding Voids in Simulations}
+
+\subsection{Abacus-Cosmos Simulation}
+
+From a snapshot of the Abacus-Cosmos simulation with fiducial cosmology, a set of
+halos is selected, within a sphere of radius $R=100\mathrm{Mpc/h}$ and a $M_{cut}$
+given to get $\sim 10^4$ halos.
+
+The Random Catalog is generated, taking care of having a uniform space
+distribution. A common error is to generate the radius using a uniform
+distribution from 0 to 1 and scaling by a factor $R$,
+but must be taken instead the cubic root of the randon number between 0 and 1,
+then multiplied by $R$. Another error is generating the angles again, taking a
+random number between zero and one, then scaling by $2\pi$. This error can be
+avoided by generating a randon number between 0 and 1 as the cosine of $\theta$,
+then calculating the angle as the arc-cosine. The unitary vector can be
+calculated using a gaussian distribution for x, y and z (centered at zero
+with the same deviation for them three).  % ################################## <<--- Search for citation here.
+The norm is calculated as usually, by taking the square root of the sum of
+the coordinates, then dividing each coordinate by the norm of the vector.
+
+The algorithm ran over the ``real'' dataset using the rations 1:1, 2:1
+and 3:1 for the number of random points vs. catalog points.
+
+\subsection{Running over a single spherical cut}
+
+\begin{figure}
+  \gridline{
+    \fig{abacus/tagging_voids_1N_N.pdf}{0.32 \textwidth}{(a)}
+    \fig{abacus/tagging_voids_2N_N.pdf}{0.32 \textwidth}{(b)}
+    \fig{abacus/tagging_voids_3N_N.pdf}{0.32 \textwidth}{(c)}}
+  \caption{Tagging Abacus-Cosmos Voids. This is the first test over ``real''
+    data, not a toy model. The LSS shows highly dense packed halos, where
+    voids have almost none of them. The idea is to increase the ratio of
+    Random Points over Catalog points to study (in later weeks) how void
+    detection can be affected. (a) Ratio 1:1, (b) ratio 2:1 and (c) ratio 3:1.
+    The catalog is a spherical set of points, with radius $100 \mathrm{Mpc/h}$,
+    N halos = 9981, N random points = 10000 (a), 2N (b) and 3N (c).
+    \label{fig:Tagging Abacus Cosmos Voids}}
+\end{figure}
+
+A kind of percolation phenomenon is apreciated at figure
+\ref{fig:Tagging Abacus Cosmos Voids}. Having a similar number of Random Points
+and Observational Points (a) conducts to sucessfull void identification, while
+a higher ration 2:1 (b) and 3:1 (c) 
+
+\subsection{Running over 64 spherical cuts}
+
+\subsection{Running over Corner Plots}
+
+
+
+
+
+
+
+\section{Finding Voids in Galaxy Redshift Surveys}
+
+
+\subsection{SDSS Planck 2015 data}
+
+The SDSS has $\sim 57000$ galaxies in the truncated cone section from RA 0 to $50\deg$,
+and DEC from $-40\deg$ to $+40\deg$. Using Planck-2015 cosmology, reshift was converted into the
+range of distance from 0 to 300 Mpc. (figure \ref{fig:Planck15_cat}).
+\begin{figure}
+  \plotone{figures/Planck15_catalog.png}
+  \caption{Dataset from SDSS. Comoving distances are in Mpc, calculated from the redshift
+    measurements using the module ``cosmology'' from the library ``astrpy'' with Planck15
+    cosmological parameters.
+    \label{fig:Planck15_cat}}
+\end{figure}
+
+The void size density function is calculated as the probability to find a void
+of a given radius in to the total volume. There is a discrepancy between our density function
+and Platen (2008) results, maybe they did not normalize by the volume.
+Figure \ref{fig:size_density_function}.
+
+\begin{figure}
+  \plottwo{figures/void_size_density_function.pdf}{figures/platen_void_size_density_function.png}
+  \caption{Void size density function. Left, our analysis. Right, Platen et al (2008).
+    \label{fig:size_density_function}}
+\end{figure}
+
+The void ellipticity is calculated as $\epsilon = 1 - c/a$, with $a$ the biggest semi-axe, and
+$c$ the smallest semi-axe. They two graphs seem to have similar values. The probability density
+is not normalized by the volume. Figure \ref{fig:ellipticity}.
+
+\begin{figure}
+  \plottwo{figures/void_ellipticity.pdf}{figures/platen_void_ellipticity.png}
+  \caption{Void Ellipticity. Left, analysis of voids found with our algorithm.
+    Rigth, Platen et al (2008).
+    \label{fig:ellipticity}}
+\end{figure}
+
+The last comparison was made using the two axis ratios to find how prolate, oblate or close
+to spheroid. Our results are pretty close to Platen results (2008).
+
+\begin{figure}
+  \plottwo{figures/void_two_axis_ratios.pdf}{figures/platen_void_two_axis_ratios.png}
+  \caption{Scatter diagram of two axis ratios. In the approximation of the voids
+    as ellipsoidal forms, the semi-axes are labeled, from shorter to larger, as
+    $a$, $b$ and $c$. A perfect sphericall void should be placed at the rigth top
+    corner of the diagram. 
+    \label{fig:two_axis_ratios}}
+\end{figure}
+
+
+
+
+\end{document}
