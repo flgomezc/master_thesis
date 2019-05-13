@@ -49,15 +49,27 @@ N_OBS_CATS = len(List_Observed_Catalogs)
 
 OBS_CAT_SIZE = []
 
+List_Random_Catalogs = []
+List_Full_Catalogs = []
+List_Beta_Skeletons = []
 
-"""
+
+
 for i in range( N_OBS_CATS):
     filename = oc_path + List_Observed_Catalogs[i]    
     OBS_CAT_SIZE.append(int( subp.getoutput("wc -l " + filename).split()[0]))
-"""
+    
+    List_Random_Catalogs.append("Random_Catalg_for_Cuts_{}.cat".format(i))
+    List_Full_Catalogs.append("FC_{}.cat".format(i))
+    List_Beta_Skeletons.append("BetaSkeleton_{}".format(i))
+
+List_Random_Catalogs.sort()    
+List_Full_Catalogs.sort()
+List_Beta_Skeletons.sort()
 
 
-"""    
+
+
 #############################################################
 #                                                           #
 #                      Plot Catalogs                        #                       
@@ -98,11 +110,9 @@ def PLOT_CATALOG(CAT, n, figname):
     fig_name = "{}_{}.png".format(figname, n)
     plt.savefig(fig_path + fig_name)
     plt.close()
-""" 
-    
 
     
-"""     
+    
 #############################################################
 #                                                           #
 #               Generate Random Catalogs                    #                       
@@ -138,7 +148,7 @@ def getPoint2(r_0, r_1, t_0, t_1, p_0, p_1):
     z = r * cosPhi
 
     return [x, y, z]
-""" 
+
 
     
 
@@ -146,7 +156,7 @@ if(TEST == True):
     N_OBS_CATS = 3
     
     
-"""     
+    
 for n in range(N_OBS_CATS):
     now = datetime.datetime.now()
     progress_string = "echo  Generating {} Random Catalog: {} >> 01_beta_skeleton.progress".format(n, now.isoformat())
@@ -160,15 +170,12 @@ for n in range(N_OBS_CATS):
         points.append(getPoint2(0,R,0,90,45,0))
     points = np.array(points)
 
-    filename = "random_cut_{}.txt".format(n)   
+    filename = List_Random_Catalogs[n]   
 
     np.savetxt( rc_path + filename , points )
     
-    PLOT_CATALOG(points, n, "Random_cut")
-    
-    
-    
-    
+    PLOT_CATALOG(points, n, "Random_cut {}".format(n) )
+   
     
 #############################################################
 #                                                           #
@@ -197,13 +204,9 @@ for n in range(N_OBS_CATS):
     progress_string = "echo  Generating {} Full Catalog: {} >> 01_beta_skeleton.progress".format(n, now.isoformat())
     subp.run( progress_string, shell=True, check=True)
 
-    fc_filename = "FC_{}.cat".format(n)
+    fc_filename = List_Full_Catalogs[n]
     np.savetxt( fc_path + fc_filename, FC)
 
-""" 
-    
-List_Full_Catalogs = os.listdir(fc_path)
-List_Full_Catalogs.sort()
 
 
 
