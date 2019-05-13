@@ -3,7 +3,7 @@
 # Be sure to load the anaconda/python3 module.
 
 BETA = 1
-TEST = True
+TEST = False
 DO_SKELETON = True
 
 import matplotlib
@@ -49,13 +49,15 @@ N_OBS_CATS = len(List_Observed_Catalogs)
 
 OBS_CAT_SIZE = []
 
+
+"""
 for i in range( N_OBS_CATS):
     filename = oc_path + List_Observed_Catalogs[i]    
     OBS_CAT_SIZE.append(int( subp.getoutput("wc -l " + filename).split()[0]))
+"""
 
 
-
-    
+"""    
 #############################################################
 #                                                           #
 #                      Plot Catalogs                        #                       
@@ -96,11 +98,11 @@ def PLOT_CATALOG(CAT, n, figname):
     fig_name = "{}_{}.png".format(figname, n)
     plt.savefig(fig_path + fig_name)
     plt.close()
-    
+""" 
     
 
     
-    
+"""     
 #############################################################
 #                                                           #
 #               Generate Random Catalogs                    #                       
@@ -108,9 +110,9 @@ def PLOT_CATALOG(CAT, n, figname):
 #############################################################
     
 def getPoint2(r_0, r_1, t_0, t_1, p_0, p_1):
-    """
-    t's & p's must be in degrees
-    """
+
+    #t's & p's must be in degrees
+
     
     t_0 = t_0 * np.pi / 180
     t_1 = t_1 * np.pi / 180
@@ -136,7 +138,7 @@ def getPoint2(r_0, r_1, t_0, t_1, p_0, p_1):
     z = r * cosPhi
 
     return [x, y, z]
-
+""" 
 
     
 
@@ -144,7 +146,7 @@ if(TEST == True):
     N_OBS_CATS = 3
     
     
-    
+"""     
 for n in range(N_OBS_CATS):
     now = datetime.datetime.now()
     progress_string = "echo  Generating {} Random Catalog: {} >> 01_beta_skeleton.progress".format(n, now.isoformat())
@@ -197,8 +199,10 @@ for n in range(N_OBS_CATS):
 
     fc_filename = "FC_{}.cat".format(n)
     np.savetxt( fc_path + fc_filename, FC)
+
+""" 
     
-List_Full_Catalogs = os.listdir(oc_path)
+List_Full_Catalogs = os.listdir(fc_path)
 List_Full_Catalogs.sort()
 
 
@@ -215,6 +219,11 @@ List_Full_Catalogs.sort()
 for n in range(N_OBS_CATS):
 
     fc_filename = List_Full_Catalogs[n]
+
+
+    print(fc_filename)
+
+
     if(DO_SKELETON):
         subp.run("LSS_BSK_calc -input  " + fc_path + fc_filename + 
                  " -output " + "BetaSkeleton_" + str(n) + 
