@@ -82,26 +82,15 @@ fc_path  = "./full_catalogs/"
 fig_path = "./figures/"
 
 oc_filename = OC_FILE_IN
-rc_filename = FILENUM + ".cat"
-fc_filename = FILENUM + ".cat"
+rc_filename = str(FILENUM) + ".cat"
+fc_filename = str(FILENUM) + ".cat"
+
+OBS_CAT_SIZE = int( subp.getoutput("wc -l " + oc_path + oc_filename).split()[0] )
 
 prog = "progress.txt"
 
 progress_string = "echo  Init time: {} >> {}".format(now.isoformat(), prog)
 subp.run( progress_string, shell=True, check=True)
-
-
-OBS_CAT_SIZE = int( subp.getoutput("wc -l " + filename).split()[0] )
-    
-    List_Random_Catalogs.append("Random_Catalg_for_Cuts_{}.cat".format(i))
-    List_Full_Catalogs.append("FC_{}.cat".format(i))
-    List_Beta_Skeletons.append("BetaSkeleton_{}".format(i))
-
-List_Random_Catalogs.sort()    
-List_Full_Catalogs.sort()
-List_Beta_Skeletons.sort()
-
-
 
 
 #############################################################
@@ -187,16 +176,18 @@ def getPoint2(r_0, r_1, t_0, t_1, p_0, p_1):
 
     
 now = datetime.datetime.now()
-progress_string = "echo  Generating {} Random Catalog: {} >> {}".format(filenumber, now.isoformat(), prog)
+progress_string = "echo  Generating {} Random Catalog: {} >> {}".format(FILENUM, now.isoformat(), prog)
 subp.run( progress_string, shell=True, check=True)
-np.random.seed(filenumber)
+np.random.seed(FILENUM)
 points = []
 R = 300
-for i in range(OBS_CAT_SIZE[n]):      
+
+N_rand = int(OBS_CAT_SIZE * nrand) # Number Points in Random Catalog
+for i in range(N_rand):      
     points.append(getPoint2(0,R,0,90,45,0))
 points = np.array(points)
 np.savetxt( rc_path + rc_filename , points )
-PLOT_CATALOG(points, filenumber, "catalog_{}".format(n) )
+PLOT_CATALOG(points, FILENUM, "rc_")
    
     
 #############################################################
@@ -210,14 +201,13 @@ RC = np.loadtxt(rc_path + rc_filename)
 OC = np.loadtxt(oc_path + oc_filename)
 
 ### Create Figures
-PLOT_CATALOG(OC, n, "Abacus_cut")
+PLOT_CATALOG(OC, FILENUM, "oc_")
     
 ### CREATE Full Catalog stacking RC and OC
 FC = np.vstack([RC, OC])
  
 now = datetime.datetime.now()
-progress_string = "echo  Generating {} Full Catalog: {} >> 01_beta_skeleton.progress".format(filenumber,
-                                                                                             now.isoformat())
+progress_string = "echo  Generating {} Full Catalog: {} >> {}".format(FILENUM, now.isoformat(), prog)
 subp.run( progress_string, shell=True, check=True)
 np.savetxt( fc_path + fc_filename, FC)
 
@@ -230,14 +220,13 @@ np.savetxt( fc_path + fc_filename, FC)
 
 if(DO_SKELETON):
     subp.run("LSS_BSK_calc -input  " + fc_path + fc_filename + 
-             " -output " + "BetaSkeleton_" + str(n) + 
+             " -output " + str(FILENUM) + 
              " -beta " + str(BETA) + 
              " -printinfo True -numNNB 300"
              , shell=True, check=True)
 
 now = datetime.datetime.now()
-progress_string = "echo  Generating {} Beta Skeleton: {} >> 01_beta_skeleton.progress".format(filenumber
-                                                                                              , now.isoformat())
+progress_string = "echo  Generating {} Beta Skeleton: {} >> {}".format(FILENUM, now.isoformat(), prog)
 subp.run( progress_string, shell=True, check=True)
 tic = timeit.default_timer()
 
