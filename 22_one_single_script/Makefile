@@ -7,8 +7,8 @@ N_OBS = 26
 FILENAME = corner_data_cut_
 URL_PATH = https://github.com/forero/abacus/raw/master/data/AbacusCosmos_720box_planck_00_0_rockstar_halos/z0.1/cuts/
 
-OC_PATH = observed_catalogs/
-RC_PATH = random_catalogs/
+OC_PATH = ./observed_catalogs/
+RC_PATH = ./random_catalogs/
 FC_PATH = full_catalogs/
 ML_PATH = masterlists/
 VE_PATH = volume_and_excentricity/
@@ -47,9 +47,10 @@ random_cats :
 clean :
 	rm -f *~
 	rm -f *.LOG
-	rm -rf $(OBS_PATH)
-	rm -rf $(RND_PATH)
-	rm -rf $(FLL_PATH)
-	rm -rf $(MLS_PATH)
-	rm -rf $(VEX_PATH)
-	rm -rf $(FIG_PATH)
+	rm -rf $(OC_PATH)
+	rm -rf $(RC_PATH)
+	rm -rf $(FC_PATH)
+	rm -rf $(ML_PATH)
+	rm -rf $(VE_PATH)
+	rm -rf $(FG_PATH)
+	rm -rf $(BS_PATH)
