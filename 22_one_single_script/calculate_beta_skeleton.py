@@ -85,7 +85,11 @@ oc_filename = OC_FILE_IN
 rc_filename = str(FILENUM) + ".cat"
 fc_filename = str(FILENUM) + ".cat"
 
-OBS_CAT_SIZE = int( subp.getoutput("wc -l " + oc_path + oc_filename).split()[0] )
+word_count =  subp.getoutput("wc -l " + oc_path + oc_filename).split()
+try:
+    OBS_CAT_SIZE = int( subp.getoutput("wc -l " + oc_path + oc_filename).split()[0] )
+except:
+    print("\n\t*** ERROR ***\n\n\t  --filein error: file '{}' not found. Are you sure that the filein file is placed inside the './observed_catalogs/' folder? \n".format(oc_filename))
 
 prog = "progress.txt"
 
