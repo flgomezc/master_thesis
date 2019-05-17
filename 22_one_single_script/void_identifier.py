@@ -2,10 +2,14 @@ import numpy as np
 import subprocess as subp
 import os
 import timeit
-
 import argparse
 
-#############################################################                                                                     #                                                           #                                                                     #                        DOCUMENTATION                      #                                                                     #                                                           #                                                                     #############################################################                                                                                                             
+#############################################################
+#                                                           #
+#                        DOCUMENTATION                      # 
+#                                                           # 
+############################################################# 
+
 description = "This script identifies the voids from the Beta-Skeleton File, and the Random,Observed and Full Catalog."
 epilog = "At the end, the script stores a Masterlist (.mls) file."
 parser = argparse.ArgumentParser(description=description, epilog=epilog)
@@ -19,10 +23,6 @@ parser.add_argument('-b', '--beta', type=float,
 parser.add_argument('-n', '--nrand', type=float,
                     default=1.0,
                     help='The ratio between Number of Random Points and Number of Observational Points (nrand= N_random/N_obs)')
-parser.add_argument('-T', '--TEST',
-                    action='store_true',
-                    default=False,
-                    help='Tests filenames and folders generating empty files, does not runs the hard calculations.')
 
 arg = parser.parse_args()
 
@@ -30,17 +30,19 @@ BETA  = arg.beta
 nrand = arg.nrand
 OC_FILE_IN = arg.filein
 FILENUM = arg.filenumber
-TEST = arg.TEST
 
-
-
-TESTING = False
 
 
 #############################################################
 #############################################################
+##                                                         ## 
 ##                                                         ##
-##                                                         ##                                                                     ##                Begins the Main Routine                  ##                                                                     ##                                                         ##                                                                     ##                                                         ##                                                                     #############################################################                                                                     #############################################################
+##                Begins the Main Routine                  ## 
+##                                                         ## 
+##                                                         ##
+#############################################################
+############################################################# 
+
 
 prog = "progress.txt"
 
