@@ -128,7 +128,7 @@ def PLOT_CATALOG(CAT, n, figname):
 
     ax4 = fig.add_subplot(222, adjustable='box', aspect=1)
     ax4.scatter(1,1, s=0.1)
-    ax4.text(1, 1, "holi", fontsize=20, 
+    ax4.text(1, 1, figname + n, fontsize=20, 
          horizontalalignment='center',
          verticalalignment='center')
     
@@ -191,7 +191,7 @@ for i in range(N_rand):
     points.append(getPoint2(0,R,0,90,45,0))
 points = np.array(points)
 np.savetxt( rc_path + rc_filename , points )
-PLOT_CATALOG(points, FILENUM, "rc_")
+PLOT_CATALOG(points, FILENUM, "rc")
    
     
 #############################################################
@@ -205,8 +205,8 @@ RC = np.loadtxt(rc_path + rc_filename)
 OC = np.loadtxt(oc_path + oc_filename)
 
 ### Create Figures
-PLOT_CATALOG(OC, FILENUM, "oc_")
-    
+PLOT_CATALOG(OC, FILENUM, "oc")
+
 ### CREATE Full Catalog stacking RC and OC
 FC = np.vstack([RC, OC])
  
