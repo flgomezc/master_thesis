@@ -191,7 +191,7 @@ c = VE[:,6]
 x = 1-c/a
 
 fig = plt.figure(figsize=(4,4))
-plt.hist(x, bins=20, density=True, histtype="step")
+Y, Bins, stuff = plt.hist(x, bins=20, density=True, histtype="step")
 plt.ylabel(r"$f(N)dN$")
 plt.xlabel(r"$\epsilon = 1 - c/a$")
 plt.xlim(0,1)
@@ -200,7 +200,9 @@ plt.tight_layout()
 plt.savefig(FG_path + "void_ellipticity_{}.{}".format(FILENUM, FG_format))
 plt.close()
 
-
+X = (Bins[:-1] + Bins[1:])/2
+data = vstack([ X, Y]).T
+np.savetxt(AN_path + "excentricity_" + AN_filename, data)
 
 ###########################################################
 #                                                         #
@@ -234,6 +236,9 @@ plt.ylabel("c / b")
 plt.tight_layout()
 plt.savefig(FG_path + "void_two_axis_ratios_{}.{}".format(FILENUM, FG_format))
 plt.close()
+
+data = vstack([m1,m2]).T
+np.savetxt(AN_path + "prolate_oblate_" + AN_filename, data)
 
 
 ###########################################################
@@ -287,7 +292,7 @@ plt.close()
 
 ## Store histogram data.
 data = vstack([x,y / (deltaBins * V_h)]).T
-np.savetxt(AN_path + "volume_pdf_" + AN_filename,data)
+np.savetxt(AN_path + "volume_pdf_" + AN_filename, data)
 
 
 ###########################################################

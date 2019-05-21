@@ -14,7 +14,7 @@ ML_PATH = masterlists/
 VE_PATH = volume_and_excentricity/
 FG_PATH = figures/
 BS_PATH = xdl_beta_skeleton/
-
+AN_PATH = analysis/
 
 all : folders download_cuts random_cats
 	@echo Boing
@@ -29,6 +29,7 @@ folders :
 	mkdir -p $(VE_PATH)
 	mkdir -p $(FG_PATH)
 	mkdir -p $(BS_PATH)
+	mkdir -p $(AN_PATH)
 
 # Download "SDSS PLANK15 cuts"
 download_cuts :
@@ -54,3 +55,4 @@ clean :
 	rm -rf $(VE_PATH)
 	rm -rf $(FG_PATH)
 	rm -rf $(BS_PATH)
+	rm -rf $(AN_PATH)
