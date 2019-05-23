@@ -151,7 +151,7 @@ FG_path = "figures/"
 VE_path = "volume_and_excentricity/"
 AN_path = "analysis/"
 
-OC_filename = "corner_data_cut_{}.dat".format(FILENUM)
+OC_filename = OC_FILE_IN
 RC_filename = "{}.cat".format(FILENUM)
 FC_filename = "{}.cat".format(FILENUM)
 BS_filename = "{}.bsk".format(FILENUM)
@@ -191,7 +191,7 @@ c = VE[:,6]
 x = 1-c/a
 
 fig = plt.figure(figsize=(4,4))
-Y, Bins, stuff = plt.hist(x, bins=20, density=True, histtype="step")
+Y, Bins, stuff = plt.hist(x, bins=20, normed=True, histtype="step") ### matplotlib 1.5.1 normed /// 2.2.2 density
 plt.ylabel(r"$f(N)dN$")
 plt.xlabel(r"$\epsilon = 1 - c/a$")
 plt.xlim(0,1)
