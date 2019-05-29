@@ -1,0 +1,9 @@
+# CORNER, shape like SDSS. ~70.000 halos
+OC corner_data_cut_0.dat 
+RC 0.cat
+FC 0.cat
+
+# Toy Model, Cubib, ~5.000 points
+OC oc.dat
+RC 1.cat
+FC 1.cat
