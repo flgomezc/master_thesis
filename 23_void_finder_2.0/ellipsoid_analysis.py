@@ -61,7 +61,7 @@ FC_filename = "{}.cat".format(FILENUM)
 RC_filename = "{}.cat".format(FILENUM)
 BS_filename = "{}.BSKIndex".format(FILENUM)
 ML_filename = "{}.mls".format(FILENUM)
-FG_filename = "{}".format(FILENUM)
+FG_filename = "particles_per_void_{}.png".format(FILENUM)
 VE_filename = "{}.vae".format(FILENUM)
 
 beta = BETA
@@ -84,6 +84,7 @@ InitialMessage += "\n"
 
 print(InitialMessage)
 
+print('Loading Catalogs (random, observed, full and Beta Skeleton).')
 RC = np.loadtxt(RC_path + RC_filename)
 OC = np.loadtxt(OC_path + OC_filename)
 FC = np.loadtxt(FC_path + FC_filename)
@@ -124,33 +125,35 @@ print("Shape", VoidParticleCat.shape)
 Void_N_particles_list = VoidParticleCat[:,0].astype(int)
 print("Len Void_N_particles_list", len(Void_N_particles_list)) 
 
-# Void ID, Particles in this void.
-Void_N_Particles = []
+
  
-print("len Void_N_Particles", len(Void_N_Particles))
     
 M = Void_N_particles_list.max()
+
+print('Maximum number of particles in a void: {}'.format(M))
+
+
     
 if M > 0:
     print("\n\tNormal operation: Beta Skeleton file seems OK.             :) \n")
+    
 
-    for i in range( Void_N_particles_list.max()):
+    # Void ID, Particles in this void.
+    Void_N_Particles = []
+    
+    for i in range( M ):
         index = np.where(Void_N_particles_list == i)[0]
         Void_N_Particles.append([i, index.shape[0]])
 
+    print("len Void_N_Particles", len(Void_N_Particles))
+
     Void_N_Particles = np.array(Void_N_Particles).astype("int")
+
+
     
     print("\tVoid number of Particles", Void_N_Particles.shape)
 
         
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    ax.scatter( Void_N_Particles[:,0], Void_N_Particles[:,1])
-    ax.set_yscale("log")
-    ax.set_ylabel("Particles per Void")
-    ax.set_xlabel("Void ID")
-    plt.savefig=( FG_path + FG_filename)
-    plt.close()
 
 
 

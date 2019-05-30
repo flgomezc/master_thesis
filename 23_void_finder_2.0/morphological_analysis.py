@@ -140,7 +140,8 @@ def density_estimation(m1, m2):
     kernel = scipy.stats.gaussian_kde(values)                                                                 
     Z = np.reshape(kernel(positions).T, X.shape)
     return X, Y, Z
-    
+
+FG_format = "png"  
 
 RC_path = "random_catalogs/"
 FC_path = "full_catalogs/"
@@ -151,16 +152,15 @@ FG_path = "figures/"
 VE_path = "volume_and_excentricity/"
 AN_path = "analysis/"
 
-OC_filename = "corner_data_cut_{}.dat".format(FILENUM)
+OC_filename = OC_FILE_IN
 RC_filename = "{}.cat".format(FILENUM)
 FC_filename = "{}.cat".format(FILENUM)
 BS_filename = "{}.bsk".format(FILENUM)
 ML_filename = "{}.mls".format(FILENUM)
-FG_filename = "{}".format(FILENUM)
+FG_filename = "{}.{}".format(FILENUM,FG_format)
 VE_filename = "{}.vae".format(FILENUM)
 AN_filename = "{}.info".format(FILENUM)
 
-FG_format = "png"
 
 OC = np.loadtxt( OC_path + OC_filename )
 RC = np.loadtxt( RC_path + RC_filename )
@@ -182,6 +182,123 @@ b = VE[:,5]
 c = VE[:,6]
 
 
+
+
+###########################################################
+#                                                         #
+#        Original And Random Catalog Plots                #
+#                                                         #
+###########################################################
+
+ps = 0.1
+al = 0.2
+
+x = OC[:,0]
+y = OC[:,1]
+z = OC[:,2]
+
+fig = plt.figure( figsize=(10,10))
+ax1 = fig.add_subplot(223)
+ax2 = fig.add_subplot(224)
+ax3 = fig.add_subplot(221)
+
+ax1.scatter(x,y, s=ps, alpha=al)
+ax2.scatter(x,z, s=ps, alpha=al)
+ax3.scatter(y,z, s=ps, alpha=al)
+
+ax1.set_xlabel('x (Mpc)')
+ax1.set_ylabel('y (Mpc)')
+ax2.set_xlabel('x (Mpc)')
+ax2.set_ylabel('z (Mpc)')
+ax3.set_xlabel('y (Mpc)')
+ax3.set_ylabel('z (Mpc)')
+
+plt.tight_layout()
+
+plt.savefig(FG_path + "oc_{}.{}".format(FILENUM, FG_format))
+plt.close()
+
+
+
+x = RC[:,0]
+y = RC[:,1]
+z = RC[:,2]
+
+fig = plt.figure( figsize=(10,10))
+ax1 = fig.add_subplot(223)
+ax2 = fig.add_subplot(224)
+ax3 = fig.add_subplot(221)
+
+ax1.scatter(x,y, s=ps, alpha=al)
+ax2.scatter(x,z, s=ps, alpha=al)
+ax3.scatter(y,z, s=ps, alpha=al)
+
+ax1.set_xlabel('x (Mpc)')
+ax1.set_ylabel('y (Mpc)')
+ax2.set_xlabel('x (Mpc)')
+ax2.set_ylabel('z (Mpc)')
+ax3.set_xlabel('y (Mpc)')
+ax3.set_ylabel('z (Mpc)')
+
+plt.tight_layout()
+
+plt.savefig(FG_path + "rc_{}.{}".format(FILENUM, FG_format))
+plt.close()
+
+
+
+###########################################################
+#                                                         #
+#                  Basic Control Plots                    #
+#                                                         #
+###########################################################
+
+fig = plt.figure( figsize=(8,8))
+ax = fig.add_subplot(111)
+ax.scatter( ID, N_part)
+ax.set_xlim(0,N)
+ax.set_ylabel("Particles per Void")
+ax.set_xlabel("Void ID")
+plt.tight_layout()
+plt.savefig(FG_path + "particles_per_void_{}.{}".format(FILENUM, FG_format))
+
+ax.set_yscale("log")
+plt.tight_layout()
+plt.savefig(FG_path + "particles_per_void_log_{}.{}".format(FILENUM, FG_format))
+plt.close()
+
+
+fig = plt.figure( figsize=(8,8))
+ax = fig.add_subplot(111)
+ax.hist(r)
+ax.set_ylabel("Counts")
+ax.set_xlabel("r (Mpc)")
+plt.tight_layout()
+plt.savefig(FG_path + "r_eff_histogram_{}.{}".format(FILENUM, FG_format))
+
+ax.set_yscale("log")
+plt.tight_layout()
+plt.savefig(FG_path + "r_eff_histogram_log_{}.{}".format(FILENUM, FG_format))
+plt.close()
+
+
+fig = plt.figure( figsize=(8,8))
+ax = fig.add_subplot(111)
+ax.scatter( N_part, r)
+ax.set_ylabel("Volume (Mpc)")
+ax.set_xlabel("Number of Particles")
+plt.tight_layout()
+plt.savefig(FG_path + "r_eff_vs_particles_{}.{}".format(FILENUM, FG_format))
+
+ax.set_yscale("log")
+ax.set_xscale('log')
+plt.tight_layout()
+plt.savefig(FG_path + "r_eff_vs_particles_log_{}.{}".format(FILENUM, FG_format))
+plt.close()
+
+
+
+
 ###########################################################
 #                                                         #
 #                  Excentricity Function                  #
@@ -191,7 +308,7 @@ c = VE[:,6]
 x = 1-c/a
 
 fig = plt.figure(figsize=(4,4))
-Y, Bins, stuff = plt.hist(x, bins=20, density=True, histtype="step")
+Y, Bins, stuff = plt.hist(x, bins=20, normed=True, histtype="step")
 plt.ylabel(r"$f(N)dN$")
 plt.xlabel(r"$\epsilon = 1 - c/a$")
 plt.xlim(0,1)
@@ -260,7 +377,7 @@ V_h = volume * (h**3)
 Bins = np.linspace(0.1,1.2, 20)
 deltaBins = Bins[1]-Bins[0]
 
-y, Bins = np.histogram( np.log10(r*h), bins=Bins, density=False )
+y, Bins = np.histogram( np.log10(r*h), bins=Bins, normed=False )
 x = (Bins[:-1] + Bins[1:])/2
 
 # Plot Volume Density Function

@@ -137,16 +137,23 @@ print( "First filter shape:", first_filter_BSkel.shape,
        "\nHow many of them have direct connections"+
        " with galaxies (i.e. droplist length)", 
        len(droplist),
-       "\nThen, must survive", first_filter_BSkel.shape[0]-len(droplist), 
+       "\nThen, must survive", len(set(first_filter_BSkel[:,0])) -len(droplist), 
        "trueVoidPoints")
 
 # We have the Random points set:
 # Maybe not all Random Particles are connected to the Skeleton. (large Beta)
 # Because of this, we doesn't take into account something like
 # Points_in_Skeleton = range(0,N_rnd).
+
+
+print('Checking Random Points in the Beta Skeleton')
 Points_in_Skeleton = set(first_filter_BSkel[:,0])
+print('Random Points in Beta Skeleton Checked') 
+
 # and the droplist. The complement(difference) is the
 # pure void points set.
+
+print('')
 trueVoidPointsIndex = Points_in_Skeleton.difference(droplist)
 # This set is converted to list, it will be used as an index to find 
 # True Voids.
@@ -168,6 +175,8 @@ for k in trueVoidPointsIndex:
     
     index = list(set(index ) )
     index.sort()
+# DEBUG
+#print(index)
 
 # Beta-Skeleton of TrueVoidPoints (includes Frontier Points)
 VoidsBS = np.array(fcBSkel[index]).astype(int)
@@ -187,10 +196,19 @@ print(" Initialize MasterList.")
 
 MasterList = []
 
+
+counter = 0
 for search in trueVoidPointsIndex:
+
+    ## DEBUG
+    counter += 1
+    print(search, len(MasterList))
+
+
     # Does the TrueVoidPoint belongs to any existing Void?
     is_in_master = any( search in sublist for sublist in MasterList)
     
+
     # Create a new void.
     # If is the first time it appears on the MasterList
     if not is_in_master:
@@ -203,8 +221,11 @@ for search in trueVoidPointsIndex:
         my_list.extend( list(VoidsBS[index,1][0]) )
         my_list.sort()
         # Append this auxiliar list to the MasterList.
-        # a new void has been appended. :)
+        # a new void has been appended. :)       
         MasterList.append(my_list)
+
+        ## DEBUG
+        print("Is not in the list", my_list)
         
     # If the TrueVoidPoint already exists in the Masterlist
     if is_in_master:
@@ -228,7 +249,10 @@ for search in trueVoidPointsIndex:
             my_list = list(VoidsBS[index,1][0])
             my_list.sort()
             MasterList[j].extend(my_list)
-
+            
+            ## DEBUG
+            print("Is One time in the list", my_list, '\n', MasterList[j])
+            
 
             # If the TrueVoidPoint appears more than one time, the lists
             # will merge into a new one.
@@ -242,8 +266,11 @@ for search in trueVoidPointsIndex:
                 my_list.extend(MasterList[j]) # collect data create a new list
                 MasterList[j]=[]              # Empty the merged lists.
                 my_list.sort()
-                MasterList.append(my_list)
+            
+            MasterList.append(my_list)
 
+
+            
 # Emtpy lists removed. 
 while( [] in MasterList):
     MasterList.remove([])
