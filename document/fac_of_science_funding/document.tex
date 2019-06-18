@@ -1,0 +1,283 @@
+ \documentclass[manuscript]{aastex62}
+% \documentclass[manuscript]{aastex62}
+%%  twocolumn, manuscript, preprint, preprint, modern and RNAAS
+\usepackage[utf8]{inputenc}
+%\usepackage{siunitx}
+%\usepackage[spanish]{babel}
+%
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+%% Tells LaTeX to search for image files in the 
+%% current directory as well as in the figures/ folder.
+\graphicspath{{./}{figures/}}
+%% Reintroduced the \received and \accepted commands from AASTeX v5.2
+%%\received{January 1, 2018}
+%%\revised{January 7, 2018}
+%%\accepted{\today}
+\shorttitle{A LSS Void Identifier based on $\beta$-Skeleton}
+\shortauthors{F. L. Gómez-Cortés}
+
+\renewcommand{\abstractname}{RESUMEN}
+%\renewcommand{\thebibliography}{RESUMEN}
+
+\renewcommand{\figurename}{Figura}
+
+
+\begin{document}
+
+\title{Proyecto de investigación:\\``A Large Scale Structure Void Identifier for Galaxy Surveys
+  Based on the $\beta$-Skeleton Graph Method'' \\en el marco de la convocatoria\\
+  2019-20 - PARA LA FINANCIACIÓN DE PROYECTOS DE INVESTIGACIÓN Y PRESENTACIÓN DE
+  RESULTADOS EN EVENTOS ACADÉMICOS CATEGORÍA: ESTUDIANTES DE MAESTRÍA Y
+  DOCTORADO ANTES DE EXAMEN DE CANDIDATURA}
+
+  
+\correspondingauthor{Felipe Leonardo Gómez-Cortés}
+\email{fl.gomez10@uniandes.edu.co}
+
+\author{Felipe Leonardo Gómez-Cortés}
+\affiliation{Departamento de Física, Universidad de los Andes}
+\collaboration{Estudiante de Maestría en Ciencias-Física}
+\collaboration{Código 201324084}
+
+
+
+\section{Investigadores}
+
+\begin{centering}
+\begin{table}[h]
+\begin{tabular}{lp{6.5cm}p{5cm}}
+\hline
+\hline
+Felipe Leonardo Gómez Cortés & Estudiante Maestría en Ciencias-Física, Un (1) semestre faltante para el grado & Universidad de los Andes      \\
+Jaime Ernesto Forero Romero  & Director de Tesis, Profesor Asociado, Departamento de Física & Universidad de los Andes      \\ 
+Xiao-Dong Li                 & Colaborador                                                  & Sun Yat Sen University, China \\ \hline \hline
+\end{tabular}
+\end{table}
+\end{centering}
+
+\section{Propuesta}
+
+\subsection{Título}
+A Large Scale Structure Void Identifier for Galaxy Surveys Based on the $\beta$-Skeleton Graph Method
+
+\subsection{Resumen}
+Large underdense regions in the Large Scale Structure (LSS) of the Universe, also known as voids,
+are a prominent features of the cosmic web that can also be used as a cosmological probe.
+This project presents a new void-finding algorithm that can be applied
+to both observational and simulated data.
+The algorithm is based on the $\beta$-Skeleton, an algorithm widely used on 
+machine learning, optimization and image recognition;  recently it has been introduced as a 
+LSS analysis tool.
+The analysis we have performed, on observational and simulated data, considers voids as ellipsoids.
+We study their statistical properties such as volumes and shape finding a good agreement with other void finders.
+We finalize by exploring possible applications of this void finder to constrain cosmological
+parameters based on data from the Dark Energy Spectroscopic Instrument.
+
+\subsection{Introducción}
+
+Estamos viviendo en la era dorada de la cosmolog\'ia observacional.
+Existe un modelo est\'andar comol\'ogico ($\Lambda$-CDM) consolidado 
+que explica las observaciones de la Estructura de Gran Escala (EGE) de galaxias mediante
+la introducci\'on de materia oscura y energ\'ia oscura como las componentes
+dominantes del Universo.
+
+Las observaciones del fondo de radiaci\'on c\'osmica de microondas
+\citep{WMAP2013} y de la distribuci\'on de galaxias a gran escala
+\citep{SDSS-DR14-2017} apuntan a que esta evoluci\'on puede ser descrita
+por un pu\~nado de par\'ametros cosmol\'ogicos, donde los m\'as
+importantes son la densidad de materia y la densidad de energ\'ia
+oscura. 
+
+Esto no s\'olo se logra con mediciones m\'as precisas sino con
+m\'etodos independientes para acotar los par\'ametros
+cosmol\'ogicos.
+Aunque un m\'etodo independiente pueda tener una incertidumbre
+grande, considerar las cotas impuestas por varios m\'etodos
+simult\'aneamente reduce la incertidumbre sobre los par\'ametros
+cosmol\'ogicos.
+
+
+Una de las caracter\'isticas m\'as prominentes en la EGE son los vac\'ios: vol\'umenes
+irregulares de escalas del orden de decenas de Mpc, donde la densidad de materia est\'a
+por debajo de la densidad media en el Universo. El an\'alisis estad\'istico de propiedades
+de los vac\'ios, como su volumen, forma y orientaci\'on tambi\'en nos puede dar informaci\'on
+cosmol\'ogica. Por esta raz\'on existe un gran inter\'es en algoritmos que encuentren y
+caractericen vac\'ios cosmol\'ogicos tanto en simulaciones como en observaciones.
+
+El m\'etodo $\beta$-Skeleton ha sido ampliamente utilizado
+en procesamiento de im\'agenes y aplicaciones de \textit{machine learning},
+recientemente ha sido introducido en el an\'alisis de EGE. Esta es una herramienta r\'apida
+para identificar estructuras filamentarias en la EGE, y promete ser una herramienta robusta
+para realizar an\'alisis cosmol\'ogicos.
+
+En este proyecto se desarrolla un buscador de vacíos cosmológicos basado en el
+$\beta$-Skeleton para calcular restricciones sobre los parámetros cosmológicos en el
+modelo $\Lambda$-CDM
+
+
+\begin{figure}
+  \plotone{pie_millennium_walls}
+  \caption{Estructura de Gran Escala: Distribuci\'on espacial de galaxias observada en mapeos como el SDSS y
+    el 2dFRGS (en azul) comparadas con resultados de la simulación Millenium (rojo).
+    Instituto de Astrofísica Max Planck. Cada punto representa una galaxia.
+    La Vía Láctea se encuentra en el centro de los mapas, que cubren diferentes regiones
+    del cielo en escalas distintas.
+    En el segmento de la izquierda muestra la estructura a gran escala compuesta por
+    filamentos donde se agrupan las galaxias y grandes vacíos donde es baja la densidad
+    de galaxias, del catálogo 2dFGRS. Hacia la periferia distante solo se pueden ver las
+    galaxias más brillantes, por eso la baja densidad hacia el borde.
+    A la derecha vemos en un segmento del la simulación Millenium,
+    En los
+    segmentos superiores vemos estructuras de varias decenas de Mpc encontradas en dos
+    catálogos (SDSS y 2dFGRS). En los dos segmentos inferiores, vemos estructuras con
+    tamaños similares generadas por la misma simulación Millenium.
+    \label{fig:pie_millenium_walls}}
+\end{figure}
+
+
+\subsection{Objetivos}
+\begin{itemize}
+\item Desarrollar un nuevo identificador de vac\'ios cosmológicos basado en el m\'etodo
+  $\beta$-Skeleton que opere tanto sobre catálogos de galaxias observadas como en
+  catálogos provenientes de simulaciones cosmológicas.
+\item Buscar vacíos sobre catálogos de galaxias del SDSS y catálogos de la simulación
+  Abacus
+\item Comparar estadísticamente morfología y abundancia de los vacíos encontrados con
+  nuestro buscador contra resultados de la literatura
+
+\item Acotar los parámetros cosmológicos asociado a la densidad de materia y de
+  energía oscura a partir del catálogo de vacíos de la red cósmica
+\item Realizar predicciones para la población de vacíos cosmológicos en el proyecto
+  DESI basado en el análisis de simulaciones de gran tamaño con nuestro buscador de vacíos.
+\end{itemize}
+
+\subsection{Resultados Esperados}
+
+Ya se ha desarrollado el código de un buscador de vacíos de la red cósmica basado en el
+método $\beta$-Skeleton. Se tienen resultados preliminares del análisis morfológico
+sobre una fracción del catálogo de galaxias del SDSS.
+
+Esperamos realizar pruebas cosmológicas tipo Alcock-Paczynski \citet{AlcockPaczynski1979}
+para acotar el parámetro cosmológico de Energía Oscura
+y pruebas morfológicas de elipticidad y relación entre semi-ejes,
+\citep{Bos2012,Lavaux-Wandelt2009,Park-Lee2007}, sobre los halos encontrados en
+catálogos de galaxias de simulaciones y observaciones, y finalmente
+estimar la población de vacíos que encontrará el proyecto DESI.
+
+\subsection{Productos Esperados}
+Este trabajo será presentado como ponencia en el evento académico \textit{LARIM 2019: XVI
+  Latin American Regional IAU Meeting} organizado por la Unión Astronómica
+Internacional, Noviembre 3-8 de 2019, Antonfagasta, Chile.
+
+\subsection{Literatura Citada}
+
+
+\subsection{Cronograma de Actividades}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline\hline
+    Actividad/Mes & Feb-May & Junio & Julio & Agosto & Septiembre & Octubre & Noviembre \\ \hline
+    1 & Hecho &   &   &   &   &   &    \\
+    2 &   & En Curso &   &   &   &   &    \\
+    3 &   &   & X &   &   &   &    \\
+    4 &   &   & X &   &   &   &    \\
+    5 &   &   & X & X &   &   &    \\
+    6 &   &   &   & X & X &   &    \\
+    7 &   &   &   &   & X & X &    \\
+    8 &   &   &   &   &   &   & X \\
+    9 &   &   &   &   &   &   & X \\
+   10 &   &   & X & X & X & X & X \\    \hline
+\end{tabular}
+\end{table}
+
+\begin{enumerate}
+\item Desarrollo del Código del Identificador de Vacíos de la Cosmológica
+\item Calibración de los parámetros del código.
+\item Obtención de catálogos de vacíos de la red a partir de simulaciones.
+\item Obtención de catálogos de vacíos de la red a partir de observaciones.
+\item Comparación por análisis estadístico entre simulaciones y observaciones.
+\item Restricción de la constante cosmológica a partir de catálogo de vacíos de la red en
+    observaciones.
+\item Estimación de resultados para el experimento DESI.
+\item Presentación de la Ponencia en LARIM 2019
+\item Sustentación de Tesis
+\item Elaboración del manuscrito del Artículo
+\end{enumerate}
+
+\subsection{Presupuesto}
+
+De acuerdo a las condiciones de la convocatoria, se destinará la financiación para
+participar con una ponencia en el evento académico LARIM 2019, Chile, del 3 al 8 de
+noviembre de 2019.
+Se solicita un presupuesto de \$3'366.000 COP
+Los gastos estimados
+se muestran a continuación.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lr}
+Rubro                               & Valor  \\ \hline
+Inscripción a LARIM 2019 (100 EUR)  &   \$366.000 COP   \\
+Tiquetes BOG-ANF                    & \$2'000.000 COP \\
+Alojamiento  (7 días)               &   \$300.000 COP \\
+Alimentación y Transporte interno   &   \$700.000 COP \\ \hline
+TOTAL                               & \$3'366.000 COP \\
+\end{tabular}
+\end{table}
+
+
+\section{Consideraciones Éticas}
+Este proyecto no incluye sujetos de investigación humanos.
+
+\section{Uso de Animales y Colectas}
+Este proyecto no incluye como sujetos de investigación seres vivos.
+
+  \nocite{*}
+
+  \begin{thebibliography}{}
+
+  \bibitem[Alcock-Paczynski(1979)]{AlcockPaczynski1979} Alcock, C. \& Paczy\'nski, B.\ 1979, \nat, 281, 358    
+    \bibitem[Colberg et al.(2008)]{Aspen-Amsterdam2008} Colbert, J. M. et al. \ 2008, \mnras, 387, 933. % Comparison of multiple void finders 2008
+
+    \bibitem[Bos et al.(2012)]{Bos2012} Bos, P. et al. \ 2012, \mnras, 426, 440 % Testing cosmologies using void ellipticity
+    \bibitem[Bustamante \& Forero-Romero (2015)]{Bustamante2015} Bustamante, S \& Forero-Romero, J. E. \ 2015, \mnras, 453, 497-506
+    \bibitem[Correa \& Lindstrom(2012)]{ngl} Correa, Carlos \& Lindstrom, Peter.\ 2011,  IEEE TVCG\ 17,12 (Dec 2011), 1852-1861
+    \bibitem[El-Ad \& Piran(1997)]{El-Ad1997} El-Ad, H. \& Piran, T. \ 1997, \apj, 491, 2, 421
+    \bibitem[Fang et al.(2018)]{Fang2018} Fang, F.; Forero-Romero, J.; Rossi, G.; Li, X. \& Feng, L\ 2018, arXiv, 1809.00438 astro-ph % Beta-Skeleton analysis of the Cosmic Web
+    \bibitem[Hamaus et al.(2015)]{Hamaus2015} Hamaus, N.; Sutter, P.M.; Lavaux, G. \& Wandelt, B. D. \ 2015, \jcap, 11, 036    
+    \bibitem[Lavaux \& Wandelt(2009)]{Lavaux-Wandelt2009} Lavaux, G. \& Wandelt, B. D. \ 2009, \mnras, 403, 1392
+    \bibitem[Leclercq et al.(2015)]{2015JCAP...03..047L} Leclercq, F.; Jasche, J. et al.\ 2015, \jcap, 03, 047
+    \bibitem[Park \& Lee(2007)]{Park-Lee2007} Park, D. \& Lee, J. \ 2007, \prl 98, 1301 % Void Ellipticity as a probe of Cosmology
+    \bibitem[Press \& Schechter(1974)]{Press&Schechter1974} Press, W. H. \& Schechter, P. \ 1974, \apj, 187, 425-438
+    \bibitem[Riebe et al.(2013)]{Multidark2013} Riebe, K. et al \ 2013, Astronomical Notes, 334, 691 % Bolshoi Simulation      
+    \bibitem[Schneider(2014)]{Schneider2014} Schneider, P. \ 2014, ``Extragalactic Astronomy and Cosmology'', Springer
+    \bibitem[Smith et al.(2017)]{Smith2017} Smith, A. et al. \ 2017, \mnras, 470, 4646 % Lightcone Millenium MXXL
+    \bibitem[Smith et al.(2018)]{Smith2018} Smith, A. et al. \ 2018, arXiv, 1809.07355 astro-ph % Fibre assignament incompleteness in DESI
+    \bibitem[Springel et al.(2005)]{Springel2005} Springel, V. et al. \ 2005, \nat, 435, 639 % Millenium Simulation
+    \bibitem[Sutter et al.(2015)]{Sutter2015} Sutter, P. M.; Lavaux G.; Hamaus, N; et al. \ 2015, A\&C, 9, 1-9 % Void Finder VIDE
+    \bibitem[van de Weygaert(2014)]{Weygaert2014} van de Weygaert, Rien\ 2014, Proceedings of the IAU, 308, 493 % Review of Voids
+
+    \bibitem[SDSS Collaboration(2017)]{SDSS-DR14-2017} SDSS Collaboration \ 2017, arxiv, 1707.09322 astro-ph % SDSS Data Release 14, 2017
+    \bibitem[Hinshaw et al.(2013)]{WMAP2013} Hinshaw, G. et al. \ 2013, \apjs, 208, 20. % WMAP last release
+  \end{thebibliography}                                                           
+                       
+
+
+
+
+
+  
+
+\end{document}
+
+
+
+%\listofchanges
+
+
+% \citet{https://arxiv.org/pdf/astro-ph/0610520.pdf} Bayes for SDSS EGE reconstruction
+
+% \bibitem[Aarseth(2003)]{Aarseth2003} Aarseth, S. J. \ 2003, ``Gravitational N-Body Simulations'', Cambridge University Press. % Book
+% \bibitem[Longair(2004)]{Longair2004} Longair, M. S. \ 2004, ``A Brief History of Cosmology'', ``Measuring and Modeling the Universe'', Carnegie Observatories Astrophysics Series, Vol 2. % BOOK
