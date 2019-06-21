@@ -1,10 +1,11 @@
 #wget https://github.com/forero/abacus/raw/master/data/AbacusCosmos_720box_planck_00_0_rockstar_halos/z0.1/cuts/corner_data_cut_0.dat
 SHELL := /bin/bash # Use bash syntax
 
-N_OBS = 26
+N_OBS = 1
+FILENUM = 0
+FILEPREFIX = corner_data_cut_
+FILENAME = $(FILEPREFIX)$(FILENUM).dat
 
-
-FILENAME = corner_data_cut_
 URL_PATH = https://github.com/forero/abacus/raw/master/data/AbacusCosmos_720box_planck_00_0_rockstar_halos/z0.1/cuts/
 
 OC_PATH = ./observed_catalogs/
@@ -34,15 +35,18 @@ folders :
 # Download "SDSS PLANK15 cuts"
 download_cuts :
 	@number=0 ; while [[ $$number -le $(N_OBS) ]] ; do \
-		echo $(URL_PATH)$(FILENAME)$$number.dat ; \
-		wget $(URL_PATH)$(FILENAME)$$number.dat ; \
+		echo $(URL_PATH)$(FILEPREFIX)$$number.dat ; \
+		wget $(URL_PATH)$(FILEPREFIX)$$number.dat ; \
 		mv $(FILENAME)$$number.dat $(OBS_PATH) ; \
 		(( number = number + 1 )) ; \
 	done
 
 # Generate random catalogs
-random_cats :
-	python 01_calculate_beta_skeleton.py
+main_squence :
+	python calculate_beta_skeleton.py $(FILENAME) $(FILENUM)
+	python void_identifier-recursion.py $(FILENAME) $(FILENUM)
+	python ellipsoid_analysis.py $(FILENAME) $(FILENUM)
+	python morphologycal_analysis.py $(FILENAME) $(FILENUM)
 
 
 clean :

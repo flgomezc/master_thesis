@@ -292,6 +292,8 @@ VOIDS = []
 VPlen = len(trueVoidPointsIndex)
 
 for ID in trueVoidPointsIndex:
+    index = np.where(trueVoidPointsIndex==ID)[0]
+    print("Progress: {:04.2f}%".format(100.0*index[0]/VPlen))
     candidate = neighbours(ID)
     candidate = list(set(candidate))
     candidate.sort()
