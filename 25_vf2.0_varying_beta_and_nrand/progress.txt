@@ -1,0 +1,182 @@
+Finding voids in oc.cat
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 1.4015689560037572 seconds.
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 1.4266534119960852 seconds.
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 1.532854855000096 seconds.
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 163.38601960600045 seconds.
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 455.1945129620008 seconds.
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 552.4305987120024 seconds.
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 557.3311673220014 seconds.
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 142.62858323499677 seconds.
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 0.8861175260008167 seconds.
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 0.9120896519998496 seconds.
+Analysis of Ellipticity
+Init time: 2019-06-21T17:36:47.564385
+Generating 1 Random Catalog: 2019-06-21T17:36:47.579065
+Init time: 2019-06-21T17:41:01.617634
+Generating 1 Random Catalog: 2019-06-21T17:41:01.631793
+Init time: 2019-06-21T17:41:38.890342
+Generating 1 Random Catalog: 2019-06-21T17:41:38.904180
+Generating 1 Full Catalog: 2019-06-21T17:41:40.580259
+Init time: 2019-06-21T17:52:44.887808
+Generating 1 Random Catalog: 2019-06-21T17:52:44.936872
+Generating 1 Full Catalog: 2019-06-21T17:52:46.768370
+Generating 1 Beta Skeleton: 2019-06-21T17:52:51.852111
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Finding voids in oc.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 0.9753479850005533 seconds.
+Init time: 2019-06-21T18:33:09.304023
+Generating 0 Random Catalog: 2019-06-21T18:33:09.489077
+Generating 0 Full Catalog: 2019-06-21T18:33:18.885232
+Generating 0 Beta Skeleton: 2019-06-21T18:34:42.225330
+Finding voids in corner_data_cut_0.dat
+Finding voids in corner_data_cut_0.dat
+Filenumber 0, beta 1.0, n_rand 1.0, voids found in 387.341530108999 seconds.
+Analysis of Ellipticity
+Init time: 2019-07-02T18:41:59.612995
+Generating 0 Random Catalog: 2019-07-02T18:41:59.746279
+Generating 0 Full Catalog: 2019-07-02T18:42:07.855873
+Generating 0 Beta Skeleton: 2019-07-02T18:43:13.655212
+Init time: 2019-07-02T18:43:14.223579
+Generating 1 Random Catalog: 2019-07-02T18:43:14.240867
+Generating 1 Full Catalog: 2019-07-02T18:43:22.944122
+Generating 1 Beta Skeleton: 2019-07-02T18:44:41.790869
+Init time: 2019-07-02T18:56:47.456388
+Generating 0 Random Catalog: 2019-07-02T18:56:47.475709
+Generating 0 Full Catalog: 2019-07-02T18:56:55.949780
+Generating 0 Beta Skeleton: 2019-07-02T18:58:08.079148
+Finding voids in corner_data_cut_0.dat
+Filenumber 0, beta 1.0, n_rand 1.0, voids found in 419.4038500710003 seconds.
+Analysis of Ellipticity
+Init time: 2019-07-02T19:05:25.898024
+Generating 1 Random Catalog: 2019-07-02T19:05:25.920501
+Generating 1 Full Catalog: 2019-07-02T19:05:37.445266
+Generating 1 Beta Skeleton: 2019-07-02T19:07:07.041760
+Finding voids in corner_data_cut_0.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 460.70389937100026 seconds.
+Analysis of Ellipticity
+Init time: 2019-07-08T16:54:59.400537
+Generating 3 Random Catalog: 2019-07-08T16:54:59.567374
+Generating 3 Full Catalog: 2019-07-08T16:55:07.893565
+Init time: 2019-07-08T16:57:20.055097
+Generating 0 Random Catalog: 2019-07-08T16:57:20.075873
+Generating 0 Full Catalog: 2019-07-08T16:57:28.288455
+Init time: 2019-07-08T16:57:50.134010
+Generating 6 Random Catalog: 2019-07-08T16:57:50.148556
+Generating 6 Full Catalog: 2019-07-08T16:58:00.143142
+Init time: 2019-07-08T16:58:10.635229
+Generating 12 Random Catalog: 2019-07-08T16:58:10.654525
+Generating 12 Full Catalog: 2019-07-08T16:58:29.424455
+Init time: 2019-07-08T16:58:35.168529
+Generating 3 Random Catalog: 2019-07-08T16:58:35.217005
+Generating 3 Full Catalog: 2019-07-08T16:58:57.513125
+Generating 0 Beta Skeleton: 2019-07-08T16:59:09.774398
+Finding voids in corner_data_cut_0.dat
+Generating 6 Beta Skeleton: 2019-07-08T17:00:35.204862
+Finding voids in corner_data_cut_0.dat
+Generating 12 Beta Skeleton: 2019-07-08T17:01:36.233031
+Finding voids in corner_data_cut_0.dat
+Generating 3 Beta Skeleton: 2019-07-08T17:02:21.406047
+Finding voids in corner_data_cut_0.dat
+Filenumber 0, beta 1.0, n_rand 1.0, voids found in 1091.1619765260002 seconds.
+Analysis of Ellipticity
+Init time: 2019-07-08T17:18:04.018738
+Generating 1 Random Catalog: 2019-07-08T17:18:04.055158
+Filenumber 6, beta 1.0, n_rand 1.0, voids found in 1053.7184525699995 seconds.
+Analysis of Ellipticity
+Generating 1 Full Catalog: 2019-07-08T17:18:31.359425
+Init time: 2019-07-08T17:18:51.767517
+Generating 7 Random Catalog: 2019-07-08T17:18:51.806764
+Generating 7 Full Catalog: 2019-07-08T17:19:18.228426
+Filenumber 12, beta 1.0, n_rand 1.0, voids found in 1083.499676583 seconds.
+Analysis of Ellipticity
+Filenumber 3, beta 1.0, n_rand 1.0, voids found in 1076.629675655 seconds.
+Analysis of Ellipticity
+Init time: 2019-07-08T17:20:20.576420
+Generating 13 Random Catalog: 2019-07-08T17:20:20.612734
+Generating 13 Full Catalog: 2019-07-08T17:20:48.020935
+Init time: 2019-07-08T17:21:02.389574
+Generating 4 Random Catalog: 2019-07-08T17:21:02.420787
+Generating 4 Full Catalog: 2019-07-08T17:21:28.560071
+Generating 1 Beta Skeleton: 2019-07-08T17:21:33.172911
+Finding voids in corner_data_cut_0.dat
+Generating 7 Beta Skeleton: 2019-07-08T17:22:21.544023
+Finding voids in corner_data_cut_0.dat
+Generating 13 Beta Skeleton: 2019-07-08T17:23:50.736191
+Finding voids in corner_data_cut_0.dat
+Generating 4 Beta Skeleton: 2019-07-08T17:24:34.230947
+Finding voids in corner_data_cut_0.dat
+Filenumber 1, beta 1.0, n_rand 1.0, voids found in 940.9765244909977 seconds.
+Analysis of Ellipticity
+Init time: 2019-07-08T17:37:57.293111
+Generating 2 Random Catalog: 2019-07-08T17:37:57.329179
+Filenumber 7, beta 1.0, n_rand 1.0, voids found in 943.2864175119976 seconds.
+Analysis of Ellipticity
+Generating 2 Full Catalog: 2019-07-08T17:38:24.800894
+Init time: 2019-07-08T17:38:47.898617
+Generating 8 Random Catalog: 2019-07-08T17:38:47.932250
+Filenumber 13, beta 1.0, n_rand 1.0, voids found in 907.3824978470002 seconds.
+Analysis of Ellipticity
+Generating 8 Full Catalog: 2019-07-08T17:39:14.124242
+Init time: 2019-07-08T17:39:39.489756
+Generating 14 Random Catalog: 2019-07-08T17:39:39.540762
+Filenumber 4, beta 1.0, n_rand 1.0, voids found in 930.3805285210001 seconds.
+Generating 14 Full Catalog: 2019-07-08T17:40:06.285327
+Analysis of Ellipticity
+Init time: 2019-07-08T17:40:53.745373
+Generating 5 Random Catalog: 2019-07-08T17:40:53.773699
+Generating 5 Full Catalog: 2019-07-08T17:41:19.702746
+Generating 2 Beta Skeleton: 2019-07-08T17:41:34.314991
+Finding voids in corner_data_cut_0.dat
+Generating 8 Beta Skeleton: 2019-07-08T17:42:24.231002
+Finding voids in corner_data_cut_0.dat
+Generating 14 Beta Skeleton: 2019-07-08T17:43:14.212331
+Finding voids in corner_data_cut_0.dat
+Generating 5 Beta Skeleton: 2019-07-08T17:44:25.352664
+Finding voids in corner_data_cut_0.dat
+Init time: 2019-07-08T17:54:03.904566
+Generating 20 Random Catalog: 2019-07-08T17:54:03.943344
+Init time: 2019-07-08T17:54:10.656171
+Generating 22 Random Catalog: 2019-07-08T17:54:10.672273
+Init time: 2019-07-08T17:54:20.104960
+Generating 24 Random Catalog: 2019-07-08T17:54:20.128897
+Generating 20 Full Catalog: 2019-07-08T17:54:24.355350
+Init time: 2019-07-08T17:54:28.555257
+Generating 26 Random Catalog: 2019-07-08T17:54:28.584270
+Generating 22 Full Catalog: 2019-07-08T17:54:43.713291
+Generating 24 Full Catalog: 2019-07-08T17:55:05.022139
+Generating 26 Full Catalog: 2019-07-08T17:55:15.089199
+Generating 26 Beta Skeleton: 2019-07-08T18:00:51.637546
+Finding voids in corner_data_cut_0.dat
+Generating 22 Beta Skeleton: 2019-07-08T18:00:54.926475
+Finding voids in corner_data_cut_0.dat
+Generating 20 Beta Skeleton: 2019-07-08T18:04:25.444964
+Finding voids in corner_data_cut_0.dat
+Generating 24 Beta Skeleton: 2019-07-08T18:05:40.246375
+Finding voids in corner_data_cut_0.dat
