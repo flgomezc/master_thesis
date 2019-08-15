@@ -29,45 +29,56 @@ $\beta$-Skeleton Graph Method}
 
 
 \begin{abstract}
-  We present a new LSS Void Finder Algorithm based on the $\beta$-Skeleton Graph.
-  Some tests where done to check the algorithms performance in toy model
-  structures, then the algorithm ran over halo catalogs from simulations
-  and galaxy catalogs.
+
 \end{abstract}
 
 
+\section{Introduction}
 
 
 \section{The Algorithm}
 
-The main goal of this project is to identify voids in the large scale structure
-of the universe, using the nobel method in astrophysics: the $\beta$-Skeleton
-graph. In order to develop the code, a toy model catalog structure is used,
-then a second catalog of random points populates the same volume, the graph is
-calculated and then the voids are identified as the second catalog points
-without connections with the first catalog points.
+This void identifier is based on the $\beta$-Skeleton graph. The input is a
+set of 3-dimentional points (galaxy/halo catalog) in the coordinate space with
+proper distances. This is the Observed Catalog (\textbf{OC}). Once is defined
+the volume and shape of the \textbf{OC}, this space is populated with random
+points following a uniform probability density function, this is the Random
+Catalog (\textbf{RC}). The Full Catalog (\textbf{FC}) is made by assembling
+the OC and RC. The $\beta$-Skeleton graph is built over the FC without any
+discrimination connecting observed and random points, the graph is stored as
+FC$\beta$-Skel. From the FC$\beta$-Skel, all the observed points and their
+connections are deprecated, even random points. The remaining random points
+are conected only with other random points, they conform the voids.
+
+\subsection{Testing with the Toy Model}
+
+The $\beta$-Skeleton working space has not units. Is also scalling-independent.
+It makes posible to test using a Toy Model Observed Catalog. A first catalog
+was built using a spherical void into a cube (100 arbitrary units of lenght)
+filled with $N_{obs}$ random uniformly ditributed points. Advanced toy models used
+overlaping ellipsoidal voids with semiaxes ratios 1:0.7:0.5, different
+orientations and major semiaxes of 40, 30, 30 and 20 arbitrary units,
+generating a big irregular void. The OC and a slice is shown at
+\ref{fig:scatter_OC}.
 
 \begin{figure}
-    \plotone{slice_OC_plus_RC.pdf}
-    \caption{The Algorithm uses two sets of points: The Observed Catalog
-      (LSS like in blue with a spherical void in the middle) and the
-      random Catalog (orange). This is a slice of the Toy Model Catalog to
-      test the Algorithm; a cubic box with an random uniform distribution of
-      points over the box volume with a spherical void at the center.
-      \label{slice_OC_plus_RC}}
+  \plottwo{explaining/toy_model_OC-3d.pdf}{explaining/toy_model_OC.pdf}
+  \caption{A toy model Observed Catalog with voids. Left: 3D scatter-plot
+    of the OC. Right: A slice of the OC at $z=50$.\label{fig:scatter_OC}}
 \end{figure}
 
-\subsection{Random Points in Empty Regions}
-We start with a sample of N points randomly placed inside a cubic box of
-lenght L. (Figure \ref{slice_OC_plus_RC}. In the middle of the box there is a
-spherical void, i.e. an spherical region without points. This set of points is
-called ``the observed catalog'' (\textbf{OC}). This toy model will represent
--in a gross aproximation- the LSS with galaxies and voids.
+A second catallog is created, the volume is filled with $N_{rnd}=N_{obs}$ random
+points. This is the Random Catalog. 
 
-Then another set of N random points populates the whole box, without restrictions.
-This set is called ``the random catalog'' (\textbf{RC}). It will populate even
-the void region. It's only necesary to know the volume of the OC and the number
-of points N to create the RC.
+\begin{figure}
+  \plottwo{explaining/toy_model_OC+RC-3d.pdf}{explaining/toy_model_OC+RC-slice.pdf}
+  \caption{The Random Catalog (red) of points populates the whole volume of the
+    (blue) OC.
+    In this case, we have the same number of Random Points and Observed Points.
+    Left: 3D scatter-plot of the OC plus RC. Right: A slice of the OC plus RC
+    at $z=50$.\label{fig:scatter_OC+RC}}
+\end{figure}
+
 
 The Li's Skeleton library can operate over a single set of points. This set is called
 ``the full catalog'' (\textbf{FC}). This set of points is created using the
