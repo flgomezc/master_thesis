@@ -39,174 +39,155 @@ $\beta$-Skeleton Graph Method}
 \section{The Algorithm}
 
 This void identifier is based on the $\beta$-Skeleton graph. The input is a
-set of 3-dimentional points (galaxy/halo catalog) in the coordinate space with
+set of 3-dimensional points (galaxy/halo catalog) in the coordinate space with
 proper distances. This is the Observed Catalog (\textbf{OC}). Once is defined
 the volume and shape of the \textbf{OC}, this space is populated with random
 points following a uniform probability density function, this is the Random
 Catalog (\textbf{RC}). The Full Catalog (\textbf{FC}) is made by assembling
 the OC and RC. The $\beta$-Skeleton graph is built over the FC without any
 discrimination connecting observed and random points, the graph is stored as
-FC$\beta$-Skel. From the FC$\beta$-Skel, all the observed points and their
-connections are deprecated, even random points. The remaining random points
-are conected only with other random points, they conform the voids.
+\textbf{fcBSkel}. From the fcBSkel, all the observed points and their
+connections are deprecated; it means that some neighbour random points are
+rejected. The remaining random points are conected only with other random
+points, they conform the voids.
 
-\subsection{Testing with the Toy Model}
+This method has two parameters: $\beta$ and the ratio between random
+points and observed points.
 
-The $\beta$-Skeleton working space has not units. Is also scalling-independent.
-It makes posible to test using a Toy Model Observed Catalog. A first catalog
-was built using a spherical void into a cube (100 arbitrary units of lenght)
-filled with $N_{obs}$ random uniformly ditributed points. Advanced toy models used
-overlaping ellipsoidal voids with semiaxes ratios 1:0.7:0.5, different
-orientations and major semiaxes of 40, 30, 30 and 20 arbitrary units,
-generating a big irregular void. The OC and a slice is shown at
-\ref{fig:scatter_OC}.
+
+\subsection{Testing methods with the Void Toy Models}
+
+The Li's $\beta$-Skeleton library \citep{Li..Github..2014} is written in
+Fortran 90. The calculation of the 1-Skeleton graph with $\sim 10^4$ points
+in a regular laptop Linux machine (Core i5, 2nd gen.) takes 192 seconds.
+Input files of three dimensionless columns ($x$, $y$, $z$): $\mathbb{R}^3$
+points.
+
+Observational Toy Model Catalogs where created to test if the algorithm was
+viable. 
+
+The first toy model catalog was generated with a spherical void into inside
+a cubic box (100 arbitrary units of lenght) filled with $N_{obs}$ random
+uniformly distributed points.
+
+\subsubsection{The weak method}
+A first attempt was an algorithm based on
+the comparison of two $\beta$-Skeleton graphs ($\beta_1 < 1$), $(\beta_2 >= 1$),
+(fig. \ref{fig:first_algorithm}). This method was able to detect multiple
+spherical voids, but was unable to detect the whole enclosing surface of
+elliptical voids, the second testing toy model. 
 
 \begin{figure}
-  \plottwo{explaining/toy_model_OC-3d.pdf}{explaining/toy_model_OC.pdf}
-  \caption{A toy model Observed Catalog with voids. Left: 3D scatter-plot
-    of the OC. Right: A slice of the OC at $z=50$.\label{fig:scatter_OC}}
+  \plottwo{first_algorithm/beta_0_9.png}
+          {first_algorithm/beta_1_0.png}
+  \caption{Weak method: Long connections dissapear in the
+    $\beta$-Skeleton graph as $\beta$ increases.
+    Left: Connections with $\beta=0.9$. Right: Connections with $\beta=1.0$.
+    The low value of $\beta$ gives the graph long connections across the
+    spherical void. They dissapear with $\beta = 1.0$, known as the Gabriel
+    Graph. \label{fig:first_algorithm}} 
 \end{figure}
 
-A second catallog is created, the volume is filled with $N_{rnd}=N_{obs}$ random
-points. This is the Random Catalog. 
+\subsubsection{The robust method}
+The second and definitive algorithm relies on random points filling voids.
+The algorithm sucessfully recognized the spherical void, and also identified
+some other underdense regions, figure \ref{fig:First void recognition}-left.
+A limit resolution arises, related to the number of random points, it was
+shown finding small spherical voids placed in different locations, figure
+\ref{fig:First void recognition}-right.
 
 \begin{figure}
-  \plottwo{explaining/toy_model_OC+RC-3d.pdf}{explaining/toy_model_OC+RC-slice.pdf}
-  \caption{The Random Catalog (red) of points populates the whole volume of the
-    (blue) OC.
-    In this case, we have the same number of Random Points and Observed Points.
-    Left: 3D scatter-plot of the OC plus RC. Right: A slice of the OC plus RC
-    at $z=50$.\label{fig:scatter_OC+RC}}
-\end{figure}
-
-
-The Li's Skeleton library can operate over a single set of points. This set is called
-``the full catalog'' (\textbf{FC}). This set of points is created using the
-\texttt{vstack} python function. The first N elements are the RC points, the last
-N elements are the OC points, then the FC has 2N elements.
-
-The 1-Skeleton graph is calculated over the FC. Runing the code over a FC of
-$\sim 10^4$ points in a Core i5 (2nd gen.) Linux machine, it takes 192 seconds
-to complete the calculus. The result is stored as the Full Catalog Beta
-Skeleton Graph (\textbf{fcBSk}).
-
-The fcBSk is chopped to the half, we are interested about the RC points that
-are not connected with the OC points. Then a droplist is created as the
-subset of connections where the second point belongs to the OC, i.e., its index
-is greater than N.
-
-Using the python  \texttt{set} class, its easy to find the complement of the
-droplist in the fsBSk. After droping the RC points connected with the OC, it
-remains the points inside the void. Those points are labelled as
-\textbf{true void points}.
-
-There are some points that belong to the void but they have connections in the
-$\beta$-Skeleton with some observational points. They are identified as
-frontier points.
-
-
-\begin{figure}
-  \plotone{single_sphere_N5000_R37_BL100/RandomPoints_Recognized_Void_1_0-skeletons.pdf}
-  \caption{Points identified as ``Void Points''. They are points from the Random Catalog
+  \plottwo{single_sphere_N5000_R37_BL100/RandomPoints_Recognized_Void_1_0-skeletons.pdf}
+          {multiple_spheres_limit_radius_N5000_R5_10_15_20_BL100/RandomPoints_Recognized_Voids.pdf}
+  \caption{The robust method identifies voids by populating the volume of the
+    observed catalog with random points. Parameters: $\beta=1$ and $n_{rnd}=1$.
+    Left: Random Points identified as ``Void Points''. They are points
+    from the Random Catalog
     connected by the 1-Skeleton only to other Random Catalog points. 
     N=5000 points, BoxLength = 100 units and void radius R=37 units.
+    Right: Points identified as ``Void Points''. This tests aims to check
+    the resolution of the algorithm. Some scattered micro-voids appear.
+    The two big voids are recognized (R=15,20), but small structures doesn't
+    appear (R=5,10).
+    N=5000, BoxLength = 100, voids radius R= [5, 10, 15, 20].
     \label{fig:First void recognition}}
 \end{figure}
 
-The algorithm sucessfully recognized the spherical void, and also identified
-some other underdense regions. (Fig. \ref{fig:First void recognition}).
-
-A second test was designed with four spherical voids in different locations, showing
-how well defined where the two bigger voids, but there is a lower resolution limit
-related to the void size and the lenght of the Random Points Catalog.
-(Fig. \ref{fig:slice for multiple spherical voids}).
+The robust method cand find irregular voids.
+The last void toy model used overlaping ellipsoidal voids with semiaxes
+ratios 1:0.7:0.5, different orientations and major semiaxes of 40, 30,
+30 and 20 arbitrary units, generating a big irregular void. The OC and a
+slice is shown at figure \ref{fig:scatter_OC}.
 
 \begin{figure}
-  \plotone{multiple_spheres_limit_radius_N5000_R5_10_15_20_BL100/slice_OC_plus_RC_at_z70.pdf}
-  \caption{Slice at z=70 of an structure with four
-    spherical voids of radii 5, 10, 5 and 20 units.
-    N=5000, BoxLength = 100, the voids radius where selected as R= 5, 10, 15
-    and 20.
-    \label{fig:slice for multiple spherical voids}}
+  \plottwo{explaining/toy_model_OC-3d.pdf}{explaining/toy_model_OC.pdf}
+  \caption{A Irregular Void in the testing toy model. Observed points
+    (fake galaxies) in blue. Left: 3D scatter-plot
+    of the full sample of OC.
+    Right: A slice of the OC at $z=50\pm5$ arbitrary units.
+    \label{fig:scatter_OC}}
 \end{figure}
 
-
+The Random Catalog was created using the same number of random points as
+the observed points.$N_{rnd}=N_{obs}$ (Fig.\ref{fig:scatter_OC+RC}).It follows
+to the recognition of the main structures (ellipsoidal voids overlapping as
+a bigger one) plus small unexpected structures. Those are clue of the
+relevance of the ratio $n_{rnd} = N_{rnd}/N_{obs}$ as free parameter of the
+algorithm. Having $n_{rnd}>1$ means a higher resolution in the shape of the
+identified voids, but also smaller voids are detected in the catalog; are
+they artifacts or true voids? The answer deppends on the void definition itself.
+The initial test is performed with $n_{rnd}=1$.
 
 \begin{figure}
-  \plotone{multiple_spheres_limit_radius_N5000_R5_10_15_20_BL100/RandomPoints_Recognized_Voids.pdf}
-  \caption{Points identified as ``Void Points''. This tests aims to check
-    the resolution of the algorithm. Some scattered micro-voids appear.
-    The ``biggest'' voids are recognized (R=15,20), but small structures doesn't
-    appear (R=5,10).
-    N=5000, BoxLength = 100, the voids radius where selected as R= 5, 10, 15
-    and 20.
-    \label{Testing multiple spherical voids}}
+  \plottwo{explaining/toy_model_OC+RC-3d.pdf}
+          {explaining/toy_model_OC+RC-slice.pdf}
+          \caption{The Random Catalog (red) of points populates the whole volume
+            of the (blue) OC. In this case, we have the same number of Random
+            Points and Observed Points. Left: 3D scatter-plot of the OC plus
+            RC. Right: A slice of the OC plus RC at $z=50\pm5$ arbitrary units.
+            \label{fig:scatter_OC+RC}}
 \end{figure}
 
-
-
-
+\begin{figure}
+  \plottwo{explaining/toy_model_fcBSkel-slice.pdf}
+          {explaining/toy_model_truevoidsBSkel-slice.pdf}
+          \caption{A slice ($z=50\pm5$ arbitrary units) of the
+            $\beta$-Skeleton of the full catalog (left).
+            After removing the observed points and their connections, the
+            remaining points are the void points (right).
+            \label{fig:beta_skel_slices}}
+\end{figure}
 
 \subsection{Tagging Voids}
 
-Once true void points are identified, the $\beta$-Skeleton Graph is used
-again to identify their neighbours. The set of True Void Points connected
-between them, together with the frontier points is tagged as a void.
-
-From the Full Catalog Beta-Skeleton Graph (\textbf{fcBSk}), that is just a
-$M \times2$ dimentional array of indexes,
-we can extract the connections of void points. Each void point
-must be conected solely with other points from the RC. They may be other
-void points or frontier points.
-
-Frontier points are poins from the RC than
-are connected to RC points as well to OC points. Frontier points where
-rejected on early stages of the algorithm, but now they are taken into account.
-Frontier points are over the ``Void Surface''. A similar surface was the aiming
-of the previous algorithm (comparing two different $\beta$-Skeletons).
-
-We did not achieve the stage of exploring voids with sparse galaxies in the
-previous algorithm, but now, a void with sparse galaxies is easily identified
-as a ``plum pudding'', where the void is the pudding with frontier points
-enclosing the ``plums'' (sparse galaxies), 
-
-The algorithm starts looking for the connections of the first Void Point in the
-Random Catalog. A list including the first void point and their neighbohrs is
-created. This list is going to be the first voids tagged. Then the second point
-is checked, if it appears in the list the the second point and its neighbohrs
-are added to the previous list, they are identified as part of the first void.
-If not, then a new list is created with the second point and their neighbohrs,
-giving place to the second void. When the $n$-th  is reached, a search is
-performed over the existent lists of voids. The $n$-th point may belong to
-a previous lists of voids, or may create its own list for a $m$-th void
-($ m \leq n$). 
-
-The master list of catalogs at this moment is incomplete, all the Void Points
-in the list are counted and checked if they belong to another list. But frontier
-points are not checked. The master lists contains voids sharing frontiers.
-Is necesary to run again a recount, looking for repetitions between lists,
-thinking each list as a set of points,
-and looking for intersection between sets. (Python offers this implementation
-using sets by invoking the class \texttt{set}). When a intersection between voids
-is detected, the two voids are merged into a new one. Finally, the voids are
-tagged (by the ID of the first void particle).
-
-
-This algorithm was able to detect irregular voids made of intersecting
-ellipsoids. This test was performed over a artificial structure, a toy model catalog.
-
+So far, the method can isolate the true void points: RC points that are not
+connected with the OC according to the $\beta$-Skeleton graph. The
+identification of structures uses the same graph, using a recursive search of
+connected neighbours; a recursive search of friends of friends.
 
 \begin{figure}
-  \plotone{multiple_irregular_void_N5000_R_40_30_30_40/tagging_voids.pdf}
-  \caption{Tagging Voids. This algorithm can indentify irregular structures,
-    a step ahead the previous algorithm. The irregular voids are made of
-    overlapping ellipsoidal voids, with semiaxes proportion 1:0.7:0.5 as the 
-    literature suggets.  
-    N=5000, BoxLength = 100, the voids major semiaxes where chosen as
-    R= 40, 30, 30 and 40.
-    \label{fig:Tagging Toy Model Voids}}
+  \plottwo{explaining/recursion2_all_identified_voids.pdf}
+          {explaining/recursion2_big_identified_voids.pdf}
+  \caption{Irregular voids Voids found in the OC. This algorithm can indentify
+           irregular structures; a giant leap ahead the previous algorithm.
+           The irregular voids are made of overlapping ellipsoidal voids, with
+           semiaxes proportion 1:0.7:0.5 as the literature suggets.  
+           N=5000, BoxLength = 100, the voids major semiaxes where chosen as
+           R= 40, 30, 30 and 40 arbitrary units.
+           Left: A total of 41 voids are identified, all of them with at least
+           one random point. To take into account, only four toy ellipsoidal
+           voids where placed in the OC, two of them overlapping.
+           Right: Voids with 10 or more random points.
+    \label{fig:}}
 \end{figure}
 
+%We did not achieve the stage of exploring voids with sparse galaxies in the
+%previous algorithm, but now, a void with sparse galaxies is easily identified
+%as a ``plum pudding'', where the void is the pudding with frontier points
+%enclosing the ``plums'' (sparse galaxies), 
+
+
+%###################################  Friday, 2019-08-16 22:15
 
 \section{Finding Voids in Simulations}
 
@@ -315,6 +296,16 @@ to spheroid. Our results are pretty close to Platen results (2008).
 \end{figure}
 
 
+
+\software{LSSCode \citep{Li..Github..2014}}
+
+
+\begin{thebibliography}{}
+
+\bibitem[LSSCode (2014)]{Li..Github..2014} Li, Xiao-Dong \ 2014, LSSCode \ \url{https://github.com/xiaodongli1986/LSS_Code}
+\bibitem[Astropy Collaboration et al.(2013)]{2013A&A...558A..33A} Astropy Collaboration, Robitaille, T.~P., Tollerud, E.~J., et al.\ 2013, \aap, 558, A33 
+
+\end{thebibliography}
 
 
 \end{document}
