@@ -1,0 +1,6 @@
+Finding voids in observed
+MasterList masterlist, beta 1.0, n_rand 1.0, voids found in 0.2502931263297796 seconds.
+Finding voids in observed
+MasterList masterlist, beta 1.0, n_rand 1.0, voids found in 0.20343908295035362 seconds.
+Finding voids in observed
+MasterList masterlist, beta 1.0, n_rand 1.0, voids found in 0.18048497289419174 seconds.
